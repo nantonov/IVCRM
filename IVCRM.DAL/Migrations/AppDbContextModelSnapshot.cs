@@ -61,6 +61,9 @@ namespace IVCRM.DAL.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("OrderStatus")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerId");

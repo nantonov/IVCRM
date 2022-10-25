@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IVCRM.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221025142824_InitDatabase")]
+    [Migration("20221025144529_InitDatabase")]
     partial class InitDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -62,6 +62,9 @@ namespace IVCRM.DAL.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("OrderStatus")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

@@ -58,6 +58,7 @@ namespace IVCRM.DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    OrderStatus = table.Column<int>(type: "int", nullable: false),
                     CustomerId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
