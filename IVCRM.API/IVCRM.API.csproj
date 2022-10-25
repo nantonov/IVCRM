@@ -11,9 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\IVCRM.BusinessLogic\IVCRM.BusinessLogic.csproj" />
-    <ProjectReference Include="..\IVCRM.Dependencies\IVCRM.Dependencies.csproj" />
-    <ProjectReference Include="..\IVCRM.Shared\IVCRM.Shared.csproj" />
+    <ProjectReference Include="..\IVCRM.BLL\IVCRM.BLL.csproj" />
+    <ProjectReference Include="..\IVCRM.DAL\IVCRM.DAL.csproj" />
   </ItemGroup>
 
 </Project>
