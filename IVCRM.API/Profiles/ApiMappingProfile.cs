@@ -2,7 +2,7 @@
 using IVCRM.API.ViewModels;
 using IVCRM.BLL.Models;
 
-namespace SPWB.SportService.BFF.Profiles
+namespace IVCRM.BLL.Profiles
 {
     public class ApiMappingProfile : AutoMapper.Profile
     {

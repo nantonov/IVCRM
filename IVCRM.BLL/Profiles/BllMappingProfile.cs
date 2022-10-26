@@ -1,7 +1,7 @@
 ﻿using IVCRM.BLL.Models;
 using IVCRM.DAL.Entities;
 
-namespace SPWB.IVCRM.BLL.Profiles
+namespace IVCRM.BLL.Profiles
 {
     public class BllMappingProfile : AutoMapper.Profile
     {

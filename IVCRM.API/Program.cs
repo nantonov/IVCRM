@@ -1,6 +1,5 @@
 using IVCRM.BLL;
-using SPWB.IVCRM.BLL.Profiles;
-using SPWB.SportService.BFF.Profiles;
+using IVCRM.BLL.Profiles;
 
 var builder = WebApplication.CreateBuilder(args);
 
