@@ -1,9 +1,18 @@
 using IVCRM.BLL;
-using Microsoft.Extensions.Configuration;
+using SPWB.IVCRM.BLL.Profiles;
+using SPWB.SportService.BFF.Profiles;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddServices(builder.Configuration);
+builder.Services.AddAutoMapper(cfg =>
+{
+    cfg.AddProfile<ApiMappingProfile>();
+    cfg.AddProfile<BllMappingProfile>();
+});
+
+builder.Services.AddDatabaseConfig(builder.Configuration);
+builder.Services.AddRepositories();
+builder.Services.AddServices();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
