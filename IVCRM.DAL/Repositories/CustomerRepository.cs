@@ -27,12 +27,12 @@ namespace IVCRM.DAL.Repositories
             return await _context.Customers.ToListAsync();
         }
 
-        public async Task<CustomerEntity> GetById(int id)
+        public async Task<CustomerEntity?> GetById(int id)
         {
             return await _context.Customers.SingleOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<CustomerEntity> Update(CustomerEntity request)
+        public async Task<CustomerEntity?> Update(CustomerEntity request)
         {
             var entity = await GetById(request.Id);
             if (entity is null)
@@ -50,7 +50,7 @@ namespace IVCRM.DAL.Repositories
             return entity;
         }
 
-        public async Task<CustomerEntity> Delete(int id)
+        public async Task<CustomerEntity?> Delete(int id)
         {
             var entity = await GetById(id);
             if (entity is null)
