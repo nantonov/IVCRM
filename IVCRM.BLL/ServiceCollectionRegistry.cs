@@ -1,4 +1,4 @@
-﻿using IVCRM.DAL.Contexts;
+﻿using IVCRM.DAL.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,13 +12,15 @@ namespace IVCRM.BLL
 {
     public static class ServiceCollectionRegistry
     {
+        private const string ConnectionString = "ConnectionString";
         public static void AddServices(this IServiceCollection services)
         {
         }
 
-        public static void AddDatabaseConfig(this IServiceCollection services, IConfiguration configuration)
+        public static void AddEntityFrameworkSetup(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<AppDbContext>(x => x.UseSqlServer(configuration.GetConnectionString("ConnectionString")));
+            var connectionString = configuration.GetConnectionString(ConnectionString);
+            services.AddDbContext<AppDbContext>(x => x.UseSqlServer(connectionString));
         }
     }
 }

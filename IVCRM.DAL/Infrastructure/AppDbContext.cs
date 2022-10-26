@@ -1,12 +1,13 @@
 ﻿using IVCRM.DAL.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace IVCRM.DAL.Contexts
+namespace IVCRM.DAL.Infrastructure
 {
     public class AppDbContext : DbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
+            Database.EnsureCreated();
         }
 
         public DbSet<Customer> Customers { get; set; }

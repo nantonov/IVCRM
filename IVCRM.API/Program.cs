@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDatabaseConfig(builder.Configuration);
+builder.Services.AddEntityFrameworkSetup(builder.Configuration);
 builder.Services.AddServices();
 
 builder.Services.AddControllers();
