@@ -22,7 +22,7 @@ namespace IVCRM.DAL.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("IVCRM.DAL.Entities.Customer", b =>
+            modelBuilder.Entity("IVCRM.DAL.Entities.CustomerEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -44,7 +44,7 @@ namespace IVCRM.DAL.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("IVCRM.DAL.Entities.Order", b =>
+            modelBuilder.Entity("IVCRM.DAL.Entities.OrderEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -71,7 +71,23 @@ namespace IVCRM.DAL.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("IVCRM.DAL.Entities.Product", b =>
+            modelBuilder.Entity("IVCRM.DAL.Entities.ProductCategoryEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProductCategories");
+                });
+
+            modelBuilder.Entity("IVCRM.DAL.Entities.ProductEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -95,23 +111,7 @@ namespace IVCRM.DAL.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("IVCRM.DAL.Entities.ProductCategory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ProductCategories");
-                });
-
-            modelBuilder.Entity("IVCRM.DAL.Entities.ProductOrder", b =>
+            modelBuilder.Entity("IVCRM.DAL.Entities.ProductOrderEntity", b =>
                 {
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -132,7 +132,7 @@ namespace IVCRM.DAL.Migrations
                     b.ToTable("ProductOrders");
                 });
 
-            modelBuilder.Entity("IVCRM.DAL.Entities.ProductStorage", b =>
+            modelBuilder.Entity("IVCRM.DAL.Entities.ProductStorageEntity", b =>
                 {
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -150,7 +150,7 @@ namespace IVCRM.DAL.Migrations
                     b.ToTable("ProductStorages");
                 });
 
-            modelBuilder.Entity("IVCRM.DAL.Entities.Storage", b =>
+            modelBuilder.Entity("IVCRM.DAL.Entities.StorageEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -166,9 +166,9 @@ namespace IVCRM.DAL.Migrations
                     b.ToTable("Storages");
                 });
 
-            modelBuilder.Entity("IVCRM.DAL.Entities.Order", b =>
+            modelBuilder.Entity("IVCRM.DAL.Entities.OrderEntity", b =>
                 {
-                    b.HasOne("IVCRM.DAL.Entities.Customer", "Customer")
+                    b.HasOne("IVCRM.DAL.Entities.CustomerEntity", "Customer")
                         .WithMany("Orders")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -177,9 +177,9 @@ namespace IVCRM.DAL.Migrations
                     b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("IVCRM.DAL.Entities.Product", b =>
+            modelBuilder.Entity("IVCRM.DAL.Entities.ProductEntity", b =>
                 {
-                    b.HasOne("IVCRM.DAL.Entities.ProductCategory", "Category")
+                    b.HasOne("IVCRM.DAL.Entities.ProductCategoryEntity", "Category")
                         .WithMany("Products")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -188,15 +188,15 @@ namespace IVCRM.DAL.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("IVCRM.DAL.Entities.ProductOrder", b =>
+            modelBuilder.Entity("IVCRM.DAL.Entities.ProductOrderEntity", b =>
                 {
-                    b.HasOne("IVCRM.DAL.Entities.Order", "Order")
+                    b.HasOne("IVCRM.DAL.Entities.OrderEntity", "Order")
                         .WithMany("ProductOrders")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("IVCRM.DAL.Entities.Product", "Product")
+                    b.HasOne("IVCRM.DAL.Entities.ProductEntity", "Product")
                         .WithMany("ProductOrders")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -207,15 +207,15 @@ namespace IVCRM.DAL.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("IVCRM.DAL.Entities.ProductStorage", b =>
+            modelBuilder.Entity("IVCRM.DAL.Entities.ProductStorageEntity", b =>
                 {
-                    b.HasOne("IVCRM.DAL.Entities.Product", "Product")
+                    b.HasOne("IVCRM.DAL.Entities.ProductEntity", "Product")
                         .WithMany("ProductStorages")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("IVCRM.DAL.Entities.Storage", "Storage")
+                    b.HasOne("IVCRM.DAL.Entities.StorageEntity", "Storage")
                         .WithMany("ProductStorages")
                         .HasForeignKey("StorageId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -226,29 +226,29 @@ namespace IVCRM.DAL.Migrations
                     b.Navigation("Storage");
                 });
 
-            modelBuilder.Entity("IVCRM.DAL.Entities.Customer", b =>
+            modelBuilder.Entity("IVCRM.DAL.Entities.CustomerEntity", b =>
                 {
                     b.Navigation("Orders");
                 });
 
-            modelBuilder.Entity("IVCRM.DAL.Entities.Order", b =>
+            modelBuilder.Entity("IVCRM.DAL.Entities.OrderEntity", b =>
                 {
                     b.Navigation("ProductOrders");
                 });
 
-            modelBuilder.Entity("IVCRM.DAL.Entities.Product", b =>
+            modelBuilder.Entity("IVCRM.DAL.Entities.ProductCategoryEntity", b =>
+                {
+                    b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("IVCRM.DAL.Entities.ProductEntity", b =>
                 {
                     b.Navigation("ProductOrders");
 
                     b.Navigation("ProductStorages");
                 });
 
-            modelBuilder.Entity("IVCRM.DAL.Entities.ProductCategory", b =>
-                {
-                    b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("IVCRM.DAL.Entities.Storage", b =>
+            modelBuilder.Entity("IVCRM.DAL.Entities.StorageEntity", b =>
                 {
                     b.Navigation("ProductStorages");
                 });
