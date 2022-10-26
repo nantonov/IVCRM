@@ -10,9 +10,7 @@ builder.Services.AddAutoMapper(cfg =>
     cfg.AddProfile<BllMappingProfile>();
 });
 
-builder.Services.AddDatabaseConfig(builder.Configuration);
-builder.Services.AddRepositories();
-builder.Services.AddServices();
+builder.Services.AddServices(builder.Configuration);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

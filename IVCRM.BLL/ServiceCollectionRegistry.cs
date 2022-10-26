@@ -1,5 +1,5 @@
-﻿using IVCRM.DAL.Contexts;
-using Microsoft.EntityFrameworkCore;
+﻿using IVCRM.BLL.Services;
+using IVCRM.BLL.Services.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -7,18 +7,12 @@ namespace IVCRM.BLL
 {
     public static class ServiceCollectionRegistry
     {
-        public static void AddServices(this IServiceCollection services)
-        {
-            services.AddTransient<ICustomerService, CustomerService>();
-        }
-        public static void AddRepositories(this IServiceCollection services)
-        {
-            services.AddTransient<ICustomerRepository, CustomerRepository>();
-        }
-
-        public static void AddDatabaseConfig(this IServiceCollection services, IConfiguration configuration)
+        public static void AddServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddEntityFrameworkSetup(configuration);
+            services.AddRepositories();
+
+            services.AddTransient<ICustomerService, CustomerService>();
         }
     }
 }

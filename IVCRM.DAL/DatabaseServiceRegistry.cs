@@ -1,4 +1,6 @@
 ﻿using IVCRM.DAL.Infrastructure;
+using IVCRM.DAL.Repositories.Interfaces;
+using IVCRM.DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +15,11 @@ namespace IVCRM.BLL
         {
             var connectionString = configuration.GetConnectionString(ConnectionString);
             services.AddDbContext<AppDbContext>(x => x.UseSqlServer(connectionString));
+        }
+
+        public static void AddRepositories(this IServiceCollection services)
+        {
+            services.AddTransient<ICustomerRepository, CustomerRepository>();
         }
     }
 }
