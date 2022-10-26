@@ -1,3 +1,4 @@
+using IVCRM.API.Profiles;
 using IVCRM.BLL;
 using IVCRM.BLL.Profiles;
 

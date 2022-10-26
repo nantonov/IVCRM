@@ -2,7 +2,7 @@
 using IVCRM.API.ViewModels;
 using IVCRM.BLL.Models;
 
-namespace IVCRM.BLL.Profiles
+namespace IVCRM.API.Profiles
 {
     public class ApiMappingProfile : AutoMapper.Profile
     {
