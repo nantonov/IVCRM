@@ -63,10 +63,17 @@ namespace IVCRM.Web.Controllers
             return Ok(customerViewModel);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Update([FromBody] UpdateCustomerRequest request)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, [FromBody] UpdateCustomerRequest request)
         {
+            if (id <= 0)
+            {
+                return BadRequest();
+            }
+
             var mappedRequest = _mapper.Map<Customer>(request);
+            mappedRequest.Id = id;
+
             var customer = await _service.Update(mappedRequest);
             if (customer is null)
             {
