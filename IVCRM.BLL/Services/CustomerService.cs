@@ -41,7 +41,7 @@ namespace IVCRM.BLL.Services
 
         public async Task<Customer> Update(Customer model)
         {
-            if (await IsEntityExists(model.Id))
+            if (!await IsEntityExists(model.Id))
             {
                 return null!;
             }
@@ -54,7 +54,7 @@ namespace IVCRM.BLL.Services
 
         public async Task<Customer> Delete(int id)
         {
-            if (await IsEntityExists(id))
+            if (!await IsEntityExists(id))
             {
                 return null!;
             }

@@ -29,12 +29,12 @@ namespace IVCRM.DAL.Repositories
 
         public async Task<CustomerEntity?> GetById(int id)
         {
-            return await _context.Customers.FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Customers.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<CustomerEntity?> Update(CustomerEntity entity)
         {
-            _context.Customers.Update(entity);
+            _context.Entry(entity).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
             return entity;
