@@ -29,17 +29,17 @@ namespace IVCRM.Web.Controllers
             await _changeCustomerValidator.ValidateAndThrowAsync(viewModel);
 
             var model = _mapper.Map<Customer>(viewModel);
-            var customer = await _service.Create(model);
+            var result = await _service.Create(model);
 
-            return _mapper.Map<CustomerViewModel>(customer);
+            return _mapper.Map<CustomerViewModel>(result);
         }
 
         [HttpGet]
         public async Task<IEnumerable<CustomerViewModel>> GetAll()
         {
-            var customers = await _service.GetAll();
+            var result = await _service.GetAll();
 
-            return _mapper.Map<IEnumerable<CustomerViewModel>>(customers);
+            return _mapper.Map<IEnumerable<CustomerViewModel>>(result);
         }
 
         [HttpGet("{id}")]
@@ -58,17 +58,17 @@ namespace IVCRM.Web.Controllers
             var model = _mapper.Map<Customer>(viewModel);
             model.Id = id;
 
-            var customer = await _service.Update(model);
+            var result = await _service.Update(model);
 
-            return _mapper.Map<CustomerViewModel>(customer);
+            return _mapper.Map<CustomerViewModel>(result);
         }
 
         [HttpDelete("{id}")]
         public async Task<CustomerViewModel> Delete(int id)
         {
-            var customer = await _service.Delete(id);
+            var result = await _service.Delete(id);
 
-            return _mapper.Map<CustomerViewModel>(customer);
+            return _mapper.Map<CustomerViewModel>(result);
         }
     }
 }

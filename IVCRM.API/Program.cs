@@ -1,4 +1,6 @@
+using FluentValidation;
 using FluentValidation.AspNetCore;
+using IVCRM.API.Middlewares;
 using IVCRM.API.Profiles;
 using IVCRM.BLL;
 using IVCRM.BLL.Profiles;
@@ -14,8 +16,10 @@ builder.Services.AddAutoMapper(cfg =>
 
 builder.Services.AddServices(builder.Configuration);
 
-builder.Services.AddControllers()
-    .AddFluentValidation(x => x.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
+builder.Services.AddControllers();
+
+builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -29,6 +33,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseAuthorization();
 
