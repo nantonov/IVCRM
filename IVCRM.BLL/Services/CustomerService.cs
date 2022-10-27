@@ -17,41 +17,41 @@ namespace IVCRM.BLL.Services
             _mapper = mapper;
         }
 
-        public async Task<Customer> Create(Customer request)
+        public async Task<Customer> Create(Customer model)
         {
-            var mappedRequest = _mapper.Map<CustomerEntity>(request);
-            var responce =  await _customerRepository.Create(mappedRequest);
+            var entity = _mapper.Map<CustomerEntity>(model);
+            var response =  await _customerRepository.Create(entity);
 
-            return _mapper.Map<Customer>(responce);
+            return _mapper.Map<Customer>(response);
         }
 
         public async Task<IEnumerable<Customer>> GetAll()
         {
-            var responce = await _customerRepository.GetAll();
+            var response = await _customerRepository.GetAll();
 
-            return _mapper.Map<IEnumerable<Customer>>(responce);
+            return _mapper.Map<IEnumerable<Customer>>(response);
         }
 
         public async Task<Customer> GetById(int id)
         {
-            var responce = await _customerRepository.GetById(id);
+            var response = await _customerRepository.GetById(id);
 
-            return _mapper.Map<Customer>(responce);
+            return _mapper.Map<Customer>(response);
         }
 
-        public async Task<Customer> Update(Customer request)
+        public async Task<Customer> Update(Customer model)
         {
-            var mappedRequest = _mapper.Map<CustomerEntity>(request);
-            var responce = await _customerRepository.Update(mappedRequest);
+            var entity = _mapper.Map<CustomerEntity>(model);
+            var response = await _customerRepository.Update(entity);
 
-            return _mapper.Map<Customer>(responce);
+            return _mapper.Map<Customer>(response);
         }
 
         public async Task<Customer> Delete(int id)
         {
-            var responce = await _customerRepository.Delete(id);
+            var response = await _customerRepository.Delete(id);
 
-            return _mapper.Map<Customer>(responce);
+            return _mapper.Map<Customer>(response);
         }
     }
 }

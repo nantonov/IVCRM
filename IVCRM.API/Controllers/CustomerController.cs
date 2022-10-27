@@ -23,11 +23,11 @@ namespace IVCRM.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(CreateCustomerRequest request)
         {
-            var mappedRequest = _mapper.Map<Customer>(request);
-            var customer = await _service.Create(mappedRequest);
-            var customerViewModel = _mapper.Map<CustomerViewModel>(customer);
+            var model = _mapper.Map<Customer>(request);
+            var customer = await _service.Create(model);
+            var viewModel = _mapper.Map<CustomerViewModel>(customer);
 
-            return Ok(customerViewModel);
+            return Ok(viewModel);
         }
 
         [HttpGet]
@@ -39,9 +39,9 @@ namespace IVCRM.Web.Controllers
                 return NotFound();
             }
 
-            var customerViewModels = _mapper.Map<List<CustomerViewModel>>(customers);
+            var viewModels = _mapper.Map<List<CustomerViewModel>>(customers);
 
-            return Ok(customerViewModels);
+            return Ok(viewModels);
         }
 
         [HttpGet("{id}")]
@@ -58,9 +58,9 @@ namespace IVCRM.Web.Controllers
                 return NotFound();
             }
 
-            var customerViewModel = _mapper.Map<CustomerViewModel>(customer);
+            var viewModel = _mapper.Map<CustomerViewModel>(customer);
 
-            return Ok(customerViewModel);
+            return Ok(viewModel);
         }
 
         [HttpPut("{id}")]
@@ -71,18 +71,18 @@ namespace IVCRM.Web.Controllers
                 return BadRequest();
             }
 
-            var mappedRequest = _mapper.Map<Customer>(request);
-            mappedRequest.Id = id;
+            var model = _mapper.Map<Customer>(request);
+            model.Id = id;
 
-            var customer = await _service.Update(mappedRequest);
+            var customer = await _service.Update(model);
             if (customer is null)
             {
                 return NotFound();
             }
 
-            var customerViewModel = _mapper.Map<CustomerViewModel>(customer);
+            var viewModel = _mapper.Map<CustomerViewModel>(customer);
 
-            return Ok(customerViewModel);
+            return Ok(viewModel);
         }
 
         [HttpDelete("{id}")]
@@ -99,9 +99,9 @@ namespace IVCRM.Web.Controllers
                 return NotFound();
             }
 
-            var customerViewModel = _mapper.Map<CustomerViewModel>(customer);
+            var viewModel = _mapper.Map<CustomerViewModel>(customer);
 
-            return Ok(customerViewModel);
+            return Ok(viewModel);
         }
     }
 }

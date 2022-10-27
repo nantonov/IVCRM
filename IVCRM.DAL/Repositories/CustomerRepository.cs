@@ -14,12 +14,12 @@ namespace IVCRM.DAL.Repositories
             _context = context;
         }
 
-        public async Task<CustomerEntity> Create(CustomerEntity request)
+        public async Task<CustomerEntity> Create(CustomerEntity entity)
         {
-            await _context.Customers.AddAsync(request);
+            await _context.Customers.AddAsync(entity);
             await _context.SaveChangesAsync();
             
-            return request;
+            return entity;
         }
 
         public async Task<IEnumerable<CustomerEntity>> GetAll()
@@ -32,22 +32,22 @@ namespace IVCRM.DAL.Repositories
             return await _context.Customers.SingleOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<CustomerEntity?> Update(CustomerEntity request)
+        public async Task<CustomerEntity?> Update(CustomerEntity entity)
         {
-            var entity = await GetById(request.Id);
-            if (entity is null)
+            var existsEntity = await GetById(entity.Id);
+            if (existsEntity is null)
             {
                 return null;
             }
 
-            entity.FirstName = request.FirstName;
-            entity.LastName = request.LastName;
-            entity.PhoneNumber = request.PhoneNumber;
+            existsEntity.FirstName = entity.FirstName;
+            existsEntity.LastName = entity.LastName;
+            existsEntity.PhoneNumber = entity.PhoneNumber;
 
-            _context.Customers.Update(entity);
+            _context.Customers.Attach(existsEntity);
             await _context.SaveChangesAsync();
 
-            return entity;
+            return existsEntity;
         }
 
         public async Task<CustomerEntity?> Delete(int id)
