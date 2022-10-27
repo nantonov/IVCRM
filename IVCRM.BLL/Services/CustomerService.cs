@@ -41,6 +41,11 @@ namespace IVCRM.BLL.Services
 
         public async Task<Customer> Update(Customer model)
         {
+            if (await IsEntityExists(model.Id))
+            {
+                return null!;
+            }
+
             var entity = _mapper.Map<CustomerEntity>(model);
             var response = await _customerRepository.Update(entity);
 
@@ -49,9 +54,21 @@ namespace IVCRM.BLL.Services
 
         public async Task<Customer> Delete(int id)
         {
+            if (await IsEntityExists(id))
+            {
+                return null!;
+            }
+
             var response = await _customerRepository.Delete(id);
 
             return _mapper.Map<Customer>(response);
+        }
+
+        public async Task<bool> IsEntityExists(int id)
+        {
+            var entity = await _customerRepository.GetById(id);
+
+            return entity is not null;
         }
     }
 }

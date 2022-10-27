@@ -1,6 +1,8 @@
+using FluentValidation.AspNetCore;
 using IVCRM.API.Profiles;
 using IVCRM.BLL;
 using IVCRM.BLL.Profiles;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +14,9 @@ builder.Services.AddAutoMapper(cfg =>
 
 builder.Services.AddServices(builder.Configuration);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddFluentValidation(x => x.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

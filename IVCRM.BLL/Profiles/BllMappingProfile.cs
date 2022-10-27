@@ -7,11 +7,6 @@ namespace IVCRM.BLL.Profiles
     {
         public BllMappingProfile()
         {
-            CreateMap();
-        }
-
-        private void CreateMap()
-        {
             CreateMap<Customer, CustomerEntity>().ReverseMap();
         }
     }

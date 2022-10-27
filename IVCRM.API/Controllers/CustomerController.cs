@@ -1,5 +1,6 @@
 using AutoMapper;
-using IVCRM.API.Requests;
+using FluentValidation;
+using IVCRM.API.Validators;
 using IVCRM.API.ViewModels;
 using IVCRM.BLL.Models;
 using IVCRM.BLL.Services.Interfaces;
@@ -13,95 +14,61 @@ namespace IVCRM.Web.Controllers
     {
         private readonly ICustomerService _service;
         private readonly IMapper _mapper;
+        private readonly ChangeCustomerValidator _changeCustomerValidator;
 
-        public CustomerController(ICustomerService service, IMapper mapper)
+        public CustomerController(ICustomerService service, IMapper mapper, ChangeCustomerValidator changeCustomerValidator)
         {
             _service = service;
             _mapper = mapper;
+            _changeCustomerValidator = changeCustomerValidator;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(CreateCustomerRequest request)
+        public async Task<CustomerViewModel> Create([FromBody] ChangeCustomerViewModel viewModel)
         {
-            var model = _mapper.Map<Customer>(request);
-            var customer = await _service.Create(model);
-            var viewModel = _mapper.Map<CustomerViewModel>(customer);
+            await _changeCustomerValidator.ValidateAndThrowAsync(viewModel);
 
-            return Ok(viewModel);
+            var model = _mapper.Map<Customer>(viewModel);
+            var customer = await _service.Create(model);
+
+            return _mapper.Map<CustomerViewModel>(customer);
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IEnumerable<CustomerViewModel>> GetAll()
         {
             var customers = await _service.GetAll();
-            if (!customers.Any())
-            {
-                return NotFound();
-            }
 
-            var viewModels = _mapper.Map<List<CustomerViewModel>>(customers);
-
-            return Ok(viewModels);
+            return _mapper.Map<IEnumerable<CustomerViewModel>>(customers);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<CustomerViewModel> GetById(int id)
         {
-            if (id <= 0)
-            {
-                return BadRequest();
-            }
+            var model = await _service.GetById(id);
 
-            var customer = await _service.GetById(id);
-            if (customer is null)
-            {
-                return NotFound();
-            }
-
-            var viewModel = _mapper.Map<CustomerViewModel>(customer);
-
-            return Ok(viewModel);
+            return _mapper.Map<CustomerViewModel>(model);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] UpdateCustomerRequest request)
+        public async Task<CustomerViewModel> Update(int id, [FromBody] ChangeCustomerViewModel viewModel)
         {
-            if (id <= 0)
-            {
-                return BadRequest();
-            }
+            await _changeCustomerValidator.ValidateAndThrowAsync(viewModel);
 
-            var model = _mapper.Map<Customer>(request);
+            var model = _mapper.Map<Customer>(viewModel);
             model.Id = id;
 
             var customer = await _service.Update(model);
-            if (customer is null)
-            {
-                return NotFound();
-            }
 
-            var viewModel = _mapper.Map<CustomerViewModel>(customer);
-
-            return Ok(viewModel);
+            return _mapper.Map<CustomerViewModel>(customer);
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<CustomerViewModel> Delete(int id)
         {
-            if (id <= 0)
-            {
-                return BadRequest();
-            }
+            var customer = await _service.Delete(id);
 
-            var customer = await _service.Delete(id); ;
-            if (customer is null)
-            {
-                return NotFound();
-            }
-
-            var viewModel = _mapper.Map<CustomerViewModel>(customer);
-
-            return Ok(viewModel);
+            return _mapper.Map<CustomerViewModel>(customer);
         }
     }
 }

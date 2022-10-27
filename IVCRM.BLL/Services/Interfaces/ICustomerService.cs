@@ -10,5 +10,6 @@ namespace IVCRM.BLL.Services.Interfaces
         Task<Customer> GetById(int id);
         Task<Customer> Update(Customer model);
         Task<Customer> Delete(int id);
+        Task<bool> IsEntityExists(int id);
     }
 }
