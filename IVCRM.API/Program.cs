@@ -1,5 +1,4 @@
 using FluentValidation;
-using FluentValidation.AspNetCore;
 using IVCRM.API.Middlewares;
 using IVCRM.API.Profiles;
 using IVCRM.BLL;
@@ -18,7 +17,6 @@ builder.Services.AddServices(builder.Configuration);
 
 builder.Services.AddControllers();
 
-builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
 builder.Services.AddEndpointsApiExplorer();
