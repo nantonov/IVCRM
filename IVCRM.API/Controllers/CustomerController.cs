@@ -1,10 +1,14 @@
 using AutoMapper;
 using FluentValidation;
+using FluentValidation.AspNetCore;
+using FluentValidation.Results;
+using IVCRM.API.Filters;
 using IVCRM.API.Validators;
 using IVCRM.API.ViewModels;
 using IVCRM.BLL.Models;
 using IVCRM.BLL.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace IVCRM.Web.Controllers
 {
@@ -24,10 +28,16 @@ namespace IVCRM.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateFilter]
         public async Task<CustomerViewModel> Create([FromBody] ChangeCustomerViewModel viewModel)
         {
-            await _changeCustomerValidator.ValidateAndThrowAsync(viewModel);
-
+            var validationResult = await _changeCustomerValidator.ValidateAsync(viewModel);
+            if (!validationResult.IsValid)
+            {
+                validationResult.AddToModelState(ModelState);
+                return null!;
+            }
+            
             var model = _mapper.Map<Customer>(viewModel);
             var result = await _service.Create(model);
 
@@ -51,9 +61,15 @@ namespace IVCRM.Web.Controllers
         }
 
         [HttpPut("{id}")]
+        [ValidateFilter]
         public async Task<CustomerViewModel> Update(int id, [FromBody] ChangeCustomerViewModel viewModel)
         {
-            await _changeCustomerValidator.ValidateAndThrowAsync(viewModel);
+            var validationResult = await _changeCustomerValidator.ValidateAsync(viewModel);
+            if (!validationResult.IsValid)
+            {
+                validationResult.AddToModelState(ModelState);
+                return null!;
+            }
 
             var model = _mapper.Map<Customer>(viewModel);
             model.Id = id;
