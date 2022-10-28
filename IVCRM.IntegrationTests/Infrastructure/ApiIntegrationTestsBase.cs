@@ -15,13 +15,13 @@ namespace IVCRM.IntegrationTests.Infrastructure
                 {
                     var dbContextService = services.SingleOrDefault(x =>
                         x.ServiceType == typeof(DbContextOptions<AppDbContext>));
-                    services.Remove(dbContextService);
+                    services.Remove(dbContextService!);
 
                     services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("ApiTestDb"));
                 }));
             Server = factory.Server;
             Client = Server.CreateClient();
-            Context = factory.Services.CreateScope().ServiceProvider.GetService<AppDbContext>();
+            Context = factory.Services.CreateScope().ServiceProvider.GetService<AppDbContext>()!;
         }
 
         protected TestServer Server { get; }
