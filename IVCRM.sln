@@ -12,6 +12,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D6CD0938-C0AD-425C-9327-9A75E9E70F4E}"
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1F8EA7E3-BBE9-4672-AB01-E96F0CE135FA}"
@@ -20,7 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{B338B686
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IVCRM.UnitTests", "IVCRM.UnitTests\IVCRM.UnitTests.csproj", "{F98F8B49-4B20-4E2A-944F-7F6DDE6AC9F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IVCRM.IntegrationTests", "IVCRM.IntegrationTests\IVCRM.IntegrationTests.csproj", "{072738EB-4A90-4106-B89D-05D0E96188EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IVCRM.IntegrationTests", "IVCRM.IntegrationTests\IVCRM.IntegrationTests.csproj", "{072738EB-4A90-4106-B89D-05D0E96188EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
