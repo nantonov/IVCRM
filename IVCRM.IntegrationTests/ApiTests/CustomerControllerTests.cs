@@ -19,6 +19,9 @@ namespace IVCRM.IntegrationTests.ApiTests
             var actualResult = await Client.SendAsync(request);
             var responseResult = actualResult.GetResponseResult<CustomerViewModel>();
 
+            entity.Id = responseResult.Id;
+            viewModel.Id = responseResult.Id;
+
             //Assert
             actualResult.StatusCode.Should().Be(HttpStatusCode.OK);
             responseResult.Should().BeEquivalentTo(viewModel);
