@@ -7,7 +7,7 @@
   </PropertyGroup>
 
 	<ItemGroup>
-		<InternalsVisibleTo Include="IVCRM.IntegrationTests" />
+		<InternalsVisibleTo Include="IVCRM.API.IntegrationTests" />
 	</ItemGroup>
 
   <ItemGroup>
