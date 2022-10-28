@@ -3,10 +3,10 @@ using System.Net;
 
 namespace IVCRM.API.IntegrationTests.ApiTests
 {
-    public class CustomerControllerTests : ApiIntegrationTestsBase
+    public class CustomerControllerTests : IntegrationTestsBase
     {
         [Fact]
-        public async void Create_WhenViewModelIsProvided_ShouldCreateEntityAndReturnModel()
+        public async void Create_ViewModel_ReturnsViewModel()
         {
             //Arrange
             var viewModel = TestCustomerViewModels.CustomerViewModel;

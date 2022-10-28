@@ -13,7 +13,7 @@ namespace IVCRM.DAL.IntegrationTests.DalTests
         }
 
         [Fact]
-        public async Task Create_IfEntityIsProvided_ShouldCreateAndReturnEntity()
+        public async Task Create_Entity_ReturnsEntity()
         {
 
             //Arrange

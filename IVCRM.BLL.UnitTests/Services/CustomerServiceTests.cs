@@ -10,7 +10,7 @@ namespace IVCRM.BLL.UnitTests.Controllers
     public class CustomerServiceTests
     {
         [Fact]
-        public async void Create_WhenModelIsProvided_ShouldCallRepositoryAndReturnModel()
+        public async void Create_Model_ReturnsModel()
         {
             //Arrange
             var model = TestCustomers.Customer;
@@ -32,7 +32,7 @@ namespace IVCRM.BLL.UnitTests.Controllers
         }
 
         [Fact]
-        public async void GetAll_ShouldCallRepositoryAndReturnModelCollection()
+        public async void GetAll_DataExists_ReturnsModelCollection()
         {
             //Arrange
             var models = TestCustomers.CustomerCollection;
@@ -54,7 +54,7 @@ namespace IVCRM.BLL.UnitTests.Controllers
         }
 
         [Fact]
-        public async void GetById_WhenIdIsProvided_ShouldCallRepositoryAndReturnModel()
+        public async void GetById_Id_ReturnsModel()
         {
             //Arrange
             var model = TestCustomers.Customer;
@@ -77,7 +77,7 @@ namespace IVCRM.BLL.UnitTests.Controllers
         }
 
         [Fact]
-        public async void Update_WhenModelIsProvided_ShouldCallRepositoryAndReturnModel()
+        public async void Update_Model_ReturnsModel()
         {
             //Arrange
             var model = TestCustomers.Customer;
@@ -99,7 +99,7 @@ namespace IVCRM.BLL.UnitTests.Controllers
         }
 
         [Fact]
-        public async void Delete_WhenIdIsProvided_ShouldCallRepositoryAndReturnModel()
+        public async void Delete_Id_ReturnsModel()
         {
             //Arrange
             var model = TestCustomers.Customer;

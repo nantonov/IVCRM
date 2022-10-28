@@ -6,7 +6,7 @@ namespace IVCRM.DAL.IntegrationTests.Infrastructure
     public class IntegrationTestsBase : IDisposable
     {
         protected AppDbContext Context { get; } = new AppDbContext(new DbContextOptionsBuilder<AppDbContext>()
-            .UseInMemoryDatabase("DalTestDb").Options);
+            .UseInMemoryDatabase("TestDb").Options);
 
         public void Dispose()
         {

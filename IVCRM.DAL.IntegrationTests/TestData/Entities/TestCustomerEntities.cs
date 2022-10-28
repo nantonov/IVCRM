@@ -8,7 +8,7 @@ namespace IVCRM.DAL.IntegrationTests.TestData.Models
         {
             FirstName = "FirstName",
             LastName = "LastName",
-            PhoneNumber = "Number",
+            PhoneNumber = "+1234567",
         };
 
         internal static List<CustomerEntity> CustomerEntityCollection => new ()

@@ -6,9 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace IVCRM.API.IntegrationTests.Infrastructure
 {
-    public class ApiIntegrationTestsBase : IDisposable
+    public class IntegrationTestsBase : IDisposable
     {
-        public ApiIntegrationTestsBase()
+        public IntegrationTestsBase()
         {
             var factory = new WebApplicationFactory<Program>().WithWebHostBuilder(builder =>
                 builder.ConfigureServices(services =>
@@ -17,7 +17,7 @@ namespace IVCRM.API.IntegrationTests.Infrastructure
                         x.ServiceType == typeof(DbContextOptions<AppDbContext>));
                     services.Remove(dbContextService!);
 
-                    services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("ApiTestDb"));
+                    services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("TestDb"));
                 }));
             Server = factory.Server;
             Client = Server.CreateClient();

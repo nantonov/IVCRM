@@ -9,7 +9,7 @@ namespace IVCRM.BLL.UnitTests.Controllers
     public class CustomerMappingTests
     {
         [Fact]
-        public void Map_WhenEntityIsProvided_ShouldReturnModel()
+        public void Map_Entity_ReturnsModel()
         {
             //Arrange
             var model = TestCustomers.Customer;
@@ -26,7 +26,7 @@ namespace IVCRM.BLL.UnitTests.Controllers
         }
 
         [Fact]
-        public void Map_WhenModelIsProvided_ShouldReturnEntity()
+        public void Map_Model_ReturnsEntity()
         {
             //Arrange
             var model = TestCustomers.Customer;
@@ -43,7 +43,7 @@ namespace IVCRM.BLL.UnitTests.Controllers
         }
 
         [Fact]
-        public void Map_WhenModelIsProvided_ShouldReturnViewModel()
+        public void Map_Model_ReturnsViewModel()
         {
             //Arrange
             var model = TestCustomers.Customer;

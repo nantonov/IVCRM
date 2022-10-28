@@ -8,7 +8,7 @@ namespace IVCRM.API.IntegrationTests.TestData.Models
         {
             Id = 1,
             FullName = "FirstName LastName",
-            PhoneNumber = "1234567",
+            PhoneNumber = "+1234567",
         };
 
         internal static ChangeCustomerViewModel ChangeCustomerViewModel => new()
