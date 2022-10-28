@@ -1,11 +1,12 @@
 using IVCRM.BLL.Models;
 using IVCRM.BLL.Services;
+using IVCRM.BLL.UnitTests.TestData.Entities;
 using IVCRM.DAL.Entities;
 using IVCRM.DAL.Repositories.Interfaces;
 using Moq;
 using Moq.AutoMock;
 
-namespace IVCRM.BLL.UnitTests.Controllers
+namespace IVCRM.BLL.UnitTests.ServiceTests
 {
     public class CustomerServiceTests
     {

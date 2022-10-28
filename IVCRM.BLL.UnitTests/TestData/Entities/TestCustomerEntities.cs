@@ -1,7 +1,6 @@
-﻿using IVCRM.BLL.Models;
-using IVCRM.DAL.Entities;
+﻿using IVCRM.DAL.Entities;
 
-namespace IVCRM.BLL.UnitTests.TestData.Models
+namespace IVCRM.BLL.UnitTests.TestData.Entities
 {
     internal static class TestCustomerEntities
     {

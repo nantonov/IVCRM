@@ -1,7 +1,8 @@
-﻿using IVCRM.DAL.Repositories;
+﻿using IVCRM.DAL.IntegrationTests.TestData.Entities;
+using IVCRM.DAL.Repositories;
 using IVCRM.DAL.Repositories.Interfaces;
 
-namespace IVCRM.DAL.IntegrationTests.DalTests
+namespace IVCRM.DAL.IntegrationTests.RepositoryTests
 {
     public class CustomerRepositoryTests : IntegrationTestsBase
     {

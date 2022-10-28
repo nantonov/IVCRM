@@ -1,7 +1,7 @@
 ﻿using IVCRM.BLL.Models;
 using IVCRM.DAL.Entities;
 
-namespace IVCRM.API.IntegrationTests.TestData.Models
+namespace IVCRM.API.IntegrationTests.TestData.Entities
 {
     internal static class TestCustomerEntities
     {

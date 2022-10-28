@@ -2,9 +2,11 @@ using IVCRM.API.Profiles;
 using IVCRM.API.ViewModels;
 using IVCRM.BLL.Models;
 using IVCRM.BLL.Profiles;
+using IVCRM.BLL.UnitTests.TestData.Entities;
+using IVCRM.BLL.UnitTests.TestData.ViewModels;
 using IVCRM.DAL.Entities;
 
-namespace IVCRM.BLL.UnitTests.Controllers
+namespace IVCRM.BLL.UnitTests.Mapping
 {
     public class CustomerMappingTests
     {

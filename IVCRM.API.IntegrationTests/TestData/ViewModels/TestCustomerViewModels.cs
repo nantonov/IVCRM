@@ -1,6 +1,6 @@
 ﻿using IVCRM.API.ViewModels;
 
-namespace IVCRM.API.IntegrationTests.TestData.Models
+namespace IVCRM.API.IntegrationTests.TestData.ViewModels
 {
     internal static class TestCustomerViewModels
     {
