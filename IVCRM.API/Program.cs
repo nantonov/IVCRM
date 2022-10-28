@@ -1,11 +1,24 @@
+using FluentValidation;
+using IVCRM.API.Middlewares;
+using IVCRM.API.Profiles;
 using IVCRM.BLL;
-using Microsoft.Extensions.Configuration;
+using IVCRM.BLL.Profiles;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddAutoMapper(cfg =>
+{
+    cfg.AddProfile<ApiMappingProfile>();
+    cfg.AddProfile<BllMappingProfile>();
+});
 
 builder.Services.AddServices(builder.Configuration);
 
 builder.Services.AddControllers();
+
+builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -18,6 +31,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseAuthorization();
 

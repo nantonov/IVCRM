@@ -10,13 +10,13 @@ namespace IVCRM.DAL.Infrastructure
             Database.EnsureCreated();
         }
 
-        public DbSet<CustomerEntity> Customers { get; set; }
-        public DbSet<OrderEntity> Orders { get; set; }
-        public DbSet<ProductEntity> Products { get; set; }
-        public DbSet<ProductCategoryEntity> ProductCategories { get; set; }
-        public DbSet<ProductOrderEntity> ProductOrders { get; set; }
-        public DbSet<ProductStorageEntity> ProductStorages { get; set; }
-        public DbSet<StorageEntity> Storages { get; set; }
+        public DbSet<CustomerEntity> Customers { get; set; } = null!;
+        public DbSet<OrderEntity> Orders { get; set; } = null!;
+        public DbSet<ProductEntity> Products { get; set; } = null!;
+        public DbSet<ProductCategoryEntity> ProductCategories { get; set; } = null!;
+        public DbSet<ProductOrderEntity> ProductOrders { get; set; } = null!;
+        public DbSet<ProductStorageEntity> ProductStorages { get; set; } = null!;
+        public DbSet<StorageEntity> Storages { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
