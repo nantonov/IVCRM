@@ -17,17 +17,17 @@ namespace IVCRM.BLL.UnitTests.TestData.ViewModels
             new ()
             {
                 FullName = "FirstName1 LastName1",
-                PhoneNumber = "Number1",
+                PhoneNumber = "+1234567",
             },
             new ()
             {
                 FullName = "FirstName2 LastName2",
-                PhoneNumber = "Number2",
+                PhoneNumber = "+2234567",
             },
             new ()
             {
                 FullName = "FirstName3 LastName3",
-                PhoneNumber = "Number3",
+                PhoneNumber = "+3234567",
             },
         };
 

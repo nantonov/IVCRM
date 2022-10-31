@@ -1,3 +1,4 @@
+using IVCRM.BLL.Exceptions;
 using IVCRM.BLL.Models;
 using IVCRM.BLL.Services;
 using IVCRM.BLL.UnitTests.TestData.Entities;
@@ -28,7 +29,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
             var response = await service.Create(model);
 
             //Assert
-            mocker.GetMock<ICustomerRepository>().Verify(x => x.Create(It.IsAny<CustomerEntity>()));
+            mocker.GetMock<ICustomerRepository>().Verify(x => x.Create(It.IsAny<CustomerEntity>()), Times.Once);
             response.Should().BeEquivalentTo(model);
         }
 
@@ -50,7 +51,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
             var response = await service.GetAll();
 
             //Assert
-            mocker.GetMock<ICustomerRepository>().Verify(x => x.GetAll());
+            mocker.GetMock<ICustomerRepository>().Verify(x => x.GetAll(), Times.Once);
             response.Should().BeEquivalentTo(models);
         }
 
@@ -73,7 +74,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
             var response = await service.GetById(id);
 
             //Assert
-            mocker.GetMock<ICustomerRepository>().Verify(x => x.GetById(It.IsAny<int>()));
+            mocker.GetMock<ICustomerRepository>().Verify(x => x.GetById(It.IsAny<int>()), Times.Once);
             response.Should().BeEquivalentTo(model);
         }
 
@@ -95,8 +96,30 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
             var response = await service.Update(model);
 
             //Assert
-            mocker.GetMock<ICustomerRepository>().Verify(x => x.Update(It.IsAny<CustomerEntity>()));
+            mocker.GetMock<ICustomerRepository>().Verify(x => x.Update(It.IsAny<CustomerEntity>()), Times.Once);
             response.Should().BeEquivalentTo(model);
+        }
+
+        [Fact]
+        public async void Update_EntityNotExists_ThrowsResourceNotFoundException()
+        {
+            //Arrange
+            var model = TestCustomers.Customer;
+            var entity = TestCustomerEntities.CustomerEntity;
+
+            var mocker = new AutoMocker(MockBehavior.Default, DefaultValue.Mock);
+            mocker.Setup<ICustomerRepository, Task<CustomerEntity?>>(x => x.GetById(It.IsAny<int>()))
+                .Returns(Task.FromResult((CustomerEntity)null!)!);
+            mocker.Setup<IMapper, Customer>(x => x.Map<Customer>(entity)).Returns(model);
+
+            var service = mocker.CreateInstance<CustomerService>();
+
+            //Act
+            Func<Task<Customer?>> update = async () => await service.Update(model);
+
+            //Assert
+            await update.Should().ThrowAsync<ResourceNotFoundException>();
+            mocker.GetMock<ICustomerRepository>().Verify(x => x.Update(It.IsAny<CustomerEntity>()), Times.Never);
         }
 
         [Fact]
@@ -108,18 +131,37 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
             var id = model.Id;
 
             var mocker = new AutoMocker(MockBehavior.Default, DefaultValue.Mock);
-            mocker.Setup<ICustomerRepository, Task<CustomerEntity?>>(x => x.Delete(It.IsAny<int>()))
-                .ReturnsAsync(entity);
             mocker.Setup<IMapper, Customer>(x => x.Map<Customer>(entity)).Returns(model);
 
             var service = mocker.CreateInstance<CustomerService>();
 
             //Act
-            var response = await service.Delete(id);
+            await service.Delete(id);
 
             //Assert
-            mocker.GetMock<ICustomerRepository>().Verify(x => x.Delete(It.IsAny<int>()));
-            response.Should().BeEquivalentTo(model);
+            mocker.GetMock<ICustomerRepository>().Verify(x => x.Delete(It.IsAny<int>()), Times.Once);
+        }
+
+        [Fact]
+        public async void Delete_EntityNotExists_ThrowsResourceNotFoundException()
+        {
+            //Arrange
+            var model = TestCustomers.Customer;
+            var entity = TestCustomerEntities.CustomerEntity;
+            var id = model.Id;
+
+            var mocker = new AutoMocker(MockBehavior.Default, DefaultValue.Mock);
+            mocker.Setup<ICustomerRepository, Task<CustomerEntity?>>(x => x.GetById(It.IsAny<int>()))
+                .Returns(Task.FromResult((CustomerEntity)null!)!);
+
+            var service = mocker.CreateInstance<CustomerService>();
+
+            //Act
+            Func<Task> update = async () => await service.Delete(id);
+
+            //Assert
+            await update.Should().ThrowAsync<ResourceNotFoundException>();
+            mocker.GetMock<ICustomerRepository>().Verify(x => x.Delete(It.IsAny<int>()), Times.Never);
         }
     }
 }

@@ -1,12 +1,9 @@
-using IVCRM.API.Profiles;
-using IVCRM.API.ViewModels;
 using IVCRM.BLL.Models;
 using IVCRM.BLL.Profiles;
 using IVCRM.BLL.UnitTests.TestData.Entities;
-using IVCRM.BLL.UnitTests.TestData.ViewModels;
 using IVCRM.DAL.Entities;
 
-namespace IVCRM.BLL.UnitTests.Mapping
+namespace IVCRM.BLL.UnitTests.MappingTests
 {
     public class CustomerMappingTests
     {
@@ -42,23 +39,6 @@ namespace IVCRM.BLL.UnitTests.Mapping
 
             //Assert
             result.Should().BeEquivalentTo(entity);
-        }
-
-        [Fact]
-        public void Map_Model_ReturnsViewModel()
-        {
-            //Arrange
-            var model = TestCustomers.Customer;
-            var viewModel = TestCustomerViewModels.CustomerViewModel;
-
-            var config = new MapperConfiguration(cfg => cfg.AddProfile<ApiMappingProfile>());
-            var mapper = config.CreateMapper();
-
-            //Act
-            var result = mapper.Map<CustomerViewModel>(model);
-
-            //Assert
-            result.Should().BeEquivalentTo(viewModel);
         }
     }
 }
