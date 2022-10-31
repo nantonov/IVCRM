@@ -1,14 +1,11 @@
 using AutoMapper;
-using FluentValidation;
 using FluentValidation.AspNetCore;
-using FluentValidation.Results;
 using IVCRM.API.Filters;
 using IVCRM.API.Validators;
 using IVCRM.API.ViewModels;
 using IVCRM.BLL.Models;
 using IVCRM.BLL.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System;
 
 namespace IVCRM.Web.Controllers
 {
@@ -80,11 +77,9 @@ namespace IVCRM.Web.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<CustomerViewModel> Delete(int id)
+        public async Task Delete(int id)
         {
-            var result = await _service.Delete(id);
-
-            return _mapper.Map<CustomerViewModel>(result);
+            await _service.Delete(id);
         }
     }
 }

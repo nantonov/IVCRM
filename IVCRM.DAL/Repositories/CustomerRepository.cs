@@ -40,14 +40,14 @@ namespace IVCRM.DAL.Repositories
             return entity;
         }
 
-        public async Task<CustomerEntity?> Delete(int id)
+        public async Task Delete(int id)
         {
             var entity = await GetById(id);
-
-            _context.Customers.Remove(entity);
-            await _context.SaveChangesAsync();
-
-            return entity;
+            if (entity is not null)
+            {
+                _context.Customers.Remove(entity);
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }

@@ -53,16 +53,14 @@ namespace IVCRM.BLL.Services
             return _mapper.Map<Customer>(result);
         }
 
-        public async Task<Customer> Delete(int id)
+        public async Task Delete(int id)
         {
             if (!await IsEntityExists(id))
             {
                 throw new ResourceNotFoundException();
             }
 
-            var entity = await _customerRepository.Delete(id);
-
-            return _mapper.Map<Customer>(entity);
+            await _customerRepository.Delete(id);
         }
 
         public async Task<bool> IsEntityExists(int id)
