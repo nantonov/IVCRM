@@ -98,7 +98,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
             mocker.GetMock<ICustomerRepository>().Verify(x => x.Update(It.IsAny<CustomerEntity>()));
             response.Should().BeEquivalentTo(model);
         }
-
+        
         [Fact]
         public async void Delete_Id_ReturnsModel()
         {
