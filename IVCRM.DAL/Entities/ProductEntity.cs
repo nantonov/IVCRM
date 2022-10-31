@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using IVCRM.DAL.Entities.Interfaces;
+using System.ComponentModel.DataAnnotations;
 
 namespace IVCRM.DAL.Entities
 {
-    public class ProductEntity
+    public class ProductEntity : IEntity
     {
         [Key]
         public int Id { get; set; }

@@ -1,8 +1,9 @@
-﻿using IVCRM.DAL.Enums;
+﻿using IVCRM.DAL.Entities.Interfaces;
+using IVCRM.DAL.Enums;
 
 namespace IVCRM.DAL.Entities
 {
-    public class OrderEntity
+    public class OrderEntity : IEntity
     {
         public int Id { get; set; }
         public string? Name { get; set; }

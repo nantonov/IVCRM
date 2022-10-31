@@ -77,11 +77,9 @@ namespace IVCRM.Web.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<CustomerViewModel> Delete(int id)
+        public async Task Delete(int id)
         {
-            var result = await _service.Delete(id);
-
-            return _mapper.Map<CustomerViewModel>(result);
+            await _service.Delete(id);
         }
     }
 }
