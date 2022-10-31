@@ -8,6 +8,6 @@ namespace IVCRM.DAL.Repositories.Interfaces
         Task<IEnumerable<CustomerEntity>> GetAll();
         Task<CustomerEntity?> GetById(int id);
         Task<CustomerEntity?> Update(CustomerEntity entity);
-        Task<CustomerEntity?> Delete(int id);
+        Task Delete(int id);
     }
 }
