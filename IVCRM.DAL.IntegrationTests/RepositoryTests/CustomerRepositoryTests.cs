@@ -28,7 +28,7 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
         }
 
         [Fact]
-        public async Task GetAll_IfEntitiesExists_ShouldEntityCollection()
+        public async Task GetAll_DataExists_ReturnsEntityCollection()
         {
             //Arrange
             var entities = TestCustomerEntities.CustomerEntityCollection;
@@ -42,7 +42,7 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
         }
 
         [Fact]
-        public async Task GetById_IfEntityExists_ShouldReturnEntity()
+        public async Task GetById_EntityExists_ReturnsEntity()
         {
             //Arrange
             var entity = TestCustomerEntities.CustomerEntity;
@@ -56,7 +56,7 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
         }
 
         [Fact]
-        public async Task Update_IfEntityExists_ShouldUpdateAndReturnEntity()
+        public async Task Update_EntityExists_UpdateAndReturnsEntity()
         {
             //Arrange
             var entity = TestCustomerEntities.CustomerEntity;
@@ -72,7 +72,7 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
         }
 
         [Fact]
-        public async Task Delete_IfEntityExists_ShouldDeleteAndReturnEntity()
+        public async Task Delete_EntityExists_DeletesEntity()
         {
             //Arrange
             var entity = TestCustomerEntities.CustomerEntity;
