@@ -1,6 +1,8 @@
-﻿namespace IVCRM.DAL.Entities
+﻿using IVCRM.DAL.Entities.Interfaces;
+
+namespace IVCRM.DAL.Entities
 {
-    public class ProductCategoryEntity
+    public class ProductCategoryEntity : IEntity
     {
         public int Id { get; set; }
         public string? Name { get; set; }
