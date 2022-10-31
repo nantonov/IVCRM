@@ -55,10 +55,8 @@ namespace IVCRM.API.IntegrationTests.ApiTests
             var entityCollection = TestCustomerEntities.CustomerEntityCollection;
             var viewModelCollection = TestCustomerViewModels.CustomerViewModelCollection;
             var entitiesCount = entityCollection.Count;
-            for (int i = 0; i < entitiesCount; i++)
-            {
-                viewModelCollection[i].Id = await AddToContext(entityCollection[i]);
-            }
+
+            await AddRangeToContext(entityCollection);
 
             using var request = new HttpRequestMessage(HttpMethod.Get, $"/api/customer");
 
@@ -68,7 +66,7 @@ namespace IVCRM.API.IntegrationTests.ApiTests
 
             //Assert
             actualResult.StatusCode.Should().Be(HttpStatusCode.OK);
-            responseResult.TakeLast(entitiesCount).Should().BeEquivalentTo(viewModelCollection);
+            responseResult.TakeLast(entitiesCount).Should().BeEquivalentTo(viewModelCollection, opt => opt.Excluding(x => x.Id));
         }
 
         [Fact]
