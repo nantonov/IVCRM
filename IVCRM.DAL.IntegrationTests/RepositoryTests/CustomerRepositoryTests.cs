@@ -60,8 +60,9 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
         {
             //Arrange
             var entity = TestCustomerEntities.CustomerEntity;
+            var updatedEntity = TestCustomerEntities.UpdatedCustomerEntity;
             await AddToContext(entity);
-            var updatedEntity = TestCustomerEntities.CustomerEntityCollection.First();
+            
             entity.FirstName = updatedEntity.FirstName;
 
             //Act
