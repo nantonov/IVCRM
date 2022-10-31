@@ -15,7 +15,7 @@ namespace IVCRM.API.Filters
             {
                 var entry = context.ModelState.Values.FirstOrDefault();
 
-                var messages = entry.Errors.Select(x => x.ErrorMessage);
+                var messages = entry?.Errors.Select(x => x.ErrorMessage);
 
                 context.Result = new BadRequestObjectResult(new
                 {
