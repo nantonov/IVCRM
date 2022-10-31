@@ -43,22 +43,5 @@ namespace IVCRM.BLL.UnitTests.Mapping
             //Assert
             result.Should().BeEquivalentTo(entity);
         }
-
-        [Fact]
-        public void Map_Model_ReturnsViewModel()
-        {
-            //Arrange
-            var model = TestCustomers.Customer;
-            var viewModel = TestCustomerViewModels.CustomerViewModel;
-
-            var config = new MapperConfiguration(cfg => cfg.AddProfile<ApiMappingProfile>());
-            var mapper = config.CreateMapper();
-
-            //Act
-            var result = mapper.Map<CustomerViewModel>(model);
-
-            //Assert
-            result.Should().BeEquivalentTo(viewModel);
-        }
     }
 }
