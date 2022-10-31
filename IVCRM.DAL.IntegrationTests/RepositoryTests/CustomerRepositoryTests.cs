@@ -84,5 +84,20 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
             //Assert
             Context.Customers.Should().NotContain(entity);
         }
+
+        [Fact]
+        public async Task Delete_EntityNotExists_Returns()
+        {
+            //Arrange
+            await AddToContext(TestCustomerEntities.CustomerEntity);
+            var entitiesCount = Context.Customers.Count();
+            var unreachableId = Context.Customers.Max(x => x.Id) + 1;
+
+            //Act
+            await _customerRepository.Delete(unreachableId);
+
+            //Assert
+            Context.Customers.Count().Should().Be(entitiesCount);
+        }
     }
 }

@@ -108,18 +108,15 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
             var id = model.Id;
 
             var mocker = new AutoMocker(MockBehavior.Default, DefaultValue.Mock);
-            mocker.Setup<ICustomerRepository, Task<CustomerEntity?>>(x => x.Delete(It.IsAny<int>()))
-                .ReturnsAsync(entity);
             mocker.Setup<IMapper, Customer>(x => x.Map<Customer>(entity)).Returns(model);
 
             var service = mocker.CreateInstance<CustomerService>();
 
             //Act
-            var response = await service.Delete(id);
+            await service.Delete(id);
 
             //Assert
             mocker.GetMock<ICustomerRepository>().Verify(x => x.Delete(It.IsAny<int>()));
-            response.Should().BeEquivalentTo(model);
         }
     }
 }
