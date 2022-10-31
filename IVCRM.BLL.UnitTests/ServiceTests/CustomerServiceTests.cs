@@ -99,7 +99,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
             mocker.GetMock<ICustomerRepository>().Verify(x => x.Update(It.IsAny<CustomerEntity>()), Times.Once);
             response.Should().BeEquivalentTo(model);
         }
-
+        
         [Fact]
         public async void Update_EntityNotExists_ThrowsResourceNotFoundException()
         {

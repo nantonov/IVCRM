@@ -1,5 +1,4 @@
-﻿using IVCRM.BLL.Models;
-using IVCRM.DAL.Entities;
+﻿using IVCRM.DAL.Entities;
 
 namespace IVCRM.API.IntegrationTests.TestData.Entities
 {
@@ -12,9 +11,26 @@ namespace IVCRM.API.IntegrationTests.TestData.Entities
             PhoneNumber = "+1234567",
         };
 
-        internal static List<CustomerEntity> CustomerEntityCollection => new ()
+        internal static List<CustomerEntity> CustomerEntityCollection => new()
         {
-            CustomerEntity,
+            new ()
+            {
+                FirstName = "FirstName1",
+                LastName = "LastName1",
+                PhoneNumber = "1234567",
+            },
+            new ()
+            {
+                FirstName = "FirstName2",
+                LastName = "LastName2",
+                PhoneNumber = "2234567",
+            },
+            new ()
+            {
+                FirstName = "FirstName3",
+                LastName = "LastName3",
+                PhoneNumber = "3234567",
+            },
         };
     }
 }

@@ -1,4 +1,5 @@
-﻿using IVCRM.DAL.Infrastructure;
+﻿using IVCRM.DAL.Entities.Interfaces;
+using IVCRM.DAL.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +28,23 @@ namespace IVCRM.API.IntegrationTests.Infrastructure
         protected TestServer Server { get; }
         protected HttpClient Client { get; }
         protected AppDbContext Context { get; }
+
+
+        public async Task<int> AddToContext<T>(T entity) where T : class, IEntity
+        {
+            var dbSet = Context.Set<T>();
+            await dbSet.AddAsync(entity);
+            await Context.SaveChangesAsync();
+
+            return entity.Id;
+        }
+
+        public async Task AddRangeToContext<T>(IEnumerable<T> entities) where T : class, IEntity
+        {
+            var dbSet = Context.Set<T>();
+            await dbSet.AddRangeAsync(entities);
+            await Context.SaveChangesAsync();
+        }
 
         public void Dispose()
         {
