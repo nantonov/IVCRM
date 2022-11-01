@@ -92,7 +92,7 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
             //Arrange
             await AddToContext(TestCustomerEntities.CustomerEntity);
             var entitiesCount = Context.Customers.Count();
-            var unreachableId = Context.Customers.Max(x => x.Id) + 1;
+            var unreachableId = int.MaxValue;
 
             //Act
             await _customerRepository.Delete(unreachableId);

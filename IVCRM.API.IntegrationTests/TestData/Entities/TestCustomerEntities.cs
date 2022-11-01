@@ -11,25 +11,32 @@ namespace IVCRM.API.IntegrationTests.TestData.Entities
             PhoneNumber = "+1234567",
         };
 
+        internal static CustomerEntity UpdatedCustomerEntity => new()
+        {
+            FirstName = "UpdatedFirstName",
+            LastName = "UpdatedLastName",
+            PhoneNumber = "+1234567",
+        };
+
         internal static List<CustomerEntity> CustomerEntityCollection => new()
         {
             new ()
             {
                 FirstName = "FirstName1",
                 LastName = "LastName1",
-                PhoneNumber = "1234567",
+                PhoneNumber = "+1234567",
             },
             new ()
             {
                 FirstName = "FirstName2",
                 LastName = "LastName2",
-                PhoneNumber = "2234567",
+                PhoneNumber = "+2234567",
             },
             new ()
             {
                 FirstName = "FirstName3",
                 LastName = "LastName3",
-                PhoneNumber = "3234567",
+                PhoneNumber = "+3234567",
             },
         };
     }
