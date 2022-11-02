@@ -1,4 +1,5 @@
 import React, { useMemo, useRef, useState } from "react";
+import axios from "axios";
 
 {/* мемоификация, кеширование другими словами*/}
 export const useSortedPosts = (posts, sort) => {
