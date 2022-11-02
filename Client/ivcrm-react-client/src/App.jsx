@@ -2,10 +2,14 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import React from 'react';
+import Header from './components/header/Header';
+import Navbar from './components/navbar/Navbar';
 
 function App() {
   return (
     <div className="App">
+      <Header/>
+
         <TextField id="outlined-basic" label="Outlined" variant="outlined" />
         <Button variant="contained">Contained</Button>
 
