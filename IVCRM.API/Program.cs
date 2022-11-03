@@ -15,6 +15,16 @@ builder.Services.AddAutoMapper(cfg =>
 
 builder.Services.AddServices(builder.Configuration);
 
+builder.Services.AddCors(opt =>
+{
+    opt.AddPolicy(name: "shit", builder =>
+    {
+        builder.WithOrigins("http://localhost:3000")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 builder.Services.AddControllers();
 
 builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
@@ -33,6 +43,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseMiddleware<ExceptionMiddleware>();
+
+app.UseCors("shit");
 
 app.UseAuthorization();
 
