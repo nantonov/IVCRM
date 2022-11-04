@@ -4,6 +4,8 @@ import CustomerService from "../../services/CustomerService";
 import CreateCustomer from '../customer/modals/CreateCustomerModal';
 import { IChangeCustomer } from '../../models/IChangeCustomer';
 import { ICustomer } from '../../models/ICustomer';
+import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
 
 function Customer() {
   const [customers, setCustomers] = useState<Array<ICustomer>>([])
@@ -33,10 +35,12 @@ function Customer() {
   }
 
   return (
-    <div className="Customer">
-      <CreateCustomer createAction={createCustomer}/>
-      <CustomerTable customers={customers} updateAction={updateCustomer} deleteAction={deleteCustomer}/>
-    </div>
+    <Box>
+      <Stack padding={2} spacing={2}>
+        <CreateCustomer createAction={createCustomer}/>
+        <CustomerTable customers={customers} updateAction={updateCustomer} deleteAction={deleteCustomer}/>
+      </Stack>
+    </Box>
   );
 }
 

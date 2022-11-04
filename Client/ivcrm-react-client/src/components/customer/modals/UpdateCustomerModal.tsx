@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Modal from "@mui/material/Modal";
 import Edit from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
-//import style from '../../shared/modal/Modal.module.css';
+import { StyledModalBox } from '../../../styles/Styles';
 import UpdateCustomerForm from '../forms/UpdateCustomerForm';
 import { IChangeCustomer } from "../../../models/IChangeCustomer";
 import { ICustomer } from "../../../models/ICustomer";
@@ -29,9 +29,9 @@ const UpdateCustomerModal: React.FC<Props> = ({customer, updateAction}) => {
             open={open}
             onClose={handleClose}
         >
-        <div /*className={style.modal}*/>
+        <StyledModalBox>
           <UpdateCustomerForm customer={customer} updateAction={updateAction} handleClose={handleClose}/>
-        </div>
+        </StyledModalBox>
       </Modal>
       </div>
       );

@@ -5,8 +5,9 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-//import classes from './CustomerTable.module.css';
+import Stack from '@mui/material/Stack';
 
 import UpdateCustomerModal from './modals/UpdateCustomerModal';
 import DeleteCustomerModal from './modals/DeleteCustomerModal';
@@ -22,9 +23,17 @@ interface Props {
 const CustomerTable: React.FC<Props> = ({customers, updateAction, deleteAction}) => {
 
   return (
-    <div /*className={classes.table}*/>
     <TableContainer component={Paper} >
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <Typography
+          sx={{ flex: '1 1 100%' }}
+          padding="10px"
+          variant="h6"
+          component="div"
+        >
+          Customers
+      </Typography>
+      <hr />
+      <Table sx={{ minWidth: 650 }} aria-label="simple table" size='small'>
         <TableHead>
           <TableRow>
             <TableCell>Id</TableCell>
@@ -45,15 +54,16 @@ const CustomerTable: React.FC<Props> = ({customers, updateAction, deleteAction})
               <TableCell align="right">{row.fullName}</TableCell>
               <TableCell align="right">{row.phoneNumber}</TableCell>
               <TableCell align="right">
+              <Stack spacing={0} direction="row">
                 <UpdateCustomerModal customer={row} updateAction={updateAction}/>
                 <DeleteCustomerModal customerId={row.id} deleteAction={deleteAction}/>
+                </Stack>
                 </TableCell>
             </TableRow>
           ))}
         </TableBody>
       </Table>
     </TableContainer>
-    </div>
   );
 }
 

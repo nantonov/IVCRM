@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import CreateCustomerForm from '../forms/CreateCustomerForm';
-//import style from '../../shared/modal/Modal.module.css';
+import { StyledModalBox } from '../../../styles/Styles';
 import { IChangeCustomer } from "../../../models/IChangeCustomer";
 
 interface Props {
@@ -16,7 +16,7 @@ const CreateCustomerModal: React.FC<Props> = ({createAction}) => {
 
       return (
         <div>
-        <Button onClick={handleOpen}>Create new Customer</Button>
+        <Button variant="outlined" onClick={handleOpen}>Create new Customer</Button>
 
         <Modal
             aria-labelledby="simple-modal-title"
@@ -24,9 +24,9 @@ const CreateCustomerModal: React.FC<Props> = ({createAction}) => {
             open={open}
             onClose={handleClose}
         >
-          <div /*className={style.modal}*/>
+          <StyledModalBox>
             <CreateCustomerForm createAction={createAction} handleClose={handleClose}/>
-          </div>
+          </StyledModalBox>
         </Modal>
       </div>
       );
