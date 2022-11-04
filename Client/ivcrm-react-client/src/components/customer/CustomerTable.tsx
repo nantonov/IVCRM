@@ -6,15 +6,23 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import classes from './CustomerTable.module.css';
+//import classes from './CustomerTable.module.css';
 
-import UpdateCustomer from './modals/UpdateCustomerModal';
-import DeleteCustomer from './modals/DeleteCustomerModal';
+import UpdateCustomerModal from './modals/UpdateCustomerModal';
+import DeleteCustomerModal from './modals/DeleteCustomerModal';
+import { ICustomer } from '../../models/ICustomer';
+import { IChangeCustomer } from '../../models/IChangeCustomer';
 
-const CustomerTable = ({customers, updateAction, deleteAction}) => {
+interface Props {
+  customers: Array<ICustomer>
+  updateAction: (x: IChangeCustomer) => void
+  deleteAction: (x: number) => void
+}
+
+const CustomerTable: React.FC<Props> = ({customers, updateAction, deleteAction}) => {
 
   return (
-    <div className={classes.table}>
+    <div /*className={classes.table}*/>
     <TableContainer component={Paper} >
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
@@ -37,8 +45,8 @@ const CustomerTable = ({customers, updateAction, deleteAction}) => {
               <TableCell align="right">{row.fullName}</TableCell>
               <TableCell align="right">{row.phoneNumber}</TableCell>
               <TableCell align="right">
-                <UpdateCustomer customer={row} updateAction={updateAction}/>
-                <DeleteCustomer customerId={row.id} deleteAction={deleteAction}/>
+                <UpdateCustomerModal customer={row} updateAction={updateAction}/>
+                <DeleteCustomerModal customerId={row.id} deleteAction={deleteAction}/>
                 </TableCell>
             </TableRow>
           ))}

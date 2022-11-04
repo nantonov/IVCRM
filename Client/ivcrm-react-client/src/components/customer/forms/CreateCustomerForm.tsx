@@ -3,16 +3,22 @@ import Button from "@mui/material/Button";
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import FormControl from '@mui/material/FormControl';
+import { IChangeCustomer } from "../../../models/IChangeCustomer";
 
-const CreateCustomerForm = ({createAction, handleClose}) => {
+interface Props {
+    createAction: (x: IChangeCustomer) => void
+    handleClose: () => void
+}
 
-    const [customer, setCustomer] = useState({firstName: '', lastName: '', phoneNumber: ''})
+const CreateCustomerForm: React.FC<Props> = ({createAction, handleClose}) => {
 
-    const handleSubmit = (e) => {
+    const [customer, setCustomer] = useState<IChangeCustomer>({id: 0, firstName: '', lastName: '', phoneNumber: ''})
+
+    const handleSubmit = (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault()
     
         createAction(customer);
-        setCustomer({firstName: '', lastName: '', phoneNumber: ''});
+        setCustomer({id: 0, firstName: '', lastName: '', phoneNumber: ''});
         handleClose();
       }
 

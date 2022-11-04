@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import CustomerTable from './CustomerTable';
+import CustomerTable from '../customer/CustomerTable';
 import CustomerService from "../../services/CustomerService";
-import CreateCustomer from './modals/CreateCustomerModal';
+import CreateCustomer from '../customer/modals/CreateCustomerModal';
+import { IChangeCustomer } from '../../models/IChangeCustomer';
+import { ICustomer } from '../../models/ICustomer';
 
 function Customer() {
-  const [customers, setCustomers] = useState([])
+  const [customers, setCustomers] = useState<Array<ICustomer>>([])
 
   useEffect(() => {
     fetchCustomers()
   }, [])
 
-  async function createCustomer(newCustomer) {
-    const createdCustomer = await CustomerService.create(newCustomer);
+  async function createCustomer(customer: IChangeCustomer) {
+    const createdCustomer = await CustomerService.create(customer);
     setCustomers([...customers, createdCustomer])
   }
 
@@ -20,12 +22,12 @@ function Customer() {
     setCustomers(customers)
   }
 
-  async function updateCustomer(updateCustomerRequest) {
-    const updatedCustomer = await CustomerService.update(updateCustomerRequest);
+  async function updateCustomer(customer: IChangeCustomer) {
+    const updatedCustomer = await CustomerService.update(customer);
     setCustomers({...customers, [updatedCustomer.id]: updatedCustomer})
   }
 
-  async function deleteCustomer(id) {
+  async function deleteCustomer(id: number) {
     await CustomerService.delete(id);
     setCustomers(customers.filter(x => x.id !== id))
   }

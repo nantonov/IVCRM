@@ -1,19 +1,24 @@
 import React, { useState } from "react";
 import Modal from "@mui/material/Modal";
-import Edit from '@mui/icons-material/Edit';
+import Delete from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
-import style from '../../shared/modal/Modal.module.css';
-import UpdateCustomerForm from '../forms/UpdateCustomerForm.jsx';
+//import style from '../../shared/modal/Modal.module.css';
+import DeleteCustomerForm from '../forms/DeleteCustomerForm';
 
-const UpdateCustomerModal = ({customer, updateAction}) => {
+interface Props {
+  customerId: number
+  deleteAction: (x: number) => void
+}
+
+const DeleteCustomerModal: React.FC<Props> = ({customerId, deleteAction}) => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    
+
       return (
         <div>
         <IconButton onClick={handleOpen} color="primary" component="label">
-          <Edit />
+          <Delete />
         </IconButton>
 
         <Modal
@@ -22,12 +27,12 @@ const UpdateCustomerModal = ({customer, updateAction}) => {
             open={open}
             onClose={handleClose}
         >
-        <div className={style.modal}>
-          <UpdateCustomerForm customer={customer} updateAction={updateAction} handleClose={handleClose}/>
+        <div /*className={style.modal}*/>
+          <DeleteCustomerForm customerId={customerId} deleteAction={deleteAction} handleClose={handleClose}/>
         </div>
       </Modal>
       </div>
       );
     }
     
-    export default UpdateCustomerModal;
+    export default DeleteCustomerModal;

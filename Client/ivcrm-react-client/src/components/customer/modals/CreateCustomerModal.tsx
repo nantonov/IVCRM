@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
-import CreateCustomerForm from '../forms/CreateCustomerForm.jsx';
-import style from '../../shared/modal/Modal.module.css';
+import CreateCustomerForm from '../forms/CreateCustomerForm';
+//import style from '../../shared/modal/Modal.module.css';
+import { IChangeCustomer } from "../../../models/IChangeCustomer";
 
-const CreateCustomerModal = ({createAction}) => {
+interface Props {
+  createAction: (x: IChangeCustomer) => void
+}
+
+const CreateCustomerModal: React.FC<Props> = ({createAction}) => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -19,7 +24,7 @@ const CreateCustomerModal = ({createAction}) => {
             open={open}
             onClose={handleClose}
         >
-          <div className={style.modal}>
+          <div /*className={style.modal}*/>
             <CreateCustomerForm createAction={createAction} handleClose={handleClose}/>
           </div>
         </Modal>
