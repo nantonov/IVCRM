@@ -17,7 +17,7 @@ builder.Services.AddServices(builder.Configuration);
 
 builder.Services.AddCors(opt =>
 {
-    opt.AddPolicy(name: "shit", builder =>
+    opt.AddPolicy(name: "client", builder =>
     {
         builder.WithOrigins("http://localhost:3000")
             .AllowAnyHeader()
@@ -44,7 +44,7 @@ app.UseHttpsRedirection();
 
 app.UseMiddleware<ExceptionMiddleware>();
 
-app.UseCors("shit");
+app.UseCors("client");
 
 app.UseAuthorization();
 
