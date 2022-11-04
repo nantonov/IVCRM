@@ -11,6 +11,13 @@ namespace IVCRM.DAL.IntegrationTests.TestData.Entities
             PhoneNumber = "+1234567",
         };
 
+        internal static CustomerEntity UpdatedCustomerEntity => new()
+        {
+            FirstName = "UpdatedFirstName",
+            LastName = "UpdatedLastName",
+            PhoneNumber = "+1234567",
+        };
+
         internal static List<CustomerEntity> CustomerEntityCollection => new ()
         {
             CustomerEntity,
