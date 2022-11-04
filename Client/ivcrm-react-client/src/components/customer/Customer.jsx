@@ -1,17 +1,13 @@
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-
 import React, { useEffect, useState } from 'react';
 import CustomerTable from './CustomerTable';
 import CustomerService from "../../services/CustomerService";
-import CreateCustomer from './CreateCustomer';
+import CreateCustomer from './modals/CreateCustomerModal';
 
 function Customer() {
   const [customers, setCustomers] = useState([])
 
   useEffect(() => {
     fetchCustomers()
-    updateCustomer()
   }, [])
 
   async function createCustomer(newCustomer) {
@@ -36,10 +32,9 @@ function Customer() {
 
   return (
     <div className="Customer">
-      <CreateCustomer create={createCustomer}/>
-      <CustomerTable customers={customers} updateCustomer={updateCustomer} deleteCustomer={deleteCustomer}/>
-      <Button onClick={createCustomer}>create!!!!!!</Button>
-      </div>
+      <CreateCustomer createAction={createCustomer}/>
+      <CustomerTable customers={customers} updateAction={updateCustomer} deleteAction={deleteCustomer}/>
+    </div>
   );
 }
 
