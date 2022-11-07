@@ -8,7 +8,8 @@ namespace StockManagement.BLL.Profiles
         public BllMappingProfile()
         {
             CreateMap<CreateProductCommand, ProductEntity>().ReverseMap();
-            CreateMap<ProductEntity, Product>();
+            CreateMap<ProductEntity, Product>()
+                .ForMember(dest => dest.Category, y => y.MapFrom(src => src.Category!.Name));
         }
     }
 }

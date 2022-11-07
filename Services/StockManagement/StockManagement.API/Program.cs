@@ -1,7 +1,9 @@
+using FluentValidation;
 using MediatR;
 using StockManagement.API.Profiles;
 using StockManagement.BLL;
 using StockManagement.BLL.Profiles;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +26,9 @@ builder.Services.AddCors(opt =>
 });
 
 builder.Services.AddControllers();
+
+builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

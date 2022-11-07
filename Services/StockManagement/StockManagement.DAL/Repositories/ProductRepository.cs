@@ -24,7 +24,7 @@ namespace StockManagement.DAL.Repositories
 
         public async Task<IEnumerable<ProductEntity>> GetAll()
         {
-            return await _context.Products.ToListAsync();
+            return await _context.Products.Include(x => x.Category).ToListAsync();
         }
 
         public async Task<IEnumerable<ProductEntity>> GetByName(string name)

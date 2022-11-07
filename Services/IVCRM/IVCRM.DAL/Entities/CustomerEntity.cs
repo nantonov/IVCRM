@@ -8,6 +8,5 @@ namespace IVCRM.DAL.Entities
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string? PhoneNumber { get; set; }
-        public ICollection<OrderEntity>? Orders { get; set; }
     }
 }
