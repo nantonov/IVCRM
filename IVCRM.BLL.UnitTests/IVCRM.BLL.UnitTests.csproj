@@ -24,10 +24,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\IVCRM.API\IVCRM.API.csproj" />
-    <ProjectReference Include="..\IVCRM.BLL\IVCRM.BLL.csproj" />
-    <ProjectReference Include="..\IVCRM.DAL\IVCRM.DAL.csproj" />
-  </ItemGroup>
-
 </Project>
