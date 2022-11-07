@@ -1,10 +1,15 @@
 import * as React from 'react';
-import {Link, NavLink} from "react-router-dom";
+import {
+  Nav,
+  NavLink,
+  Bars,
+} from './NavbarElements';
 
-const Navigation = () => {
+const Navbar = () => {
 
   return (
-    <nav>
+    <Nav>
+    <Bars />
         <NavLink 
           to="/"
         >
@@ -20,7 +25,7 @@ const Navigation = () => {
         >
             Orders
         </NavLink>
-   </nav> 
+        </Nav>
   );
 }
-export default Navigation;
+export default Navbar;
