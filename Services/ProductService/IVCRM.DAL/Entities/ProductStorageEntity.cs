@@ -9,5 +9,6 @@
         public StorageEntity? Storage { get; set; }
 
         public float Quantity { get; set; }
+        public DateTime LastUpdate { get; set; }
     }
 }

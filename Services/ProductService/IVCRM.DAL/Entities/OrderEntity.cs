@@ -7,7 +7,7 @@ namespace IVCRM.DAL.Entities
     {
         public int Id { get; set; }
         public string? Name { get; set; }
-        public DateTime CreationDate { get; set; }
+        public DateTime OrderDate { get; set; }
         public OrderStatus OrderStatus { get; set; }
         public int CustomerId { get; set; }
         public CustomerEntity? Customer { get; set; }
