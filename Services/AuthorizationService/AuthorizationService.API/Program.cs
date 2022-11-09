@@ -1,14 +1,18 @@
-using IVCRM.BLL;
+using AuthorizationService.API;
+using AuthorizationService.BLL;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddControllersWithViews();
+
 builder.Services.AddServices(builder.Configuration);
+
 builder.Services.AddIdentitySetup();
 builder.Services.AddIdentityServerSetup();
 
-builder.Services.AddControllersWithViews();
-
 var app = builder.Build();
+
+app.InitializeDatabase();
 
 if (!app.Environment.IsDevelopment())
 {
@@ -18,13 +22,12 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseIdentityServer();
-
-app.UseHttpsRedirection();
-app.UseStaticFiles();
+app.UseAuthorization();
 
 app.UseRouting();
 
-app.UseAuthorization();
+app.UseHttpsRedirection();
+app.UseStaticFiles();
 
 app.MapControllerRoute(
     name: "default",

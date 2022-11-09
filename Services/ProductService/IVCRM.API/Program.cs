@@ -16,6 +16,14 @@ builder.Services.AddAutoMapper(cfg =>
     cfg.AddProfile<BllMappingProfile>();
 });
 
+builder.Services.AddAuthentication("Bearer")
+    .AddIdentityServerAuthentication("Bearer", options =>
+    {
+        options.ApiName = "api1";
+        options.Authority = "https://localhost:7237";
+    });
+builder.Services.AddAuthorization();
+
 builder.Services.AddServices(builder.Configuration);
 
 builder.Services.AddCors(opt =>
