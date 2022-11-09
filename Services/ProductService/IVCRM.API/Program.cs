@@ -46,14 +46,21 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(option =>
 {
     option.SwaggerDoc("v1", new OpenApiInfo { Title = "MyAPI", Version = "v1" });
-    option.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    option.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
     {
-        In = ParameterLocation.Header,
-        Description = "Please enter a valid token",
-        Name = "Authorization",
-        Type = SecuritySchemeType.Http,
-        BearerFormat = "JWT",
-        Scheme = "Bearer"
+        Type = SecuritySchemeType.OAuth2,
+        Flows = new OpenApiOAuthFlows
+        {
+            AuthorizationCode = new OpenApiOAuthFlow
+            {
+                AuthorizationUrl = new Uri("https://localhost:7237/connect/authorize"),
+                TokenUrl = new Uri("https://localhost:7237/connect/token"),
+                Scopes = new Dictionary<string, string>
+            {
+                {"openId", "Demo API - full access"}
+            }
+            }
+        }
     });
     option.AddSecurityRequirement(new OpenApiSecurityRequirement
     {
@@ -76,7 +83,14 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+
+        options.OAuthClientId("demo_api_swagger");
+        options.OAuthAppName("Demo API - Swagger");
+        options.OAuthUsePkce();
+    });
 }
 
 app.UseHttpsRedirection();

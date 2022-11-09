@@ -35,9 +35,9 @@ namespace IVCRM.BLL
             services.AddIdentityServer()
                 .AddInMemoryIdentityResources(IdentityServerConfig.IdentityResources)
                 .AddInMemoryClients(IdentityServerConfig.Clients)
-                .AddDeveloperSigningCredential()
-                .AddProfileService<ProfileService>()
-                .AddResourceOwnerValidator<ResourceOwnerPasswordValidator>();
+                .AddDeveloperSigningCredential();
+                //.AddProfileService<ProfileService>()
+                //.AddResourceOwnerValidator<ResourceOwnerPasswordValidator>();
         }
     }
 }

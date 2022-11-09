@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using IdentityModel;
 using IdentityServer4;
 using IdentityServer4.Models;
 using Microsoft.AspNetCore.Identity;
@@ -31,7 +32,7 @@ namespace SPWB.AuthorizationService.Dependencies.Configs
             new Client
             {
                 ClientId = "testClient",
-                //AllowAccessTokensViaBrowser = true,
+                AllowAccessTokensViaBrowser = true,
                 ClientSecrets =
                 {
                     new Secret("secret".Sha256()),
@@ -46,12 +47,30 @@ namespace SPWB.AuthorizationService.Dependencies.Configs
                 AllowedScopes =
                 {
                     IdentityServerConstants.StandardScopes.OpenId,
-                    //IdentityServerConstants.StandardScopes.Profile,
+                    IdentityServerConstants.StandardScopes.Profile,
                 },
                 /*
-                RedirectUris = new List<string>() { "https://localhost:7035/signin-oidc" },
-                PostLogoutRedirectUris = { "https://localhost:7035/signout-callback-oidc" },
+                RedirectUris = new List<string>() { "https://oauth.pstmn.io/v1/callback" },
+                PostLogoutRedirectUris = { "https://localhost:5002/signout-callback-oidc" },
                 */
+            },
+            new Client()
+            {
+                ClientId = "swaggerClient",
+                ClientSecrets = 
+                { 
+                    new Secret("secret".ToSha256()) 
+                },
+                AllowedGrantTypes = GrantTypes.Code,
+                RequirePkce = true,
+                RequireClientSecret = false,
+                RedirectUris = {"https://localhost:7159/swagger/oauth2-redirect.html"},
+                AllowedCorsOrigins = {"https://localhost:7159"},
+                AllowedScopes = {
+                    IdentityServerConstants.StandardScopes.OpenId,
+                    IdentityServerConstants.StandardScopes.Email,
+                    IdentityServerConstants.StandardScopes.Profile,
+                }
             },
         };
     }
