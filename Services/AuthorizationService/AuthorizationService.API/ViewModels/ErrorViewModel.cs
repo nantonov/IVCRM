@@ -1,4 +1,4 @@
-namespace AuthorizationService.API.Models
+namespace AuthorizationService.API.ViewModels
 {
     public class ErrorViewModel
     {

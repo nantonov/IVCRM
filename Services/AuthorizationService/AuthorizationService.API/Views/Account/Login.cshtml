@@ -1,0 +1,17 @@
+﻿@model LoginViewModel
+
+    <div>
+            <form method="post" action="Login">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary()
+                @Html.HiddenFor(m => m.ReturnUrl)
+
+                <input asp-for="Login" type="text" class="login-page__login fadeIn second" name="login" placeholder="login">
+                <input asp-for="Password" type="password" class="login-page__password fadeIn third" name="password"
+                    placeholder="password">
+                <label for="isRemember"> remember the password
+                    <input asp-for="IsRemember" class="login-page__isRemember" type="checkbox" id="isRemember">
+                </label>
+                <button class="login-page__submit-button" type="submit">Log In</button>
+            </form>
+    </div>

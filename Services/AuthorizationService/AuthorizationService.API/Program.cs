@@ -1,17 +1,23 @@
+using IVCRM.BLL;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddServices(builder.Configuration);
+builder.Services.AddIdentitySetup();
+builder.Services.AddIdentityServerSetup();
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+app.UseIdentityServer();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
