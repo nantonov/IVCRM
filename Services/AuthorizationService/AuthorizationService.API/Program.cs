@@ -1,8 +1,26 @@
+using AuthorizationService;
+using AuthorizationService.Quickstart.UI;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddIdentityServer(options =>
+{
+    options.Events.RaiseErrorEvents = true;
+    options.Events.RaiseInformationEvents = true;
+    options.Events.RaiseFailureEvents = true;
+    options.Events.RaiseSuccessEvents = true;
+})
+    .AddTestUsers(TestUsers.Users)
+    .AddInMemoryIdentityResources(Config.IdentityResources)
+    .AddInMemoryApiScopes(Config.ApiScopes)
+    .AddInMemoryApiResources(Config.ApiResources)
+    .AddTestUsers(TestUsers.Users)
+    .AddInMemoryClients(Config.Clients)
+    .AddDeveloperSigningCredential();
+        
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -18,6 +36,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseIdentityServer();
 app.UseAuthorization();
 
 app.MapControllerRoute(
