@@ -1,27 +1,32 @@
-using IdentityServerHost;
-using IdentityServerHost.Quickstart.UI;
+using AuthorizationService.BLL;
 
 var builder = WebApplication.CreateBuilder(args);
-        
-var app = builder.Build();
 
 builder.Services.AddControllersWithViews();
 
-// Configure the HTTP request pipeline.
+builder.Services.AddServices(builder.Configuration);
+
+builder.Services.AddIdentitySetup();
+builder.Services.AddIdentityServerSetup(builder.Configuration);
+
+var app = builder.Build();
+
+app.InitializeDatabase();
+
 if (!app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
-app.UseStaticFiles();
+app.UseIdentityServer();
+app.UseAuthorization();
 
 app.UseRouting();
 
-app.UseIdentityServer();
-app.UseAuthorization();
+app.UseHttpsRedirection();
+app.UseStaticFiles();
 
 app.MapControllerRoute(
     name: "default",
