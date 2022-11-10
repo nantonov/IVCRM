@@ -1,9 +1,33 @@
+using FluentValidation;
+using ShippingService.API.Profiles;
+using ShippingService.BLL;
+using ShippingService.BLL.Profiles;
+using System.Reflection;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddAutoMapper(cfg =>
+{
+    cfg.AddProfile<ApiMappingProfile>();
+    cfg.AddProfile<BllMappingProfile>();
+});
+
+builder.Services.AddServices(builder.Configuration);
+builder.Services.AddMediatR();
+builder.Services.AddCors(opt =>
+{
+    opt.AddPolicy(name: "client", builder =>
+    {
+        builder.WithOrigins("http://localhost:3000")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
