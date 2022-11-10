@@ -13,6 +13,8 @@ builder.Services.AddAutoMapper(cfg =>
     cfg.AddProfile<BllMappingProfile>();
 });
 
+builder.Services.AddAuthorization();
+
 builder.Services.AddServices(builder.Configuration);
 
 builder.Services.AddCors(opt =>
@@ -30,6 +32,7 @@ builder.Services.AddControllers();
 builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
@@ -45,8 +48,6 @@ app.UseHttpsRedirection();
 app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseCors("client");
-
-app.UseAuthorization();
 
 app.MapControllers();
 

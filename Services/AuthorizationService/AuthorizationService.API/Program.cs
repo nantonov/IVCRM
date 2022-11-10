@@ -1,9 +1,11 @@
+using IdentityServerHost;
+using IdentityServerHost.Quickstart.UI;
+
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-builder.Services.AddControllersWithViews();
-
+        
 var app = builder.Build();
+
+builder.Services.AddControllersWithViews();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -18,6 +20,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseIdentityServer();
 app.UseAuthorization();
 
 app.MapControllerRoute(
