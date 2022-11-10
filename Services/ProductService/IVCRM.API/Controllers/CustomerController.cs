@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IVCRM.Web.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class CustomerController : ControllerBase
