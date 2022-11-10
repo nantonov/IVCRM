@@ -55,42 +55,45 @@ namespace AuthorizationService.BLL
             var context = serviceScope?.ServiceProvider.GetRequiredService<AuthServiceDbContext>();
             var userManager = serviceScope?.ServiceProvider.GetRequiredService<UserManager<User>>();
 
-            context?.Database.Migrate();
-            if (!context.Clients.Any())
+            if (context is not null)
             {
-                foreach (var client in IdentityServerConfig.Clients)
+                context.Database.Migrate();
+                if (!context.Clients.Any())
                 {
-                    context.Clients.Add(client.ToEntity());
+                    foreach (var client in IdentityServerConfig.Clients)
+                    {
+                        context.Clients.Add(client.ToEntity());
+                    }
+
+                    context.SaveChanges();
                 }
 
-                context.SaveChanges();
-            }
-
-            if (!context.IdentityResources.Any())
-            {
-                foreach (var resources in IdentityServerConfig.IdentityResources)
+                if (!context.IdentityResources.Any())
                 {
-                    context.IdentityResources.Add(resources.ToEntity());
+                    foreach (var resources in IdentityServerConfig.IdentityResources)
+                    {
+                        context.IdentityResources.Add(resources.ToEntity());
+                    }
+
+                    context.SaveChanges();
                 }
 
-                context.SaveChanges();
-            }
-
-            if (!context.ApiScopes.Any())
-            {
-                foreach (var scope in IdentityServerConfig.ApiScopes)
+                if (!context.ApiScopes.Any())
                 {
-                    context.ApiScopes.Add(scope.ToEntity());
+                    foreach (var scope in IdentityServerConfig.ApiScopes)
+                    {
+                        context.ApiScopes.Add(scope.ToEntity());
+                    }
+
+                    context.SaveChanges();
                 }
 
-                context.SaveChanges();
-            }
+                var testUser = IdentityServerConfig.TestUser;
 
-            var testUser = IdentityServerConfig.TestUser;
-
-            if (userManager.FindByNameAsync(testUser.UserName) == null)
-            {
-                userManager.CreateAsync(testUser, testUser.UserName);
+                if (userManager?.FindByNameAsync(testUser.UserName) == null)
+                {
+                    userManager?.CreateAsync(testUser, testUser.UserName);
+                }
             }
         }
     }
