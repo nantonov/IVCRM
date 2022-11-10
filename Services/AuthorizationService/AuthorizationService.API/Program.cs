@@ -1,4 +1,3 @@
-using AuthorizationService.API;
 using AuthorizationService.BLL;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,7 +7,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddServices(builder.Configuration);
 
 builder.Services.AddIdentitySetup();
-builder.Services.AddIdentityServerSetup();
+builder.Services.AddIdentityServerSetup(builder.Configuration);
 
 var app = builder.Build();
 

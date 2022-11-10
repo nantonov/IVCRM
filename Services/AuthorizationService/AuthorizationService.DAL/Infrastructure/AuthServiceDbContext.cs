@@ -1,25 +1,25 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using IdentityServer4.EntityFramework.Entities;
 using IdentityServer4.EntityFramework.Interfaces;
+using AuthorizationService.DAL.Entities;
 
 namespace AuthorizationService.DAL.Infrastructure
 {
-    public class AuthServiceDbContext : IdentityDbContext<IdentityUser, IdentityRole, int>, IPersistedGrantDbContext, IConfigurationDbContext
+    public class AuthServiceDbContext : IdentityDbContext<User, Role, int>, IPersistedGrantDbContext, IConfigurationDbContext
     {
         public AuthServiceDbContext(DbContextOptions<AuthServiceDbContext> options) : base(options)
         {
             Database.EnsureCreated();
         }
 
-        public DbSet<Client> Clients { get; set; }
-        public DbSet<IdentityResource> IdentityResources { get; set; }
-        public DbSet<ApiScope> ApiScopes { get; set; }
-        public DbSet<PersistedGrant> PersistedGrants { get; set; }
-        public DbSet<DeviceFlowCodes> DeviceFlowCodes { get; set; }
-        public DbSet<ClientCorsOrigin> ClientCorsOrigins { get; set; }
-        public DbSet<ApiResource> ApiResources { get ; set; }
+        public DbSet<Client> Clients { get; set; } = null!;
+        public DbSet<IdentityResource> IdentityResources { get; set; } = null!;
+        public DbSet<ApiScope> ApiScopes { get; set; } = null!;
+        public DbSet<PersistedGrant> PersistedGrants { get; set; } = null!;
+        public DbSet<DeviceFlowCodes> DeviceFlowCodes { get; set; } = null!;
+        public DbSet<ClientCorsOrigin> ClientCorsOrigins { get; set; } = null!;
+        public DbSet<ApiResource> ApiResources { get ; set; } = null!;
 
         public Task<int> SaveChangesAsync()
         {
@@ -30,16 +30,9 @@ namespace AuthorizationService.DAL.Infrastructure
         {
             base.OnModelCreating(builder);
 
-            var hasher = new PasswordHasher<IdentityUser>();
 
-            builder.Entity<IdentityUser>().HasData(
-            new IdentityUser
-            {
-                UserName = "admin",
-                NormalizedUserName = "ADMIN",
-                PasswordHash = hasher.HashPassword(null, "1221")
-            }
-            );
+            builder.Entity<DeviceFlowCodes>().ToTable("DeviceCode").HasKey(x => x.UserCode);
+            builder.Entity<PersistedGrant>().ToTable(nameof(PersistedGrant)).HasKey(x => x.Key);
         }
     }
 }
