@@ -1,31 +1,33 @@
-﻿using ShippingService.DAL.Infrastructure;
-using ShippingService.DAL.Entities;
+﻿using ShippingService.DAL.Entities;
 using ShippingService.DAL.Repositories.Interfaces;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using MongoDB.Driver;
+using ShippingService.DAL.Models;
 
 namespace ShippingService.DAL.Repositories
 {
     public class ShipmentRepository : IShipmentRepository
     {
-        private readonly AppDbContext _context;
+        private readonly IMongoCollection<ShipmentEntity> _shipmentCollection;
 
-        public ShipmentRepository(AppDbContext context)
+        public ShipmentRepository(IOptions<DatabaseSettings> mongoDBSettings)
         {
-            _context = context;
+            MongoClient client = new MongoClient(mongoDBSettings.Value.ConnectionString);
+            IMongoDatabase database = client.GetDatabase(mongoDBSettings.Value.DatabaseName);
+            _shipmentCollection = database.GetCollection<ShipmentEntity>(mongoDBSettings.Value.ShipmentCollectionName);
         }
 
         public async Task<ShipmentEntity> Create(ShipmentEntity entity)
         {
             entity.CreatedDate = DateTime.Now;
-            await _context.Shipment.AddAsync(entity);
-            await _context.SaveChangesAsync();
-            
+            await _shipmentCollection.InsertOneAsync(entity);
+
             return entity;
         }
 
-        public async Task<ShipmentEntity?> GetByOrderId(int orderId)
+        public async Task<ShipmentEntity> GetByOrderId(int orderId)
         {
-            return await _context.Shipment.AsNoTracking().FirstOrDefaultAsync(x => x.OrderId == orderId);
+            return await _shipmentCollection.Find(x => x.OrderId == orderId).SingleOrDefaultAsync();
         }
     }
 }

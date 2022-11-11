@@ -1,14 +1,12 @@
-﻿using ShippingService.DAL.Entities.Interfaces;
+﻿using MongoDB.Bson.Serialization.Attributes;
 
 namespace ShippingService.DAL.Entities
 {
-    public class TrackingEntity : IEntity
+    public class TrackingEntity
     {
-        public int Id { get; set; }
-        public int ShipmentId { get; set; }
+        [BsonId]
+        public Guid Id { get; set; }
         public string? Notes { get; set; }
         public DateTime CreatedDate { get; set; }
-
-        public ShipmentEntity? Shipment { get; set; }
     }
 }

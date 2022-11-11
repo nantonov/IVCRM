@@ -5,6 +5,6 @@ namespace ShippingService.DAL.Repositories.Interfaces
     public interface IShipmentRepository
     {
         Task<ShipmentEntity> Create(ShipmentEntity entity);
-        Task<ShipmentEntity?> GetByOrderId(int id);
+        Task<ShipmentEntity?> GetByOrderId(int orderId);
     }
 }
