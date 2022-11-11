@@ -8,8 +8,8 @@ namespace ShippingService.BLL.Profiles
     {
         public BllMappingProfile()
         {
-            CreateMap<CreateShipmentCommand, ShipmentEntity>().ReverseMap();
-            CreateMap<ShipmentEntity, Shipment>();
+            CreateMap<CreateShipmentCommand, Shipment>();
+            CreateMap<ShipmentEntity, Shipment>().ReverseMap();
         }
     }
 }
