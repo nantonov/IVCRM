@@ -25,6 +25,11 @@ const Navbar = () => {
         >
             Orders
         </NavLink>
+        <NavLink 
+          to="/profile" 
+        >
+            Profile
+        </NavLink>
         </Nav>
   );
 }

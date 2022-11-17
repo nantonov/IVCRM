@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import CustomerTable from '../customer/CustomerTable';
-import CustomerService from "../../services/customerService";
+import CustomerService from "../../services/CustomerService";
 import CreateCustomer from '../customer/modals/CreateCustomerModal';
 import { IChangeCustomer } from '../../models/IChangeCustomer';
 import { ICustomer } from '../../models/ICustomer';

@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using AuthorizationService.BLL.Configs;
+using IdentityServer4.Services;
+using AuthorizationService.BLL.Services;
 
 namespace AuthorizationService.BLL
 {
@@ -46,7 +48,8 @@ namespace AuthorizationService.BLL
                     options.EnableTokenCleanup = true;
                     options.TokenCleanupInterval = HourTokenCleanupInterval;
                 })
-                .AddDeveloperSigningCredential();
+                .AddDeveloperSigningCredential()
+                .AddProfileService<ProfileService>();
         }
 
         public static void InitializeDatabase(this IApplicationBuilder builder)
