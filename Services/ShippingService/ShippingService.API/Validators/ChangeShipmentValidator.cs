@@ -8,7 +8,7 @@ namespace ShippingService.API.Validators
     {
         public ChangeShipmentValidator()
         {
-            RuleFor(x => x.OrderId).NotNull().GreaterThan(0);
+            RuleFor(x => x.OrderId).NotNull();
             RuleFor(x => x.ShipmentStatus).IsInEnum();
             RuleFor(x => x.ShippingAddress).NotNull().NotEmpty().Length(3, 250);
         }
