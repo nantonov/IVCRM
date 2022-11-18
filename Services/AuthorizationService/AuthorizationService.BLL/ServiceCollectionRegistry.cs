@@ -10,6 +10,10 @@ using Microsoft.Extensions.DependencyInjection;
 using AuthorizationService.BLL.Configs;
 using IdentityServer4.Services;
 using AuthorizationService.BLL.Services;
+using IdentityModel;
+using IdentityServer4.Models;
+using Microsoft.VisualBasic;
+using IdentityResource = IdentityServer4.EntityFramework.Entities.IdentityResource;
 
 namespace AuthorizationService.BLL
 {
@@ -32,24 +36,26 @@ namespace AuthorizationService.BLL
         public static void AddIdentityServerSetup(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddIdentityServer(options =>
-            {
-                options.Events.RaiseErrorEvents = true;
-                options.Events.RaiseInformationEvents = true;
-                options.Events.RaiseFailureEvents = true;
-                options.Events.RaiseSuccessEvents = true;
-            })
+                {
+                    options.Events.RaiseErrorEvents = true;
+                    options.Events.RaiseInformationEvents = true;
+                    options.Events.RaiseFailureEvents = true;
+                    options.Events.RaiseSuccessEvents = true;
+                })
                 .AddConfigurationStore<AuthServiceDbContext>(options =>
                 {
-                    options.ConfigureDbContext = builder => builder.UseSqlServer(configuration.GetConnectionString(ConnectionString));
+                    options.ConfigureDbContext = builder =>
+                        builder.UseSqlServer(configuration.GetConnectionString(ConnectionString));
                 })
                 .AddOperationalStore<AuthServiceDbContext>(options =>
                 {
-                    options.ConfigureDbContext = builder => builder.UseSqlServer(configuration.GetConnectionString(ConnectionString));
+                    options.ConfigureDbContext = builder =>
+                        builder.UseSqlServer(configuration.GetConnectionString(ConnectionString));
                     options.EnableTokenCleanup = true;
                     options.TokenCleanupInterval = HourTokenCleanupInterval;
                 })
                 .AddDeveloperSigningCredential()
-                .AddProfileService<ProfileService>();
+            .AddProfileService<ProfileService>();
         }
 
         public static void InitializeDatabase(this IApplicationBuilder builder)
@@ -57,6 +63,7 @@ namespace AuthorizationService.BLL
             using var serviceScope = builder.ApplicationServices.GetService<IServiceScopeFactory>()?.CreateScope();
             var context = serviceScope?.ServiceProvider.GetRequiredService<AuthServiceDbContext>();
             var userManager = serviceScope?.ServiceProvider.GetRequiredService<UserManager<User>>();
+            var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<Role>>();
 
             if (context is not null)
             {
@@ -96,6 +103,19 @@ namespace AuthorizationService.BLL
                 if (userManager?.FindByNameAsync(testUser.UserName) == null)
                 {
                     userManager?.CreateAsync(testUser, testUser.UserName);
+                }
+
+                CreateDefaultRolesAsync(roleManager); //.GetAwaiter().GetResult();
+            }
+        }
+
+        public static void /*async Task*/ CreateDefaultRolesAsync(this RoleManager<Role> roleManager)
+        {
+            foreach (var role in IdentityServerConfig.Roles)
+            {
+                if (roleManager.FindByNameAsync(role) == null)
+                {
+                    roleManager.CreateAsync(new Role(role));
                 }
             }
         }

@@ -4,6 +4,7 @@ using IdentityServer4;
 using IdentityServer4.Models;
 using Microsoft.AspNetCore.Identity;
 using static IdentityServer4.Models.IdentityResources;
+using Role = AuthorizationService.DAL.Enums.Role;
 
 namespace AuthorizationService.BLL.Configs
 {
@@ -11,8 +12,9 @@ namespace AuthorizationService.BLL.Configs
     {
         internal static IEnumerable<IdentityResource> IdentityResources => new List<IdentityResource>
         {
-            new IdentityResources.OpenId(),
-            new IdentityResources.Profile(),
+            new OpenId(),
+            new Profile(),
+            new Email(),
         };
 
         internal static IEnumerable<ApiScope> ApiScopes => new List<ApiScope>
@@ -68,5 +70,9 @@ namespace AuthorizationService.BLL.Configs
             UserName = "alice",
             Email = "AliceSmith@email.com",
         };
+
+        internal static IEnumerable<string> Roles => Enum.GetValues(typeof(Role))
+            .Cast<Role>()
+            .Select(x => x.ToString());
     }
 }

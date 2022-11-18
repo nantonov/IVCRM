@@ -32,16 +32,18 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
-
+/*
+app.Use(async (context, next) =>
+{
+    context.Response.Headers.Add("Content-Security-Policy", "frame-ancestors https://localhost:3000"); //modifies CSP to allow client url to frame content
+    await next();
+});
+*/
 app.UseIdentityServer();
 app.UseAuthorization();
 
 app.UseCors();
-/*
-app.UseCsp(options => options.DefaultSources(s => s.Self())
-    .ConnectSources(s => s.CustomSources("wss://localhost:44348/IdentityServer/"))
-    .ConnectSources(s => s.CustomSources("wss://localhost:44390/IdentityServer/")));
-*/
+
 app.UseRouting();
 
 app.UseHttpsRedirection();
