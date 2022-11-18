@@ -1,24 +1,24 @@
 ﻿using AutoMapper;
 using MediatR;
 using ShippingService.BLL.Models;
-using ShippingService.DAL.Repositories.Interfaces;
+using ShippingService.BLL.Services.Interfaces;
 
 namespace ShippingService.BLL.Handlers.Queries
 {
     public class GetShipmentByOrderIdQueryHandler : IRequestHandler<GetShipmentByOrderIdQuery, Shipment>
     {
-        private readonly IShipmentRepository _repository;
+        private readonly IShipmentService _service;
         private readonly IMapper _mapper;
 
-        public GetShipmentByOrderIdQueryHandler(IShipmentRepository repository, IMapper mapper)
+        public GetShipmentByOrderIdQueryHandler(IShipmentService service, IMapper mapper)
         {
-            _repository = repository;
+            _service = service;
             _mapper = mapper;
         }
 
         public async Task<Shipment> Handle(GetShipmentByOrderIdQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _repository.GetByOrderId(request.OrderId);
+            var entity = await _service.GetByOrderId(request.OrderId);
 
             return _mapper.Map<Shipment>(entity);
         }
