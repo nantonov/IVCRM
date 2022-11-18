@@ -15,7 +15,6 @@ export interface routerType {
 export const privateRoutes: routerType[] = [
     { title: "Customer", path: '/customers', element: <Customer />},
     { title: "Order", path: '/orders',  element: <Order />},
-    { title: "Profile", path: '/profile',  element: <Profile />},
     { title: "Callback", path: '/callback',  element: <Callback />},
     { title: "Logout", path: '/logout',  element: <Logout />},
     { title: "Refresh", path: '/refresh',  element: <Refresh />},

@@ -7,10 +7,9 @@ interface AuthProviderProps {
     children: React.ReactNode;
 }
 
-//type AuthProps = ReturnType<typeof useUser>;
-type AuthProps = ReturnType<typeof useUserInfo>;
+type AuthProps = ReturnType<typeof useAuthState>;
 
- const useUserInfo = () => {
+ export const useAuthState = () => {
     const [user, setUser] = useState<User>(null);
     const [isAuth, setIsAuth] = useState(false);
 
@@ -33,7 +32,7 @@ const useAuthContext = () => useContext(AuthContext)
 
 const AuthProvider: React.FC<AuthProviderProps>= ({ children }) => {
 
-    const auth = useUserInfo()
+    const auth = useAuthState()
 
     return <AuthContext.Provider value={auth}>
         {children}

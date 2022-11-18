@@ -1,7 +1,4 @@
 using AuthorizationService.BLL;
-using IdentityModel;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,13 +29,7 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
-/*
-app.Use(async (context, next) =>
-{
-    context.Response.Headers.Add("Content-Security-Policy", "frame-ancestors https://localhost:3000"); //modifies CSP to allow client url to frame content
-    await next();
-});
-*/
+
 app.UseIdentityServer();
 app.UseAuthorization();
 

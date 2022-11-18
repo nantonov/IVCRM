@@ -4,7 +4,6 @@ import authService from "../../services/AuthService";
 
 const Logout : React.FC = () => {
     authService.signOutCallback();
-    console.log('SignOut');
     return (
         <div>
             <Navigate to="/" replace={true} />

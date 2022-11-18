@@ -8,11 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using AuthorizationService.BLL.Configs;
-using IdentityServer4.Services;
-using AuthorizationService.BLL.Services;
-using IdentityModel;
-using IdentityServer4.Models;
-using Microsoft.VisualBasic;
 using IdentityResource = IdentityServer4.EntityFramework.Entities.IdentityResource;
 
 namespace AuthorizationService.BLL
@@ -54,8 +49,7 @@ namespace AuthorizationService.BLL
                     options.EnableTokenCleanup = true;
                     options.TokenCleanupInterval = HourTokenCleanupInterval;
                 })
-                .AddDeveloperSigningCredential()
-            .AddProfileService<ProfileService>();
+                .AddDeveloperSigningCredential();
         }
 
         public static void InitializeDatabase(this IApplicationBuilder builder)
@@ -105,11 +99,11 @@ namespace AuthorizationService.BLL
                     userManager?.CreateAsync(testUser, testUser.UserName);
                 }
 
-                CreateDefaultRolesAsync(roleManager); //.GetAwaiter().GetResult();
+                CreateDefaultRolesAsync(roleManager);
             }
         }
 
-        public static void /*async Task*/ CreateDefaultRolesAsync(this RoleManager<Role> roleManager)
+        public static void CreateDefaultRolesAsync(this RoleManager<Role> roleManager)
         {
             foreach (var role in IdentityServerConfig.Roles)
             {

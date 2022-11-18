@@ -1,17 +1,12 @@
 import { User, UserManager } from 'oidc-client';
+import { useState } from 'react';
 import { authConfig } from '../config/authConfig';
-
-/*
-https://github.com/authts/sample-angular-oidc-client-ts/blob/main/src/app/core/services/auth.service.ts
-example
-*/
 
 const userManager = new UserManager(authConfig)
 
 export default class AuthService {
   static async getUser() : Promise<User | null> {
     var user =  await userManager.getUser()
-    console.log(user)
     return user
   }
 
