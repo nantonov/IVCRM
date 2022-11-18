@@ -5,9 +5,9 @@ namespace ShippingService.BLL.Handlers.Queries
 {
     public class GetShipmentByOrderIdQuery : IRequest<Shipment>
     {
-        public GetShipmentByOrderIdQuery(int orederId)
+        public GetShipmentByOrderIdQuery(int orderId)
         {
-            OrderId = orederId;
+            OrderId = orderId;
         }
 
         public int OrderId { get; set; }

@@ -4,7 +4,7 @@ namespace ShippingService.BLL.Models
 {
     public class Shipment
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public int OrderId { get; set; }
         public ShipmentStatus ShipmentStatus { get; set; }
         public string? ShippingAddress { get; set; }
