@@ -3,6 +3,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ShippingService.BLL.Handlers.Commands;
 using ShippingService.BLL.Handlers.Queries;
+using ShippingService.BLL.Services;
+using ShippingService.BLL.Services.Interfaces;
 
 namespace ShippingService.BLL
 {
@@ -12,6 +14,8 @@ namespace ShippingService.BLL
         {
             services.AddEntityFrameworkSetup(configuration);
             services.AddRepositories();
+
+            services.AddTransient<IShipmentService, ShipmentService>();
         }
 
         public static void AddMediatR(this IServiceCollection services)
