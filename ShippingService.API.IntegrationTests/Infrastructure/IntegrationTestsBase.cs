@@ -12,7 +12,6 @@ namespace ShippingService.API.IntegrationTests.Infrastructure
     {
         private const string ConnectionString = "mongodb://localhost:27017";
         private const string DatabaseName = "ShippingDB_test";
-        private const string ShipmentCollectionName = "Shipment";
 
         public IntegrationTestsBase()
         {
@@ -37,7 +36,7 @@ namespace ShippingService.API.IntegrationTests.Infrastructure
 
         protected IMongoCollection<ShipmentEntity> ShipmentCollection { get
             {
-                return Context.GetCollection<ShipmentEntity>(ShipmentCollectionName);
+                return Context.GetCollection<ShipmentEntity>(typeof(ShipmentEntity).GetCollectionName());
             }
         }
 
