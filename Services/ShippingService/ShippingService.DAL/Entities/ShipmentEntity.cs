@@ -1,10 +1,13 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using ShippingService.DAL.Attributes;
 using ShippingService.DAL.Entities.Enums;
+using ShippingService.DAL.Entities.Interfaces;
 
 namespace ShippingService.DAL.Entities
 {
-    public class ShipmentEntity
+    [BsonCollection("Shipment")]
+    public class ShipmentEntity : IEntity
     {
         [BsonId]
         public Guid Id { get; set; }

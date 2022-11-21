@@ -1,7 +1,7 @@
 ﻿using ShippingService.API.ViewModels;
 using ShippingService.API.ViewModels.Enums;
 
-namespace IVCRM.BLL.UnitTests.TestData.ViewModels
+namespace ShippingService.API.IntegrationTests.TestData.ViewModels
 {
     internal static class TestShipmentViewModels
     {
@@ -38,7 +38,7 @@ namespace IVCRM.BLL.UnitTests.TestData.ViewModels
         {
             OrderId = 1,
             ShipmentStatus = ShipmentStatus.Preliminary,
-            ShippingAddress = "ShippingAddres",
+            ShippingAddress = "ShippingAddress",
         };
     }
 }

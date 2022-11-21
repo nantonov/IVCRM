@@ -1,57 +1,58 @@
-﻿using ShippingService.DAL.Entities.Interfaces;
-using ShippingService.DAL.Infrastructure;
-using Microsoft.AspNetCore.Mvc.Testing;
+﻿using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using MongoDB.Driver;
+using ShippingService.DAL.Entities;
+using ShippingService.DAL.Entities.Interfaces;
+using ShippingService.DAL.Extensions;
 
 namespace ShippingService.API.IntegrationTests.Infrastructure
 {
     public class IntegrationTestsBase : IDisposable
     {
-        private const string ConfigurationKey = "DatabaseConfigs:ConnectionString";
-        private const string ConnectionString = "Server=mssql;Database=SportService_db;User Id=sa;Password=StrPassword123;";
+        private const string ConnectionString = "mongodb://localhost:27017";
+        private const string DatabaseName = "ShippingDB_test";
+        private const string ShipmentCollectionName = "Shipment";
 
         public IntegrationTestsBase()
         {
             var factory = new WebApplicationFactory<Program>().WithWebHostBuilder(builder =>
-                builder.ConfigureServices(services =>
-                {
-                    var dbContextService = services.SingleOrDefault(x =>
-                        x.ServiceType == typeof(DbContextOptions<AppDbContext>));
-                    services.Remove(dbContextService!);
 
-                    services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("TestDb"));
-                }));
+            builder.ConfigureServices(services =>
+            {
+                var dbService = services.SingleOrDefault(x =>
+                    x.ServiceType == typeof(IMongoDatabase));
+                services.Remove(dbService!);
+
+                services.AddSingleton(new MongoClient(ConnectionString).GetDatabase(DatabaseName));
+            }));
             Server = factory.Server;
             Client = Server.CreateClient();
-            Context = factory.Services.CreateScope().ServiceProvider.GetService<AppDbContext>()!;
+            Context = factory.Services.CreateScope().ServiceProvider.GetService<IMongoDatabase>()!;
         }
 
         protected TestServer Server { get; }
         protected HttpClient Client { get; }
-        protected AppDbContext Context { get; }
+        protected IMongoDatabase Context { get; }
 
+        protected IMongoCollection<ShipmentEntity> ShipmentCollection { get
+            {
+                return Context.GetCollection<ShipmentEntity>(ShipmentCollectionName);
+            }
+        }
 
-        public async Task<int> AddToContext<T>(T entity) where T : class, IEntity
+        public async Task<Guid> AddToContext<T>(T entity) where T : class, IEntity
         {
-            var dbSet = Context.Set<T>();
-            await dbSet.AddAsync(entity);
-            await Context.SaveChangesAsync();
+            var collectionName = entity.GetType().GetCollectionName();
+            var dbSet = Context.GetCollection<T>(collectionName);
+            await dbSet.InsertOneAsync(entity);
 
             return entity.Id;
         }
 
-        public async Task AddRangeToContext<T>(IEnumerable<T> entities) where T : class, IEntity
-        {
-            var dbSet = Context.Set<T>();
-            await dbSet.AddRangeAsync(entities);
-            await Context.SaveChangesAsync();
-        }
-
         public void Dispose()
         {
-            Context.Dispose();
+            Context.Client.DropDatabase(DatabaseName);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Text;
 
-namespace IVCRM.API.IntegrationTests.Infrastructure.Extensions
+namespace ShippingService.API.IntegrationTests.Infrastructure.Extensions
 {
     internal static class HttpRequestMessageExtensions
     {

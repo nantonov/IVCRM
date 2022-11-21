@@ -2,7 +2,6 @@ using FluentValidation;
 using ShippingService.API.Profiles;
 using ShippingService.BLL;
 using ShippingService.BLL.Profiles;
-using ShippingService.DAL.Models;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,11 +12,7 @@ builder.Services.AddAutoMapper(cfg =>
     cfg.AddProfile<BllMappingProfile>();
 });
 
-// MongoDb Config
-builder.Services.Configure<DatabaseSettings>(
-    builder.Configuration.GetSection("DatabaseSettings"));
-
-builder.Services.AddServices();
+builder.Services.AddServices(builder.Configuration);
 builder.Services.AddMediatR();
 builder.Services.AddCors(opt =>
 {

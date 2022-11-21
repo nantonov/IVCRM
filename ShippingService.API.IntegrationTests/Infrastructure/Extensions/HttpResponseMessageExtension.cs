@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace IVCRM.API.IntegrationTests.Infrastructure.Extensions
+namespace ShippingService.API.IntegrationTests.Infrastructure.Extensions
 {
     internal static class HttpResponseMessageExtension
     {
