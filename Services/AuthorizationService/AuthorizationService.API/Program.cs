@@ -6,6 +6,16 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddServices(builder.Configuration);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(options.DefaultPolicyName,
+                                            policy => policy.AllowAnyOrigin()
+                                                    .AllowAnyHeader()
+                                                    .AllowAnyMethod());
+});
+
+builder.Services.AddAuthentication();
+
 builder.Services.AddIdentitySetup();
 builder.Services.AddIdentityServerSetup(builder.Configuration);
 
@@ -22,6 +32,8 @@ if (!app.Environment.IsDevelopment())
 
 app.UseIdentityServer();
 app.UseAuthorization();
+
+app.UseCors();
 
 app.UseRouting();
 
