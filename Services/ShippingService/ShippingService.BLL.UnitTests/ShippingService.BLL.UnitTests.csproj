@@ -25,9 +25,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Services\ShippingService\ShippingService.API\ShippingService.API.csproj" />
-    <ProjectReference Include="..\Services\ShippingService\ShippingService.BLL\ShippingService.BLL.csproj" />
-    <ProjectReference Include="..\Services\ShippingService\ShippingService.DAL\ShippingService.DAL.csproj" />
+    <ProjectReference Include="..\ShippingService.API\ShippingService.API.csproj" />
+    <ProjectReference Include="..\ShippingService.BLL\ShippingService.BLL.csproj" />
   </ItemGroup>
 
 </Project>

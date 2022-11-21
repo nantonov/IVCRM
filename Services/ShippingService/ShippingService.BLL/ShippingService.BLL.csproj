@@ -14,7 +14,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-    <ProjectReference Include="..\ShippingService.DAL\ShippingService.DAL.csproj" />
-  </ItemGroup>
+	  <ProjectReference Include="..\ShippingService.DAL\ShippingService.DAL.csproj" />
+	</ItemGroup>
 
 </Project>
