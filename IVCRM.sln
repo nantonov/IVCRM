@@ -44,11 +44,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IVCRM.DAL", "Services\Produ
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{4C5C386C-DC25-43D1-BF3F-7545603799D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShippingService.API.IntegrationTests", "ShippingService.API.IntegrationTests\ShippingService.API.IntegrationTests.csproj", "{73918A45-4B19-488A-A8C9-4DC3BAC8619D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShippingService.API.IntegrationTests", "ShippingService.API.IntegrationTests\ShippingService.API.IntegrationTests.csproj", "{73918A45-4B19-488A-A8C9-4DC3BAC8619D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShippingService.BLL.UnitTests", "ShippingService.BLL.UnitTests\ShippingService.BLL.UnitTests.csproj", "{14E26691-3890-4785-BDD0-3048A8BE822A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShippingService.DAL.IntegrationTests", "ShippingService.DAL.IntegrationTests\ShippingService.DAL.IntegrationTests.csproj", "{49BAD527-6E00-44EC-94E0-90258FEC0BBB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShippingService.BLL.UnitTests", "ShippingService.BLL.UnitTests\ShippingService.BLL.UnitTests.csproj", "{14E26691-3890-4785-BDD0-3048A8BE822A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -112,10 +110,6 @@ Global
 		{14E26691-3890-4785-BDD0-3048A8BE822A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14E26691-3890-4785-BDD0-3048A8BE822A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14E26691-3890-4785-BDD0-3048A8BE822A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{49BAD527-6E00-44EC-94E0-90258FEC0BBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{49BAD527-6E00-44EC-94E0-90258FEC0BBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{49BAD527-6E00-44EC-94E0-90258FEC0BBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{49BAD527-6E00-44EC-94E0-90258FEC0BBB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -140,7 +134,6 @@ Global
 		{4C5C386C-DC25-43D1-BF3F-7545603799D4} = {364D67EC-7CDE-4936-A1FA-2E454AB8883B}
 		{73918A45-4B19-488A-A8C9-4DC3BAC8619D} = {4C5C386C-DC25-43D1-BF3F-7545603799D4}
 		{14E26691-3890-4785-BDD0-3048A8BE822A} = {4C5C386C-DC25-43D1-BF3F-7545603799D4}
-		{49BAD527-6E00-44EC-94E0-90258FEC0BBB} = {4C5C386C-DC25-43D1-BF3F-7545603799D4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {261C14C2-FD09-4D4C-8BAF-5BA8D5FC3906}

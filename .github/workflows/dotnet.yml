@@ -9,9 +9,6 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        mongodb-version: ['4.2', '4.4', '5.0', '6.0']
 
     steps:
     - uses: actions/checkout@v3
@@ -26,7 +23,7 @@ jobs:
     - name: Install MongoDb
       uses: supercharge/mongodb-github-action@1.8.0
       with:
-        mongodb-version: ${{ matrix.mongodb-version }}
+        mongodb-version: '6.0'
         mongodb-replica-set: test-rs
         mongodb-port: 27017
     - name: Test
