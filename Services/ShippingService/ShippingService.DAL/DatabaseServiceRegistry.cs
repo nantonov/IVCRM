@@ -13,9 +13,9 @@ namespace ShippingService.BLL
         private const string DatabaseName = "DatabaseName";
         public static void AddMongoDbSetup(this IServiceCollection services, IConfiguration configuration)
         {
-            var section = configuration.GetSection(SectionName);
-            var connectionString = section.GetSection(ConnectionString).Value;
-            var databaseName = section.GetSection(DatabaseName).Value;
+            var mongoSection = configuration.GetSection(SectionName);
+            var connectionString = mongoSection.GetSection(ConnectionString).Value;
+            var databaseName = mongoSection.GetSection(DatabaseName).Value;
             
 
             services.AddSingleton(new MongoClient(connectionString).GetDatabase(databaseName));
