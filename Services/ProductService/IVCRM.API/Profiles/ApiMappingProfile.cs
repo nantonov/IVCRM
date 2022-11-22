@@ -10,6 +10,9 @@ namespace IVCRM.API.Profiles
             CreateMap<Customer, CustomerViewModel>()
                 .ForMember(dest => dest.FullName, y => y.MapFrom(src => $"{src.FirstName} {src.LastName}"));
             CreateMap<ChangeCustomerViewModel, Customer>();
+
+            CreateMap<ProductCategory, ProductCategoryViewModel>();
+            CreateMap<ChangeProductCategoryViewModel, ProductCategory>();
         }
     }
 }
