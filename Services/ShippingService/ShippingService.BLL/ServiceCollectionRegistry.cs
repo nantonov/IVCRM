@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ShippingService.BLL.Handlers.Commands;
 using ShippingService.BLL.Handlers.Queries;
@@ -9,8 +10,10 @@ namespace ShippingService.BLL
 {
     public static class ServiceCollectionRegistry
     {
-        public static void AddServices(this IServiceCollection services)
+        public static void AddServices(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddMongoDbSetup(configuration);
+
             services.AddRepositories();
 
             services.AddTransient<IShipmentService, ShipmentService>();
