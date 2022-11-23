@@ -1,8 +1,9 @@
 ﻿using ShippingService.DAL.Entities;
 using ShippingService.DAL.Repositories.Interfaces;
-using Microsoft.Extensions.Options;
 using MongoDB.Driver;
-using ShippingService.DAL.Models;
+using Microsoft.Extensions.Configuration;
+using ShippingService.DAL.Attributes;
+using ShippingService.DAL.Extensions;
 
 namespace ShippingService.DAL.Repositories
 {
@@ -10,11 +11,9 @@ namespace ShippingService.DAL.Repositories
     {
         private readonly IMongoCollection<ShipmentEntity> _shipmentCollection;
 
-        public ShipmentRepository(IOptions<DatabaseSettings> mongoDBSettings)
+        public ShipmentRepository(IMongoDatabase db)
         {
-            MongoClient client = new MongoClient(mongoDBSettings.Value.ConnectionString);
-            IMongoDatabase database = client.GetDatabase(mongoDBSettings.Value.DatabaseName);
-            _shipmentCollection = database.GetCollection<ShipmentEntity>(mongoDBSettings.Value.ShipmentCollectionName);
+            _shipmentCollection = db.GetCollection<ShipmentEntity>(typeof(ShipmentEntity).GetCollectionName());
         }
 
         public async Task<ShipmentEntity> Create(ShipmentEntity entity)
