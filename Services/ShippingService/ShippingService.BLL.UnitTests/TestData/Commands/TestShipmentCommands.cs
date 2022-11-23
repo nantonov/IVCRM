@@ -5,7 +5,7 @@ namespace ShippingService.BLL.UnitTests.TestData.Commands
 {
     internal static class TestShipmentCommands
     {
-        internal static CreateShipmentCommand CreateShipmentCommand => new()
+        internal static CreateShipmentCommand ValidCreateShipmentCommand => new()
         {
             OrderId = 1,
             ShipmentStatus = ShipmentStatus.Preliminary,

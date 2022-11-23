@@ -5,7 +5,9 @@ namespace ShippingService.API.IntegrationTests.TestData.ViewModels
 {
     internal static class TestShipmentViewModels
     {
-        internal static ShipmentViewModel ShipmentViewModel => new()
+        internal static ShipmentViewModel InvalidShipmentViewModel => new();
+
+        internal static ShipmentViewModel ValidShipmentViewModel => new()
         {
             OrderId = 1,
             ShipmentStatus = ShipmentStatus.Preliminary,
@@ -34,7 +36,7 @@ namespace ShippingService.API.IntegrationTests.TestData.ViewModels
             },
         };
 
-        internal static ChangeShipmentViewModel ChangeShipmentViewModel => new()
+        internal static ChangeShipmentViewModel ValidChangeShipmentViewModel => new()
         {
             OrderId = 1,
             ShipmentStatus = ShipmentStatus.Preliminary,

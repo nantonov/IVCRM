@@ -5,14 +5,14 @@ namespace IVCRM.BLL.UnitTests.TestData.ViewModels
 {
     internal static class TestShipmentViewModels
     {
-        internal static ShipmentViewModel ShipmentViewModel => new()
+        internal static ShipmentViewModel ValidShipmentViewModel => new()
         {
             OrderId = 1,
             ShipmentStatus = ShipmentStatus.Preliminary,
             ShippingAddress = "ShippingAddress",
         };
 
-        internal static List<ShipmentViewModel> ShipmentViewModelCollection => new()
+        internal static List<ShipmentViewModel> ValidShipmentViewModelCollection => new()
         {
             new ()
             {
@@ -34,11 +34,11 @@ namespace IVCRM.BLL.UnitTests.TestData.ViewModels
             },
         };
 
-        internal static ChangeShipmentViewModel ChangeShipmentViewModel => new()
+        internal static ChangeShipmentViewModel ValidChangeShipmentViewModel => new()
         {
             OrderId = 1,
             ShipmentStatus = ShipmentStatus.Preliminary,
-            ShippingAddress = "ShippingAddres",
+            ShippingAddress = "ShippingAddress",
         };
     }
 }

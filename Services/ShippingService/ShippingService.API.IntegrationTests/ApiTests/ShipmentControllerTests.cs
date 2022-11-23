@@ -22,11 +22,11 @@ namespace ShippingService.API.IntegrationTests.ApiTests
         public async void Create_ViewModel_ReturnsViewModel()
         {
             //Arrange
-            var viewModel = TestShipmentViewModels.ShipmentViewModel;
-            var entity = TestShipmentEntities.ShipmentEntity;
+            var viewModel = TestShipmentViewModels.ValidShipmentViewModel;
+            var entity = TestShipmentEntities.ValidShipmentEntity;
 
             using var request = new HttpRequestMessage(HttpMethod.Post, $"/api/shipment");
-            request.AddContent(TestShipmentViewModels.ChangeShipmentViewModel);
+            request.AddContent(TestShipmentViewModels.ValidChangeShipmentViewModel);
 
             //Act
             var actualResult = await Client.SendAsync(request);
@@ -63,12 +63,12 @@ namespace ShippingService.API.IntegrationTests.ApiTests
         }
 
         [Fact]
-        public async Task GetByOrderId_WhenDataExists_ShouldViewModel()
+        public async Task GetByOrderId_DataExists_ReturnsViewModel()
         {
             //Arrange
-            var entity = TestShipmentEntities.ShipmentEntity;
+            var entity = TestShipmentEntities.ValidShipmentEntity;
             var id = await AddToContext(entity);
-            var viewModel = TestShipmentViewModels.ShipmentViewModel;
+            var viewModel = TestShipmentViewModels.ValidShipmentViewModel;
             viewModel.Id = id;
 
             using var request = new HttpRequestMessage(HttpMethod.Get, $"/api/shipment/orders/{entity.OrderId}");

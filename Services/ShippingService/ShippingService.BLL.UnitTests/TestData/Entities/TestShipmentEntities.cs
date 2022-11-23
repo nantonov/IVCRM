@@ -6,7 +6,7 @@ namespace ShippingService.BLL.UnitTests.TestData.Entities
     internal static class TestShipmentEntities
     {
 
-        internal static ShipmentEntity ShipmentEntity => new()
+        internal static ShipmentEntity ValidShipmentEntity => new()
         {
             Id = new Guid(1, 0, 0, new byte[8]),
             OrderId = 1,
@@ -14,9 +14,9 @@ namespace ShippingService.BLL.UnitTests.TestData.Entities
             ShippingAddress = "ShippingAddress",
         };
 
-        internal static List<ShipmentEntity> ShipmentEntityCollection => new ()
+        internal static List<ShipmentEntity> ValidShipmentEntityCollection => new ()
         {
-            ShipmentEntity,
+            ValidShipmentEntity,
         };
     }
 }

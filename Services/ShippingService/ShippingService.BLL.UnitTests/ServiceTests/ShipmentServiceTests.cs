@@ -11,11 +11,11 @@ namespace SippingService.BLL.UnitTests.ServiceTests
     public class ShipmentServiceTests
     {
         [Fact]
-        public async void Create_Model_ReturnsModel()
+        public async void Create_ValidModel_ReturnsModel()
         {
             //Arrange
-            var model = TestShipmentModels.Shipment;
-            var entity = TestShipmentEntities.ShipmentEntity;
+            var model = TestShipmentModels.ValidShipmentModel;
+            var entity = TestShipmentEntities.ValidShipmentEntity;
 
             var mocker = new AutoMocker(MockBehavior.Default, DefaultValue.Mock);
             mocker.Setup<IShipmentRepository, Task<ShipmentEntity>>(x => x.Create(It.IsAny<ShipmentEntity>()))
@@ -33,11 +33,11 @@ namespace SippingService.BLL.UnitTests.ServiceTests
         }
 
         [Fact]
-        public async void GetByOrderId_Id_ReturnsModel()
+        public async void GetByOrderId_ValidId_ReturnsModel()
         {
             //Arrange
-            var model = TestShipmentModels.Shipment;
-            var entity = TestShipmentEntities.ShipmentEntity;
+            var model = TestShipmentModels.ValidShipmentModel;
+            var entity = TestShipmentEntities.ValidShipmentEntity;
             var id = model.OrderId;
 
             var mocker = new AutoMocker(MockBehavior.Default, DefaultValue.Mock);
