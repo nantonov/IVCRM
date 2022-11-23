@@ -13,6 +13,7 @@ namespace IVCRM.BLL
             services.AddRepositories();
 
             services.AddTransient<ICustomerService, CustomerService>();
+            services.AddTransient<IProductCategoryService, ProductCategoryService>();
         }
     }
 }

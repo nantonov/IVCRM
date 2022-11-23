@@ -8,6 +8,8 @@ namespace IVCRM.BLL.Profiles
         public BllMappingProfile()
         {
             CreateMap<Customer, CustomerEntity>().ReverseMap();
+
+            CreateMap<ProductCategory, ProductCategoryEntity>().ReverseMap();
         }
     }
 }

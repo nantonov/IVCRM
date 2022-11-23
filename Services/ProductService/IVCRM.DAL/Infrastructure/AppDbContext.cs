@@ -22,6 +22,8 @@ namespace IVCRM.DAL.Infrastructure
         {
             modelBuilder.Entity<ProductEntity>(p => p.Property(x => x.Price).HasColumnType("decimal(18,2)"));
             modelBuilder.Entity<ProductEntity>().HasOne(x => x.Category).WithMany(x => x.Products).HasForeignKey(x => x.CategoryId);
+            modelBuilder.Entity<ProductCategoryEntity>().HasOne(x => x.ParentCategory).WithMany(x => x.ChildCategories)
+                .HasForeignKey(x => x.ParentCategoryId).OnDelete(DeleteBehavior.NoAction);
             modelBuilder.Entity<ProductOrderEntity>(p => p.Property(x => x.Price).HasColumnType("decimal(18,2)"));
             modelBuilder.Entity<ProductOrderEntity>().HasKey(x => new { x.ProductId, x.OrderId});
             modelBuilder.Entity<ProductOrderEntity>().HasOne(x => x.Order).WithMany(x => x.ProductOrders).HasForeignKey(x => x.OrderId);
