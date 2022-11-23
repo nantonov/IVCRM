@@ -10,22 +10,11 @@ const Navbar = () => {
   return (
     <Nav>
     <Bars />
-        <NavLink 
-          to="/"
-        >
-            Home
-        </NavLink>
-        <NavLink 
-          to="/customers"
-        >
-            Customers
-        </NavLink>
-        <NavLink 
-          to="/orders" 
-        >
-            Orders
-        </NavLink>
-        </Nav>
+        <NavLink to="/">Home</NavLink>
+        <NavLink to="/catalog">Catalog</NavLink>
+        <NavLink to="/customers">Customers</NavLink>
+        <NavLink to="/orders">Orders</NavLink>
+    </Nav>
   );
 }
 export default Navbar;

@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
 import { Navigate } from "react-router-dom";
 import AuthService from "../../services/AuthService";
-import { useAuthState } from './AuthProvider';
 
 const Callback = () => {
 AuthService.signInCallback().then(() => {
