@@ -19,7 +19,7 @@ namespace ShippingService.API.IntegrationTests.ApiTests
         }
 
         [Fact]
-        public async void Create_ViewModel_ReturnsViewModel()
+        public async void Create_ValidViewModel_ReturnsViewModel()
         {
             //Arrange
             var viewModel = TestShipmentViewModels.ValidShipmentViewModel;
@@ -51,7 +51,7 @@ namespace ShippingService.API.IntegrationTests.ApiTests
             var unchangedCollectionCount = await ShipmentCollection.Find(_ => true).CountDocumentsAsync();
 
             using var request = new HttpRequestMessage(HttpMethod.Post, $"/api/shipment");
-            request.AddContent(new ChangeShipmentViewModel());
+            request.AddContent(TestShipmentViewModels.InvalidShipmentViewModel);
 
             //Act
             var actualResult = await Client.SendAsync(request);

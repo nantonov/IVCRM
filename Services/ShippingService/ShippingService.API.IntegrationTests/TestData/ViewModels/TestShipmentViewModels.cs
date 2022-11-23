@@ -14,7 +14,7 @@ namespace ShippingService.API.IntegrationTests.TestData.ViewModels
             ShippingAddress = "ShippingAddress",
         };
 
-        internal static List<ShipmentViewModel> ShipmentViewModelCollection => new()
+        internal static List<ShipmentViewModel> ValidShipmentViewModelCollection => new()
         {
             new ()
             {
