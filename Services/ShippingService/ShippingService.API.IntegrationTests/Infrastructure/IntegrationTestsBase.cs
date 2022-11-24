@@ -51,7 +51,7 @@ namespace ShippingService.API.IntegrationTests.Infrastructure
 
         public void Dispose()
         {
-            //Context.Client.DropDatabase(DatabaseName);
+            Context.Client.DropDatabase(DatabaseName);
         }
     }
 }
