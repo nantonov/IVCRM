@@ -1,11 +1,10 @@
 ﻿using IVCRM.API.ViewModels;
-using IVCRM.DAL.Entities;
 
 namespace IVCRM.API.IntegrationTests.TestData.ViewModels
 {
     internal static class TestCustomerViewModels
     {
-        internal static CustomerViewModel CustomerViewModel => new()
+        internal static CustomerViewModel ValidCustomerViewModel => new()
         {
             Id = 1,
             FullName = "FirstName LastName",
@@ -19,7 +18,7 @@ namespace IVCRM.API.IntegrationTests.TestData.ViewModels
             PhoneNumber = "+1234567",
         };
 
-        internal static List<CustomerViewModel> CustomerViewModelCollection => new()
+        internal static List<CustomerViewModel> ValidCustomerViewModelCollection => new()
         {
             new ()
             {
@@ -38,7 +37,7 @@ namespace IVCRM.API.IntegrationTests.TestData.ViewModels
             },
         };
 
-        internal static ChangeCustomerViewModel ChangeCustomerViewModel => new()
+        internal static ChangeCustomerViewModel ValidChangeCustomerViewModel => new()
         {
             FirstName = "FirstName",
             LastName = "LastName",
