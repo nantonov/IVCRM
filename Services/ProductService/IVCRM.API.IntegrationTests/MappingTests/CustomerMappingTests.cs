@@ -12,8 +12,8 @@ namespace IVCRM.API.IntegrationTests.MappingTests
         public void Map_Model_ReturnsViewModel()
         {
             //Arrange 
-            var model = TestCustomers.Customer;
-            var viewModel = TestCustomerViewModels.CustomerViewModel;
+            var model = TestCustomerModels.CustomerModel;
+            var viewModel = TestCustomerViewModels.ValidCustomerViewModel;
 
             var config = new MapperConfiguration(cfg => cfg.AddProfile<ApiMappingProfile>());
             var mapper = config.CreateMapper();
@@ -29,8 +29,8 @@ namespace IVCRM.API.IntegrationTests.MappingTests
         public void Map_ChangeCustomerViewModel_ReturnsModel()
         {
             //Arrange 
-            var model = TestCustomerViewModels.ChangeCustomerViewModel;
-            var entity = TestCustomers.Customer;
+            var model = TestCustomerViewModels.ValidChangeCustomerViewModel;
+            var entity = TestCustomerModels.CustomerModel;
 
             var config = new MapperConfiguration(cfg => cfg.AddProfile<ApiMappingProfile>());
             var mapper = config.CreateMapper();
