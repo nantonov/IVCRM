@@ -3,19 +3,21 @@ import Button from "@mui/material/Button";
 import Typography from '@mui/material/Typography';
 import FormControl from '@mui/material/FormControl';
 import Stack from '@mui/material/Stack';
+import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
+import { deleteCustomer } from "../../../store/reducers/customers/ActionCreators";
 
 interface Props {
   customerId: number
-  deleteAction: (x: number) => void
   handleClose: () => void
 }
 
-const DeleteCustomerForm: React.FC<Props> = ({customerId, deleteAction, handleClose}) => {
-
+const DeleteCustomerForm: React.FC<Props> = ({customerId, handleClose}) => {
+  const dispatch = useAppDispatch()
+  
     const handleSubmit = (e : React.MouseEvent<HTMLElement>) => {
       e.preventDefault()
   
-      deleteAction(customerId);
+      dispatch(deleteCustomer(customerId));
       handleClose();
     }
 

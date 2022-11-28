@@ -4,12 +4,9 @@ import Button from "@mui/material/Button";
 import CreateCustomerForm from '../forms/CreateCustomerForm';
 import { StyledModalBox } from '../../../styles/Styles';
 import { IChangeCustomer } from "../../../models/IChangeCustomer";
+import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 
-interface Props {
-  createAction: (x: IChangeCustomer) => void
-}
-
-const CreateCustomerModal: React.FC<Props> = ({createAction}) => {
+const CreateCustomerModal = () => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -25,7 +22,7 @@ const CreateCustomerModal: React.FC<Props> = ({createAction}) => {
             onClose={handleClose}
         >
           <StyledModalBox>
-            <CreateCustomerForm createAction={createAction} handleClose={handleClose}/>
+            <CreateCustomerForm handleClose={handleClose}/>
           </StyledModalBox>
         </Modal>
       </div>

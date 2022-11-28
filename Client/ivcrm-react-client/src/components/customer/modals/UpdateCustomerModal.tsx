@@ -9,10 +9,9 @@ import { ICustomer } from "../../../models/ICustomer";
 
 interface Props {
   customer: ICustomer
-  updateAction: (x: IChangeCustomer) => void
 }
 
-const UpdateCustomerModal: React.FC<Props> = ({customer, updateAction}) => {
+const UpdateCustomerModal: React.FC<Props> = ({customer}) => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -30,7 +29,7 @@ const UpdateCustomerModal: React.FC<Props> = ({customer, updateAction}) => {
             onClose={handleClose}
         >
         <StyledModalBox>
-          <UpdateCustomerForm customer={customer} updateAction={updateAction} handleClose={handleClose}/>
+          <UpdateCustomerForm customer={customer} handleClose={handleClose}/>
         </StyledModalBox>
       </Modal>
       </div>
