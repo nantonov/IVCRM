@@ -14,6 +14,7 @@ namespace IVCRM.BLL
 
             services.AddTransient<ICustomerService, CustomerService>();
             services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<IOrderService, OrderService>();
             services.AddTransient<IProductCategoryService, ProductCategoryService>();
         }
     }

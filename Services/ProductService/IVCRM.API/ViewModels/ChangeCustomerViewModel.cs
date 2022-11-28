@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace IVCRM.API.ViewModels
+﻿namespace IVCRM.API.ViewModels
 {
     public class ChangeCustomerViewModel
     {
