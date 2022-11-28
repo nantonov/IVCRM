@@ -7,10 +7,9 @@ import DeleteCustomerForm from '../forms/DeleteCustomerForm';
 
 interface Props {
   customerId: number
-  deleteAction: (x: number) => void
 }
 
-const DeleteCustomerModal: React.FC<Props> = ({customerId, deleteAction}) => {
+const DeleteCustomerModal: React.FC<Props> = ({customerId}) => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -28,7 +27,7 @@ const DeleteCustomerModal: React.FC<Props> = ({customerId, deleteAction}) => {
             onClose={handleClose}
         >
         <StyledModalBox>
-          <DeleteCustomerForm customerId={customerId} deleteAction={deleteAction} handleClose={handleClose}/>
+          <DeleteCustomerForm customerId={customerId} handleClose={handleClose}/>
         </StyledModalBox>
       </Modal>
       </div>
