@@ -62,6 +62,6 @@ jobs:
           sonarProjectKey: nantonov_IVCRM_ProductService
           sonarProjectName:  IVCRM Product Service
           sonarOrganization: nantonov
-          dotnetBuildArguments: IVCRM/IVCRM.sln
-          dotnetTestArguments: IVCRM/IVCRM.sln --logger trx --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
+          dotnetBuildArguments: IVCRM.sln
+          dotnetTestArguments: IVCRM.sln --logger trx --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
           sonarBeginArguments: /d:sonar.cs.opencover.reportsPaths="**/TestResults/**/coverage.opencover.xml" -d:sonar.cs.vstest.reportsPaths="**/TestResults/*.trx"
