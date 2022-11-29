@@ -11,7 +11,7 @@ namespace ShippingService.API.IntegrationTests.Infrastructure
     public class IntegrationTestsBase : IDisposable
     {
         private const string ConnectionString = "mongodb://localhost:27017";
-        private const string DatabaseName = "ShippingDB_test";
+        private const string DatabaseName = "ShippingDB_test1";
 
         public IntegrationTestsBase()
         {
