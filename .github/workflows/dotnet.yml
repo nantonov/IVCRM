@@ -32,8 +32,9 @@ jobs:
         mongodb-version: '6.0'
         mongodb-replica-set: test-rs
         mongodb-port: 27017
-    - name: Test
-      run: dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage
+
+    #- name: Test
+    #  run: dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage
 
 
     #- name: Sonarqube end
