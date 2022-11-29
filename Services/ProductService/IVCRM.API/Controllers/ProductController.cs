@@ -1,4 +1,5 @@
 using AutoMapper;
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using IVCRM.API.Filters;
 using IVCRM.API.Validators;
@@ -26,15 +27,9 @@ namespace IVCRM.Web.Controllers
         }
 
         [HttpPost]
-        [ValidateFilter]
         public async Task<ProductViewModel> Create([FromBody] ChangeProductViewModel viewModel)
         {
-            var validationResult = await _changeProductValidator.ValidateAsync(viewModel);
-            if (!validationResult.IsValid)
-            {
-                validationResult.AddToModelState(ModelState);
-                return null!;
-            }
+            await _changeProductValidator.ValidateAndThrowAsync(viewModel);
             
             var model = _mapper.Map<Product>(viewModel);
             var result = await _service.Create(model);
@@ -59,15 +54,9 @@ namespace IVCRM.Web.Controllers
         }
 
         [HttpPut("{id}")]
-        [ValidateFilter]
         public async Task<ProductViewModel> Update(int id, [FromBody] ChangeProductViewModel viewModel)
         {
-            var validationResult = await _changeProductValidator.ValidateAsync(viewModel);
-            if (!validationResult.IsValid)
-            {
-                validationResult.AddToModelState(ModelState);
-                return null!;
-            }
+            await _changeProductValidator.ValidateAndThrowAsync(viewModel);
 
             var model = _mapper.Map<Product>(viewModel);
             model.Id = id;

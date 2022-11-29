@@ -21,6 +21,7 @@ namespace IVCRM.BLL
         {
             services.AddTransient<ICustomerRepository, CustomerRepository>();
             services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddTransient<IOrderRepository, OrderRepository>();
             services.AddTransient<IProductCategoryRepository, ProductCategoryRepository>();
         }
     }

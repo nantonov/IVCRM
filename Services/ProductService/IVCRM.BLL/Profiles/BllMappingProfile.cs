@@ -11,6 +11,8 @@ namespace IVCRM.BLL.Profiles
 
             CreateMap<Product, ProductEntity>().ReverseMap();
 
+            CreateMap<Order, OrderEntity>().ReverseMap();
+
             CreateMap<ProductCategory, ProductCategoryEntity>().ReverseMap();
         }
     }
