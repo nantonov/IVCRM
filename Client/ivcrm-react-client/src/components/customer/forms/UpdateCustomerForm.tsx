@@ -5,24 +5,26 @@ import Typography from '@mui/material/Typography';
 import FormControl from '@mui/material/FormControl';
 import { ICustomer } from "../../../models/ICustomer";
 import { IChangeCustomer } from "../../../models/IChangeCustomer";
+import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
+import { updateCustomer } from "../../../store/reducers/customers/ActionCreators";
 
 interface Props {
   customer: ICustomer
-  updateAction: (x: IChangeCustomer) => void
   handleClose: () => void
 }
 
 
-const UpdateCustomerForm: React.FC<Props> = ({customer, updateAction, handleClose}) => {
+const UpdateCustomerForm: React.FC<Props> = ({customer, handleClose}) => {
 
   const names = customer.fullName.split(" ");
   const [changeCustomer, setChangeCustomer] = useState<IChangeCustomer>({id: customer.id, firstName: names[0], lastName: names[1], phoneNumber: customer.phoneNumber})
+  const dispatch = useAppDispatch()
 
     const handleSubmit = (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault()
     
-        updateAction(changeCustomer);
-        setChangeCustomer({id: 0, firstName: '', lastName: '', phoneNumber: ''});
+        dispatch(updateCustomer(changeCustomer));
+        setChangeCustomer({} as IChangeCustomer);
         handleClose();
       }
 
