@@ -96,7 +96,7 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
         {
             //Arrange
             await AddToContext(TestProductCategoryEntities.ProductCategoryEntity);
-            var entitiesCount = Context.Products.Count();
+            var entitiesCount = Context.ProductCategories.Count();
             var unreachableId = int.MaxValue;
 
             //Act
