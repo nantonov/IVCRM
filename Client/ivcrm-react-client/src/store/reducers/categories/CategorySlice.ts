@@ -48,7 +48,7 @@ export const categorySlice = createSlice({
         [updateCategory.fulfilled.type]: (state, action: PayloadAction<IProductCategory>) => {
             state.isLoading = false;
             state.error = '';
-            state.categories = state.categories.map((item) => item.id === action.payload.id ? action.payload : item);
+            state.categories = updateCategoryById(state.categories, action.payload);
         },
         [updateCategory.pending.type]: (state) => {
             state.isLoading = true;
@@ -71,5 +71,21 @@ export const categorySlice = createSlice({
         },
     }
 })
+
+function updateCategoryById(cdata: Array<IProductCategory>, value: IProductCategory):Array<IProductCategory> {
+    
+    cdata.map((data) => {
+        if (data.id == value.id) {
+            data = value;
+        }
+
+            if (data.childCategories !== undefined && data.childCategories.length > 0) {
+                data.childCategories = updateCategoryById(data.childCategories, value);
+            }
+
+    })
+
+    return cdata;
+}
 
 export default categorySlice.reducer;

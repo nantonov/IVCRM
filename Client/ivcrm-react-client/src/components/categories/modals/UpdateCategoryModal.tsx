@@ -4,7 +4,6 @@ import Edit from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
 import { StyledModalBox } from '../../../styles/Styles';
 import UpdateCustomerForm from '../forms/UpdateCategoryForm';
-import { IChangeProductCategory } from "../../../models/IChangeProductCategory";
 import { IProductCategory } from "../../../models/IProductCategory";
 
 interface Props {
@@ -17,7 +16,7 @@ const UpdateCategoryModal: React.FC<Props> = ({category}) => {
     const handleClose = () => setOpen(false);
     
       return (
-        <div>
+      <div>
         <IconButton onClick={handleOpen} color="primary" component="label" size="small">
           <Edit />
         </IconButton>
@@ -28,10 +27,10 @@ const UpdateCategoryModal: React.FC<Props> = ({category}) => {
             open={open}
             onClose={handleClose}
         >
-        <StyledModalBox>
-          <UpdateCustomerForm category={category} handleClose={handleClose}/>
-        </StyledModalBox>
-      </Modal>
+          <StyledModalBox>
+            <UpdateCustomerForm category={category} handleClose={handleClose}/>
+          </StyledModalBox>
+        </Modal>
       </div>
       );
     }

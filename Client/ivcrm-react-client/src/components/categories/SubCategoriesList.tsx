@@ -1,7 +1,6 @@
 import { IProductCategory } from "../../models/IProductCategory";
 
 import { Button, List, ListItem, ListItemButton, ListItemText } from "@mui/material";
-import { IChangeProductCategory } from "../../models/IChangeProductCategory";
 import CreateCategoryModal from "./modals/CreateCategoryModal";
 import UpdateCategoryModal from "./modals/UpdateCategoryModal";
 import DeleteCategoryModal from "./modals/DeleteCategoryModal";
@@ -47,10 +46,10 @@ interface Props {
       };
 
     return (
-        <List>
+      <List>
         {getListItems(categories)}
         <CreateCategoryModal parentCategoryId={parentCategoryId}/>
-        </List>
+      </List>
                 
 
   );

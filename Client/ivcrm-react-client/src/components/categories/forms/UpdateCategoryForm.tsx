@@ -22,7 +22,7 @@ const UpdateCustomerForm: React.FC<Props> = ({category, handleClose}) => {
     const handleSubmit = (e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault()
     
-        dispatch(updateCategory(category));
+        dispatch(updateCategory(changeCategory));
         setChangeCategory({} as IChangeProductCategory);
         handleClose();
       }
