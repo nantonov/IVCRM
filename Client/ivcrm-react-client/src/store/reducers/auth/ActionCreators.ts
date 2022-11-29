@@ -18,7 +18,7 @@ export const signIn = createAsyncThunk(
     'auth/signIn',
     async (_, thunkAPI) => { 
         try {
-            const response = await AuthService.signInCallback()
+            const response = await AuthService.signIn()
             return response;
         } catch (e: any) {
             return thunkAPI.rejectWithValue(e.response.data);
@@ -30,7 +30,7 @@ export const signOut = createAsyncThunk(
     'auth/signOut',
     async (_, thunkAPI) => { 
         try {
-            const response = await AuthService.signOutCallback()
+            const response = await AuthService.signOut()
             return response;
         } catch (e: any) {
             return thunkAPI.rejectWithValue(e.response.data);
