@@ -1,5 +1,4 @@
 import { User, UserManager } from 'oidc-client';
-import { useState } from 'react';
 import { authConfig } from '../config/authConfig';
 
 const userManager = new UserManager(authConfig)

@@ -3,8 +3,6 @@ import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 import CreateCustomerForm from '../forms/CreateCustomerForm';
 import { StyledModalBox } from '../../../styles/Styles';
-import { IChangeCustomer } from "../../../models/IChangeCustomer";
-import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 
 const CreateCustomerModal = () => {
     const [open, setOpen] = useState(false);

@@ -9,10 +9,9 @@ import { IProductCategory } from "../../../models/IProductCategory";
 
 interface Props {
   category: IProductCategory
-  updateAction: (x: IChangeProductCategory) => void
 }
 
-const UpdateCategoryModal: React.FC<Props> = ({category, updateAction}) => {
+const UpdateCategoryModal: React.FC<Props> = ({category}) => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -30,7 +29,7 @@ const UpdateCategoryModal: React.FC<Props> = ({category, updateAction}) => {
             onClose={handleClose}
         >
         <StyledModalBox>
-          <UpdateCustomerForm category={category} updateAction={updateAction} handleClose={handleClose}/>
+          <UpdateCustomerForm category={category} handleClose={handleClose}/>
         </StyledModalBox>
       </Modal>
       </div>

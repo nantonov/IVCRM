@@ -9,12 +9,9 @@ import DeleteCategoryModal from "./modals/DeleteCategoryModal";
 interface Props {
     parentCategoryId: number
     categories: Array<IProductCategory>
-    createAction: (x: IChangeProductCategory) => void
-    updateAction: (x: IChangeProductCategory) => void
-    deleteAction: (x: number) => void
   }
 
-  const SubCategoriesList: React.FC<Props> = ({parentCategoryId, categories, createAction, updateAction, deleteAction}) => {
+  const SubCategoriesList: React.FC<Props> = ({parentCategoryId, categories}) => {
 
     const getListItems = (items: Array<IProductCategory>) => {
         return items.map(treeItemData => {
@@ -24,9 +21,9 @@ interface Props {
                 <ListItemButton>
                   <ListItemText primary={treeItemData.name} />
               </ListItemButton>
-              <CreateCategoryModal parentCategory={treeItemData.id} createAction={createAction}/>
-                <UpdateCategoryModal category={treeItemData} updateAction={updateAction}/>
-                <DeleteCategoryModal categoryId={treeItemData.id} deleteAction={deleteAction}/>
+              <CreateCategoryModal parentCategoryId={treeItemData.id}/>
+                <UpdateCategoryModal category={treeItemData}/>
+                <DeleteCategoryModal categoryId={treeItemData.id}/>
             </ListItem>
             {getChildListItems(treeItemData.childCategories)}
             
@@ -42,8 +39,8 @@ interface Props {
                 <ListItemButton>
                   <ListItemText primary={' - ' + treeItemData.name} />
               </ListItemButton>
-                <UpdateCategoryModal category={treeItemData} updateAction={updateAction}/>
-                <DeleteCategoryModal categoryId={treeItemData.id} deleteAction={deleteAction}/>
+                <UpdateCategoryModal category={treeItemData}/>
+                <DeleteCategoryModal categoryId={treeItemData.id}/>
             </ListItem>
           );
         });
@@ -52,7 +49,7 @@ interface Props {
     return (
         <List>
         {getListItems(categories)}
-        <CreateCategoryModal parentCategory={parentCategoryId} createAction={createAction}/>
+        <CreateCategoryModal parentCategoryId={parentCategoryId}/>
         </List>
                 
 

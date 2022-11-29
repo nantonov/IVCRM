@@ -1,5 +1,4 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { IChangeCustomer } from "../../../models/IChangeCustomer";
 import AuthService from "../../../services/AuthService";
 
 export const getUser = createAsyncThunk(

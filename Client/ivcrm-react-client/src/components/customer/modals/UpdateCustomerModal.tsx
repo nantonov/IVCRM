@@ -4,7 +4,6 @@ import Edit from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
 import { StyledModalBox } from '../../../styles/Styles';
 import UpdateCustomerForm from '../forms/UpdateCustomerForm';
-import { IChangeCustomer } from "../../../models/IChangeCustomer";
 import { ICustomer } from "../../../models/ICustomer";
 
 interface Props {

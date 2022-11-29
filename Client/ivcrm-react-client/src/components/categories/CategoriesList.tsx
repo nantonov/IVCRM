@@ -10,18 +10,21 @@ import { IChangeProductCategory } from '../../models/IChangeProductCategory';
 import UpdateCategoryModal from './modals/UpdateCategoryModal';
 import DeleteCategoryModal from './modals/DeleteCategoryModal';
 import CreateCategoryModal from './modals/CreateCategoryModal';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { fetchCategories } from '../../store/reducers/categories/ActionCreators';
+import { useEffect } from 'react';
 
-interface Props {
-    categories: Array<IProductCategory>
-    createAction: (x: IChangeProductCategory) => void
-    updateAction: (x: IChangeProductCategory) => void
-    deleteAction: (x: number) => void
-  }
-
-const CategoriesList: React.FC<Props> = ({categories, createAction, updateAction, deleteAction}) => {
+const CategoriesList = () => {
 
     const [subCategories, setSubCategories] = React.useState<Array<IProductCategory>>([])
     const [actualCategoryId, setactualCategoryId] = React.useState<number>()
+
+    const {categories, isLoading, error} = useAppSelector(state => state.categoryReducer)
+    const dispatch = useAppDispatch()
+  
+    useEffect(() => {
+      dispatch(fetchCategories())
+    }, [])
 
     const handleMouseEnter = (category: IProductCategory) => {
       setSubCategories(category.childCategories)
@@ -35,8 +38,8 @@ const CategoriesList: React.FC<Props> = ({categories, createAction, updateAction
             <ListItemButton onMouseEnter={() => handleMouseEnter(treeItemData)}>
               <ListItemText primary={treeItemData.name} />
             </ListItemButton>
-                <UpdateCategoryModal category={treeItemData} updateAction={updateAction}/>
-                <DeleteCategoryModal categoryId={treeItemData.id} deleteAction={deleteAction}/>
+                <UpdateCategoryModal category={treeItemData}/>
+                <DeleteCategoryModal categoryId={treeItemData.id}/>
           </ListItem>
         );
       });
@@ -47,12 +50,12 @@ const CategoriesList: React.FC<Props> = ({categories, createAction, updateAction
         <Grid container item sm={3}>
           <List>
             {getListItemsFromData(categories)}
-            <CreateCategoryModal createAction={createAction}/>
+            <CreateCategoryModal/>
           </List>
         </Grid>
         <Divider orientation="vertical" flexItem/>
         <Grid container item sm={8}>
-          <SubCategoriesList parentCategoryId={actualCategoryId!} categories={subCategories} createAction={createAction} updateAction={updateAction} deleteAction={deleteAction}/>
+          <SubCategoriesList parentCategoryId={actualCategoryId!} categories={subCategories}/>
         </Grid>
       </Grid>
 

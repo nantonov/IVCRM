@@ -1,7 +1,5 @@
 import CustomerService from "../../../services/CustomerService";
-import { AppDispatch } from "../../store";
-import { customerSlice } from './CustomerSlice';
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import { IChangeCustomer } from "../../../models/IChangeCustomer";
 
 export const fetchCustomers = createAsyncThunk(
