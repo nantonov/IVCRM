@@ -6,6 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import { IChangeProductCategory } from "../../../models/IChangeProductCategory";
 import { useAppDispatch } from "../../../hooks/redux";
 import { createCategory } from "../../../store/reducers/categories/ActionCreators";
+import { IProductCategory } from "../../../models/IProductCategory";
 
 interface Props {
     parentCategoryId?: number

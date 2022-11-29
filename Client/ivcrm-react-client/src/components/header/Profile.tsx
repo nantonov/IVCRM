@@ -14,13 +14,13 @@ function Profile() {
     if (!isAuth) {
         return (
         <>
-        <Button onClick={dispatch(signIn())} color="inherit">Login</Button>
+        <Button onClick={() => dispatch(signIn())} color="inherit">Login</Button>
       </>
       );
       }
       return (
         <>
-          <Button onClick={dispatch(signOut())} color="inherit">Logout</Button>
+          <Button onClick={() => dispatch(signOut())} color="inherit">Logout</Button>
         </>
         );
 }
