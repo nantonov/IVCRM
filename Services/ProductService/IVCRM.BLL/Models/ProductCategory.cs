@@ -1,6 +1,4 @@
-﻿using IVCRM.DAL.Entities;
-
-namespace IVCRM.BLL.Models
+﻿namespace IVCRM.BLL.Models
 {
     public class ProductCategory
     {

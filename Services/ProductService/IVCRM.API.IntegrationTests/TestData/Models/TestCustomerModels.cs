@@ -3,9 +3,9 @@ using IVCRM.DAL.Entities;
 
 namespace IVCRM.API.IntegrationTests.TestData.Models
 {
-    internal static class TestCustomers
+    internal static class TestCustomerModels
     {
-        internal static Customer Customer => new()
+        internal static Customer CustomerModel => new()
         {
             Id = 1,
             FirstName = "FirstName",
@@ -13,9 +13,9 @@ namespace IVCRM.API.IntegrationTests.TestData.Models
             PhoneNumber = "+1234567",
         };
 
-        internal static List<Customer> CustomerCollection => new()
+        internal static List<Customer> CustomerModelCollection => new()
         {
-            Customer,
+            CustomerModel,
         };
     }
 }

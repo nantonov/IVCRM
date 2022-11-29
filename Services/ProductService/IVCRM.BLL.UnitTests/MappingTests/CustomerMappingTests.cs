@@ -11,7 +11,7 @@ namespace IVCRM.BLL.UnitTests.MappingTests
         public void Map_Entity_ReturnsModel()
         {
             //Arrange
-            var model = TestCustomers.Customer;
+            var model = TestCustomerModels.CustomerModel;
             var entity = TestCustomerEntities.CustomerEntity;
 
             var config = new MapperConfiguration(cfg => cfg.AddProfile<BllMappingProfile>());
@@ -28,7 +28,7 @@ namespace IVCRM.BLL.UnitTests.MappingTests
         public void Map_Model_ReturnsEntity()
         {
             //Arrange
-            var model = TestCustomers.Customer;
+            var model = TestCustomerModels.CustomerModel;
             var entity = TestCustomerEntities.CustomerEntity;
 
             var config = new MapperConfiguration(cfg => cfg.AddProfile<BllMappingProfile>());

@@ -2,6 +2,7 @@ import CustomerTable from '../customer/CustomerTable';
 import CreateCustomer from '../customer/modals/CreateCustomerModal';
 import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 function Customer() {
   

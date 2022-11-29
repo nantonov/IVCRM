@@ -15,7 +15,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
         public async void Create_Model_ReturnsModel()
         {
             //Arrange
-            var model = TestCustomers.Customer;
+            var model = TestCustomerModels.CustomerModel;
             var entity = TestCustomerEntities.CustomerEntity;
 
             var mocker = new AutoMocker(MockBehavior.Default, DefaultValue.Mock);
@@ -37,7 +37,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
         public async void GetAll_DataExists_ReturnsModelCollection()
         {
             //Arrange
-            var models = TestCustomers.CustomerCollection;
+            var models = TestCustomerModels.CustomerModelCollection;
             var entities = TestCustomerEntities.CustomerEntityCollection;
 
             var mocker = new AutoMocker(MockBehavior.Default, DefaultValue.Mock);
@@ -59,7 +59,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
         public async void GetById_Id_ReturnsModel()
         {
             //Arrange
-            var model = TestCustomers.Customer;
+            var model = TestCustomerModels.CustomerModel;
             var entity = TestCustomerEntities.CustomerEntity;
             var id = model.Id;
 
@@ -82,7 +82,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
         public async void Update_Model_ReturnsModel()
         {
             //Arrange
-            var model = TestCustomers.Customer;
+            var model = TestCustomerModels.CustomerModel;
             var entity = TestCustomerEntities.CustomerEntity;
 
             var mocker = new AutoMocker(MockBehavior.Default, DefaultValue.Mock);
@@ -104,7 +104,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
         public async void Update_EntityNotExists_ThrowsResourceNotFoundException()
         {
             //Arrange
-            var model = TestCustomers.Customer;
+            var model = TestCustomerModels.CustomerModel;
             var entity = TestCustomerEntities.CustomerEntity;
 
             var mocker = new AutoMocker(MockBehavior.Default, DefaultValue.Mock);
@@ -126,7 +126,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
         public async void Delete_Id_ReturnsModel()
         {
             //Arrange
-            var model = TestCustomers.Customer;
+            var model = TestCustomerModels.CustomerModel;
             var entity = TestCustomerEntities.CustomerEntity;
             var id = model.Id;
 
@@ -146,7 +146,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
         public async void Delete_EntityNotExists_ThrowsResourceNotFoundException()
         {
             //Arrange
-            var model = TestCustomers.Customer;
+            var model = TestCustomerModels.CustomerModel;
             var entity = TestCustomerEntities.CustomerEntity;
             var id = model.Id;
 

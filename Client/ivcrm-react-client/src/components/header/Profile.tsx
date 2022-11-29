@@ -2,14 +2,15 @@ import React, { useContext, useEffect } from 'react';
 import { Button } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { getUser, signIn, signOut } from '../../store/reducers/auth/ActionCreators';
+import AuthService from '../../services/AuthService';
 
 function Profile() {
-        const {user, isAuth} = useAppSelector(state => state.authReducer)
-        const dispatch = useAppDispatch()
+    const {user, isAuth, isLoading, error} = useAppSelector(state => state.authReducer)
+    const dispatch = useAppDispatch()
       
-        useEffect(() => {
-          dispatch(getUser())
-        }, [])
+    useEffect(() => {
+      dispatch(getUser())
+    }, [])
 
     if (!isAuth) {
         return (
