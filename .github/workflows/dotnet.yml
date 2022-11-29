@@ -19,10 +19,10 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
 
-    - name: Sonarqube Begin
-      run: | 
-          dotnet tool install --global dotnet-sonarscanner
-          dotnet sonarscanner begin /o:nantonov /k:nantonov_IVCRM_ProductService /d:sonar.login=${{ secrets.SONAR_TOKEN }} /s:$GITHUB_WORKSPACE/SonarQube.Analysis.xml
+    #- name: Sonarqube Begin
+    #  run: | 
+    #      dotnet tool install --global dotnet-sonarscanner
+    #      dotnet sonarscanner begin /o:nantonov /k:nantonov_IVCRM_ProductService /d:sonar.login=${{ secrets.SONAR_TOKEN }} /s:$GITHUB_WORKSPACE/SonarQube.Analysis.xml
 
     - name: Build
       run: dotnet build --no-restore
@@ -36,7 +36,22 @@ jobs:
       run: dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage
 
 
-    - name: Sonarqube end
-      run: dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+    #- name: Sonarqube end
+    #  run: dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+    #  env:
+    #      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: SonarCloud Scan
+      uses: SonarSource/sonarcloud-github-action@master
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      with:
+          projectBaseDir: Services/ProductService
+
+          sonarProjectKey: nantonov_IVCRM_ProductService
+          sonarProjectName:  IVCRM Product Service
+          sonarOrganization: nantonov
+          dotnetBuildArguments: IVCRM.sln
+          dotnetTestArguments: IVCRM.sln --logger trx --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
+          sonarBeginArguments: /d:sonar.cs.opencover.reportsPaths="**/TestResults/**/coverage.opencover.xml" -d:sonar.cs.vstest.reportsPaths="**/TestResults/*.trx"
