@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -11,16 +11,17 @@ import Stack from '@mui/material/Stack';
 
 import UpdateCustomerModal from './modals/UpdateCustomerModal';
 import DeleteCustomerModal from './modals/DeleteCustomerModal';
-import { ICustomer } from '../../models/ICustomer';
-import { IChangeCustomer } from '../../models/IChangeCustomer';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { fetchCustomers } from '../../store/reducers/customers/ActionCreators';
 
-interface Props {
-  customers: Array<ICustomer>
-  updateAction: (x: IChangeCustomer) => void
-  deleteAction: (x: number) => void
-}
+const CustomerTable = () => {
 
-const CustomerTable: React.FC<Props> = ({customers, updateAction, deleteAction}) => {
+  const {customer, customers, isLoading, error} = useAppSelector(state => state.customerReducer)
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch(fetchCustomers())
+  }, [])
 
   return (
     <TableContainer component={Paper} >
@@ -32,6 +33,10 @@ const CustomerTable: React.FC<Props> = ({customers, updateAction, deleteAction})
         >
           Customers
       </Typography>
+
+      {isLoading && <h1>Loading...</h1>}
+      {error && <h1>{error}</h1>}
+
       <hr />
       <Table sx={{ minWidth: 650 }} aria-label="simple table" size='small'>
         <TableHead>
@@ -55,8 +60,8 @@ const CustomerTable: React.FC<Props> = ({customers, updateAction, deleteAction})
               <TableCell align="right">{row.phoneNumber}</TableCell>
               <TableCell align="right">
               <Stack spacing={0} direction="row">
-                <UpdateCustomerModal customer={row} updateAction={updateAction}/>
-                <DeleteCustomerModal customerId={row.id} deleteAction={deleteAction}/>
+                <UpdateCustomerModal customer={row}/>
+                <DeleteCustomerModal customerId={row.id}/>
                 </Stack>
                 </TableCell>
             </TableRow>
