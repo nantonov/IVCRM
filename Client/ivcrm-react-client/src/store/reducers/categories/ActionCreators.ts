@@ -14,6 +14,18 @@ export const fetchCategories = createAsyncThunk(
     }
 )
 
+export const fetchCategoriesTree = createAsyncThunk(
+    'category/getCategoriesTree',
+    async (_, thunkAPI) => { 
+        try {
+            const response = await ProductCategoryService.getCategoriesTree()
+            return response;
+        } catch (e: any) {
+            return thunkAPI.rejectWithValue(e.response.data);
+        }
+    }
+)
+
 export const createCategory = createAsyncThunk(
     'category/create',
     async (customer :IChangeProductCategory, thunkAPI) => { 

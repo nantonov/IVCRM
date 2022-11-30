@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { createCategory, deleteCategory, fetchCategories, updateCategory } from "./ActionCreators";
+import { createCategory, deleteCategory, fetchCategories, fetchCategoriesTree, updateCategory } from "./ActionCreators";
 import { IProductCategory } from "../../../models/IProductCategory";
 
 interface ICategoryState {
     categories: IProductCategory[];
+    categoriesTree: IProductCategory[];
     actualCategoryId: number;
     isLoading: boolean;
     error: string;
@@ -11,6 +12,7 @@ interface ICategoryState {
 
 const initialState: ICategoryState = {
     categories: [],
+    categoriesTree: [],
     actualCategoryId: 0,
     isLoading: false,
     error: '',
@@ -33,6 +35,18 @@ export const categorySlice = createSlice({
             state.isLoading = false;
             state.error = action.payload;
         },
+        [fetchCategoriesTree.fulfilled.type]: (state, action: PayloadAction<Array<IProductCategory>>) => {
+            state.isLoading = false;
+            state.error = '';
+            state.categoriesTree = action.payload;
+        },
+        [fetchCategoriesTree.pending.type]: (state) => {
+            state.isLoading = true;
+        },
+        [fetchCategoriesTree.rejected.type]: (state, action: PayloadAction<string>) => {
+            state.isLoading = false;
+            state.error = action.payload;
+        },
         [createCategory.fulfilled.type]: (state, action: PayloadAction<IProductCategory>) => {
             state.isLoading = false;
             state.error = '';
@@ -48,7 +62,7 @@ export const categorySlice = createSlice({
         [updateCategory.fulfilled.type]: (state, action: PayloadAction<IProductCategory>) => {
             state.isLoading = false;
             state.error = '';
-            state.categories = updateCategoryById(state.categories, action.payload);
+            state.categories = state.categories.map((item) => item.id === action.payload.id ? action.payload : item);;
         },
         [updateCategory.pending.type]: (state) => {
             state.isLoading = true;
@@ -71,21 +85,5 @@ export const categorySlice = createSlice({
         },
     }
 })
-
-function updateCategoryById(cdata: Array<IProductCategory>, value: IProductCategory):Array<IProductCategory> {
-    
-    cdata.map((data) => {
-        if (data.id == value.id) {
-            data = value;
-        }
-
-            if (data.childCategories !== undefined && data.childCategories.length > 0) {
-                data.childCategories = updateCategoryById(data.childCategories, value);
-            }
-
-    })
-
-    return cdata;
-}
 
 export default categorySlice.reducer;

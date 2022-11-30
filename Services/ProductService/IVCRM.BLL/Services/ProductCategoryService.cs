@@ -26,11 +26,18 @@ namespace IVCRM.BLL.Services
             return _mapper.Map<ProductCategory>(result);
         }
 
-        public IEnumerable<ProductCategory> GetAll()
+        public async Task<IEnumerable<ProductCategory>> GetAll()
         {
-            var entity = _repository.GetAll();
+            var entities = await _repository.GetAll();
 
-            return _mapper.Map<IEnumerable<ProductCategory>>(entity);
+            return _mapper.Map<IEnumerable<ProductCategory>>(entities);
+        }
+
+        public IEnumerable<ProductCategory> GetCategoriesTree()
+        {
+            var entities = _repository.GetCategoriesTree();
+
+            return _mapper.Map<IEnumerable<ProductCategory>>(entities);
         }
 
         public async Task<ProductCategory> GetById(int id)
