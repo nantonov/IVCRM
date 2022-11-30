@@ -30,8 +30,7 @@ const CategoriesList = () => {
         return (
           <ListItem disablePadding key={treeItemData.id}>
             <ListItemButton onMouseEnter={() => handleMouseEnter(treeItemData)}>
-              {<ListItemText primary={treeItemData.name} />}
-              {/*treeItemData.name*/}
+              <ListItemText primary={treeItemData.name} />
             </ListItemButton>
           </ListItem>
         );
