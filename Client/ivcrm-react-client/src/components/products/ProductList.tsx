@@ -1,6 +1,6 @@
 import * as React from 'react';
 import List from '@mui/material/List';
-import { Grid, Divider } from '@mui/material';
+import { Grid, Divider, Stack } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { useEffect } from 'react';
 import { fetchProducts } from '../../store/reducers/products/ActionCreators';
@@ -26,9 +26,9 @@ const ProductList = () => {
     return (
       <Grid direction='row' container spacing={1}>
         <Grid container item sm={3}>
-          <List>
+          <Stack direction="row" spacing={2}>
             {getListItemsFromData(products)}
-          </List>
+          </Stack>
         </Grid>
         <Divider orientation="vertical" flexItem/>
         <Grid container item sm={8}>
