@@ -49,6 +49,7 @@ const CategoriesList = () => {
           <SubCategoriesList categories={subCategories}/>
         </Grid>
       </Grid>
+
   );
 }
 

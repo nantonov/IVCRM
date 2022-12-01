@@ -1,5 +1,6 @@
 import { Divider, Grid } from '@mui/material';
 import React, { useState } from 'react';
+import { IProductCategory } from '../../models/IProductCategory';
 import CategoriesList from '../categories/CategoryList';
 
 function Catalog() {
