@@ -41,17 +41,17 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
             var entities = TestProductCategoryEntities.ProductCategoryEntityCollection;
 
             var mocker = new AutoMocker(MockBehavior.Default, DefaultValue.Mock);
-            mocker.Setup<IProductCategoryRepository, IEnumerable<ProductCategoryEntity>>(x => x.GetAll())
+            mocker.Setup<IProductCategoryRepository, IEnumerable<ProductCategoryEntity>>(x => x.GetCategoriesTree())
                 .Returns(entities);
             mocker.Setup<IMapper, IEnumerable<ProductCategory>>(x => x.Map<IEnumerable<ProductCategory>>(entities)).Returns(models);
 
             var service = mocker.CreateInstance<ProductCategoryService>();
 
             //Act
-            var response = service.GetAll();
+            var response = service.GetCategoriesTree();
 
             //Assert
-            mocker.GetMock<IProductCategoryRepository>().Verify(x => x.GetAll(), Times.Once);
+            mocker.GetMock<IProductCategoryRepository>().Verify(x => x.GetCategoriesTree(), Times.Once);
             response.Should().BeEquivalentTo(models);
         }
 

@@ -39,7 +39,7 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
             var expectedResult = Context.ProductCategories.Include(x => x.ChildCategories).Last(x => x.ParentCategoryId == null);
 
             //Act
-            var actualResult = _repository.GetAll();
+            var actualResult = _repository.GetCategoriesTree();
 
             //Assert
             actualResult.Should().NotBeEmpty();
@@ -96,7 +96,7 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
         {
             //Arrange
             await AddToContext(TestProductCategoryEntities.ProductCategoryEntity);
-            var entitiesCount = Context.Customers.Count();
+            var entitiesCount = Context.ProductCategories.Count();
             var unreachableId = int.MaxValue;
 
             //Act
