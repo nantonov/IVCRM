@@ -5,7 +5,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import { IProductCategory } from '../../models/IProductCategory';
 import { Grid, Divider } from '@mui/material';
-import SubCategoriesList from './SubCategoryList';
+import SubCategoriesList from './ChildCategoryList';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchCategoriesTree } from '../../store/reducers/categories/ActionCreators';
 import { useEffect } from 'react';
@@ -49,7 +49,6 @@ const CategoriesList = () => {
           <SubCategoriesList categories={subCategories}/>
         </Grid>
       </Grid>
-
   );
 }
 
