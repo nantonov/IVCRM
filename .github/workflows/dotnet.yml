@@ -12,6 +12,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
@@ -19,13 +20,9 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
 
-    #- name: Sonarqube Begin
-    #  run: | 
-    #      dotnet tool install --global dotnet-sonarscanner
-    #      dotnet sonarscanner begin /o:nantonov /k:nantonov_IVCRM_ProductService /d:sonar.login=${{ secrets.SONAR_TOKEN }} /s:$GITHUB_WORKSPACE/SonarQube.Analysis.xml
-
     - name: Build
       run: dotnet build --no-restore
+
     - name: Install MongoDb
       uses: supercharge/mongodb-github-action@1.8.0
       with:
@@ -55,11 +52,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       with:
-          #projectBaseDir: Services/ProductService
-
           sonarProjectKey: nantonov_IVCRM_ProductService
           sonarProjectName:  IVCRM Product Service
           sonarOrganization: nantonov
           dotnetBuildArguments: IVCRM.sln
           dotnetTestArguments: IVCRM.sln --logger trx --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
-          sonarBeginArguments: /d:sonar.cs.opencover.reportsPaths="**/coverage/coverage.opencover.xml" -d:sonar.cs.vstest.reportsPaths="**/coverage/*.trx"
+          sonarBeginArguments: /d:sonar.cs.opencover.reportsPaths="**/coverage/**/coverage.cobertura.xml" -d:sonar.cs.vstest.reportsPaths="**/coverage/*.trx"
