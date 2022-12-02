@@ -18,7 +18,6 @@ namespace ShippingService.API.Controllers
         private readonly IMapper _mapper;
         private readonly ChangeShipmentValidator _changeShipmentValidator;
 
-
         public ShipmentController(IMediator mediator, IMapper mapper, ChangeShipmentValidator changeShipmentValidator)
         {
             _mediator = mediator;

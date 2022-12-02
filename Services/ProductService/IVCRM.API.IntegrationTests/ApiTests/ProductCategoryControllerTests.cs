@@ -41,7 +41,6 @@ namespace IVCRM.API.IntegrationTests.ApiTests
 
             //Act
             var actualResult = await Client.SendAsync(request);
-            var responseResult = actualResult.GetResponseResult<CustomerViewModel>();
 
             //Assert
             actualResult.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
@@ -125,7 +124,6 @@ namespace IVCRM.API.IntegrationTests.ApiTests
 
             //Act
             var actualResult = await Client.SendAsync(request);
-            var responseResult = actualResult.GetResponseResult<ProductCategoryViewModel>();
 
             //Assert
             actualResult.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
