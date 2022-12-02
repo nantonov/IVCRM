@@ -7,7 +7,7 @@ interface Props {
     categories: Array<IProductCategory>
   }
 
-  const SubCategoriesList: React.FC<Props> = ({categories}) => {
+  const ChildCategoriesList: React.FC<Props> = ({categories}) => {
 
     const getListItems = (items: Array<IProductCategory>) => {
         return items.map(treeItemData => {
@@ -49,4 +49,4 @@ interface Props {
   );
 }
 
-export default SubCategoriesList;
+export default ChildCategoriesList;
