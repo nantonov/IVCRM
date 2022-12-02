@@ -1,4 +1,3 @@
-using FluentAssertions;
 using MongoDB.Driver;
 using ShippingService.API.IntegrationTests.Infrastructure;
 using ShippingService.API.IntegrationTests.Infrastructure.Extensions;
@@ -11,12 +10,6 @@ namespace ShippingService.API.IntegrationTests.ApiTests
 {
     public class ShipmentControllerTests : IntegrationTestsBase
     {
-        public ShipmentControllerTests()
-        {
-            AssertionOptions.AssertEquivalencyUsing(options => options
-                .Using<DateTime>(ctx => ctx.Subject.Should().BeWithin(TimeSpan.FromMilliseconds(1000))).WhenTypeIs<DateTime>()
-            );
-        }
 
         [Fact]
         public async void Create_ValidViewModel_ReturnsViewModel()
@@ -38,10 +31,10 @@ namespace ShippingService.API.IntegrationTests.ApiTests
             viewModel.CreatedDate = responseResult.CreatedDate;
 
             //Assert
-            actualResult.StatusCode.Should().Be(HttpStatusCode.OK);
-            responseResult.CreatedDate.Should().NotBe(default);
-            responseResult.Should().BeEquivalentTo(viewModel);
-            ShipmentCollection.Find(x => x.Id == responseResult.Id).Single().Should().BeEquivalentTo(entity);
+            actualResult.StatusCode.ShouldBe(HttpStatusCode.OK);
+            responseResult.CreatedDate.ShouldNotBe(default);
+            responseResult.ShouldBeEquivalentTo(viewModel);
+            ShipmentCollection.Find(x => x.Id == responseResult.Id).Single().ShouldNotBeNull();
         }
         
         [Fact]
@@ -58,8 +51,8 @@ namespace ShippingService.API.IntegrationTests.ApiTests
             var responseResult = actualResult.GetResponseResult<ShipmentViewModel>();
 
             //Assert
-            actualResult.StatusCode.Should().Be(HttpStatusCode.BadRequest);
-            ShipmentCollection.Find(_ => true).CountDocuments().Should().Be(unchangedCollectionCount);
+            actualResult.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
+            ShipmentCollection.Find(_ => true).CountDocuments().ShouldBe(unchangedCollectionCount);
         }
 
         [Fact]
@@ -78,8 +71,8 @@ namespace ShippingService.API.IntegrationTests.ApiTests
             var responseResult = actualResult.GetResponseResult<ShipmentViewModel>();
 
             //Assert
-            actualResult.StatusCode.Should().Be(HttpStatusCode.OK);
-            responseResult.Should().BeEquivalentTo(viewModel);
+            actualResult.StatusCode.ShouldBe(HttpStatusCode.OK);
+            responseResult.ShouldBeEquivalentTo(viewModel);
         }
     }
 }
