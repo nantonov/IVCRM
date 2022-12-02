@@ -13,10 +13,6 @@ namespace ShippingService.DAL.IntegrationTests.RepositoryTests
         public ShipmentRepositoryTests()
         {
             _repository = new ShipmentRepository(Context);
-            /*
-            AssertionOptions.AssertEquivalencyUsing(options => options
-                .Using<DateTime>(ctx => ctx.Subject.Should().BeWithin(TimeSpan.FromMilliseconds(1000))).WhenTypeIs<DateTime>()
-            );*/
         }
 
         [Fact]
