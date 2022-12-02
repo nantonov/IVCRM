@@ -24,7 +24,7 @@ namespace IVCRM.BLL.UnitTests.MappingTests
             var result = mapper.Map<Product>(entity);
 
             //Assert
-            result.Should().BeEquivalentTo(model);
+            result.ShouldBeEquivalentTo(model);
         }
 
         [Fact]
@@ -32,7 +32,7 @@ namespace IVCRM.BLL.UnitTests.MappingTests
         {
             //Arrange
             var model = TestProductModels.ProductModel;
-            var entity = TestProductModels.ProductModel;
+            var entity = TestProductEntities.ProductEntity;
 
             var config = new MapperConfiguration(cfg => cfg.AddProfile<BllMappingProfile>());
             var mapper = config.CreateMapper();
@@ -41,7 +41,7 @@ namespace IVCRM.BLL.UnitTests.MappingTests
             var result = mapper.Map<ProductEntity>(model);
 
             //Assert
-            result.Should().BeEquivalentTo(entity);
+            result.ShouldBeEquivalentTo(entity);
         }
 
         [Fact]
@@ -58,24 +58,25 @@ namespace IVCRM.BLL.UnitTests.MappingTests
             var result = mapper.Map<ProductViewModel>(model);
 
             //Assert 
-            result.Should().BeEquivalentTo(viewModel);
+            result.ShouldBeEquivalentTo(viewModel);
         }
 
         [Fact]
         public void Map_ChangeViewModel_ReturnsModel()
         {
             //Arrange 
-            var model = TestProductViewModels.ValidChangeProductViewModel;
-            var entity = TestProductModels.ProductModel;
+            var viewModel = TestProductViewModels.ValidChangeProductViewModel;
+            var model = TestProductModels.ProductModel;
 
             var config = new MapperConfiguration(cfg => cfg.AddProfile<ApiMappingProfile>());
             var mapper = config.CreateMapper();
 
             //Act 
-            var result = mapper.Map<Product>(entity);
+            var result = mapper.Map<Product>(viewModel);
+            result.Id = model.Id;
 
             //Assert 
-            result.Should().BeEquivalentTo(model);
+            result.ShouldBeEquivalentTo(model);
 
         }
     }

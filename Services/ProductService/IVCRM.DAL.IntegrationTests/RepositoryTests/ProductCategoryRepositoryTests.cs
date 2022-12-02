@@ -25,8 +25,8 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
             var actualResult = await _repository.Create(entity);
 
             //Assert
-            actualResult.Should().BeEquivalentTo(entity);
-            Context.ProductCategories.Last().Should().BeEquivalentTo(entity);
+            actualResult.ShouldBeEquivalentTo(entity);
+            Context.ProductCategories.Last().ShouldBeEquivalentTo(entity);
         }
 
         [Fact]
@@ -42,8 +42,8 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
             var actualResult = _repository.GetAll();
 
             //Assert
-            actualResult.Should().NotBeEmpty();
-            actualResult.Should().Contain(expectedResult);
+            actualResult.ShouldNotBeEmpty();
+            actualResult.ShouldContain(expectedResult);
         }
 
         [Fact]
@@ -57,7 +57,7 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
             var actualResult = await _repository.GetById(entity.Id);
 
             //Assert
-            actualResult.Should().BeEquivalentTo(entity);
+            actualResult.ShouldBeEquivalentTo(entity);
         }
 
         [Fact]
@@ -74,7 +74,7 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
             var actualResult = await _repository.Update(entity);
 
             //Assert
-            actualResult.Should().BeEquivalentTo(entity);
+            actualResult.ShouldBeEquivalentTo(entity);
         }
 
         [Fact]
@@ -88,7 +88,7 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
             await _repository.Delete(entity.Id);
 
             //Assert
-            Context.ProductCategories.Should().NotContain(entity);
+            Context.ProductCategories.ShouldNotContain(entity);
         }
 
         [Fact]
@@ -103,7 +103,7 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
             await _repository.Delete(unreachableId);
 
             //Assert
-            Context.ProductCategories.Count().Should().Be(entitiesCount);
+            Context.ProductCategories.Count().ShouldBe(entitiesCount);
         }
     }
 }

@@ -23,8 +23,8 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
             var actualResult = await _customerRepository.Create(entity);
 
             //Assert
-            actualResult.Should().BeEquivalentTo(entity);
-            Context.Customers.Last().Should().BeEquivalentTo(entity);
+            actualResult.ShouldBeEquivalentTo(entity);
+            Context.Customers.Last().ShouldBeEquivalentTo(entity);
         }
 
         [Fact]
@@ -37,8 +37,8 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
             var actualResult = await _customerRepository.GetAll();
 
             //Assert
-            actualResult.Should().NotBeEmpty();
-            actualResult.Should().Contain(entities);
+            actualResult.ShouldNotBeEmpty();
+            entities.ShouldBeSubsetOf(actualResult);
         }
 
         [Fact]
@@ -52,7 +52,7 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
             var actualResult = await _customerRepository.GetById(entity.Id);
 
             //Assert
-            actualResult.Should().BeEquivalentTo(entity);
+            actualResult.ShouldBeEquivalentTo(entity);
         }
 
         [Fact]
@@ -69,7 +69,7 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
             var actualResult = await _customerRepository.Update(entity);
 
             //Assert
-            actualResult.Should().BeEquivalentTo(entity);
+            actualResult.ShouldBeEquivalentTo(entity);
         }
 
         [Fact]
@@ -83,7 +83,7 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
             await _customerRepository.Delete(entity.Id);
 
             //Assert
-            Context.Customers.Should().NotContain(entity);
+            Context.Customers.ShouldNotContain(entity);
         }
 
         [Fact]
@@ -98,7 +98,7 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
             await _customerRepository.Delete(unreachableId);
 
             //Assert
-            Context.Customers.Count().Should().Be(entitiesCount);
+            Context.Customers.Count().ShouldBe(entitiesCount);
         }
     }
 }

@@ -24,7 +24,7 @@ namespace IVCRM.BLL.UnitTests.MappingTests
             var result = mapper.Map<ProductCategory>(entity);
 
             //Assert
-            result.Should().BeEquivalentTo(model);
+            result.ShouldBeEquivalentTo(model);
         }
 
         [Fact]
@@ -41,7 +41,7 @@ namespace IVCRM.BLL.UnitTests.MappingTests
             var result = mapper.Map<ProductCategoryEntity>(model);
 
             //Assert
-            result.Should().BeEquivalentTo(entity);
+            result.ShouldBeEquivalentTo(entity);
         }
 
         [Fact]
@@ -58,24 +58,26 @@ namespace IVCRM.BLL.UnitTests.MappingTests
             var result = mapper.Map<ProductCategoryViewModel>(model);
 
             //Assert 
-            result.Should().BeEquivalentTo(viewModel);
+            result.ShouldBeEquivalentTo(viewModel);
         }
 
         [Fact]
         public void Map_ChangeViewModel_ReturnsModel()
         {
             //Arrange 
-            var model = TestProductCategoryViewModels.ValidChangeProductCategoryViewModel;
-            var entity = TestProductCategoryModels.ProductCategoryModel;
+            var viewModel = TestProductCategoryViewModels.ValidChangeProductCategoryViewModel;
+            var model = TestProductCategoryModels.ProductCategoryModel;
 
             var config = new MapperConfiguration(cfg => cfg.AddProfile<ApiMappingProfile>());
             var mapper = config.CreateMapper();
 
             //Act 
-            var result = mapper.Map<ProductCategory>(entity);
+            var result = mapper.Map<ProductCategory>(viewModel);
+            result.Id = model.Id;
+            result.ChildCategories = new List<ProductCategory>();
 
             //Assert 
-            result.Should().BeEquivalentTo(model);
+            result.ShouldBeEquivalentTo(model);
 
         }
     }

@@ -25,9 +25,9 @@ namespace IVCRM.API.IntegrationTests.ApiTests
             viewModel.Id = responseResult.Id;
 
             //Assert
-            actualResult.StatusCode.Should().Be(HttpStatusCode.OK);
-            responseResult.Should().BeEquivalentTo(viewModel);
-            Context.Customers.Last().Should().BeEquivalentTo(entity);
+            actualResult.StatusCode.ShouldBe(HttpStatusCode.OK);
+            responseResult.ShouldBeEquivalentTo(viewModel);
+            Context.Customers.Last().ShouldBeEquivalentTo(entity);
         }
 
         [Fact]
@@ -44,8 +44,8 @@ namespace IVCRM.API.IntegrationTests.ApiTests
             var responseResult = actualResult.GetResponseResult<CustomerViewModel>();
 
             //Assert
-            actualResult.StatusCode.Should().Be(HttpStatusCode.BadRequest);
-            Context.Customers.Count().Should().Be(unchangedCollectionCount);
+            actualResult.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
+            Context.Customers.Count().ShouldBe(unchangedCollectionCount);
         }
 
         [Fact]
@@ -63,10 +63,11 @@ namespace IVCRM.API.IntegrationTests.ApiTests
             //Act
             var actualResult = await Client.SendAsync(request);
             var responseResult = actualResult.GetResponseResult<IEnumerable<CustomerViewModel>>();
+            viewModelCollection.Select(x => x.Id = responseResult.First(z => z.FullName == x.FullName).Id).ToList();
 
             //Assert
-            actualResult.StatusCode.Should().Be(HttpStatusCode.OK);
-            responseResult.TakeLast(entitiesCount).Should().BeEquivalentTo(viewModelCollection, opt => opt.Excluding(x => x.Id));
+            actualResult.StatusCode.ShouldBe(HttpStatusCode.OK);
+            responseResult.TakeLast(entitiesCount).ToList().ShouldBeEquivalentTo(viewModelCollection);
         }
 
         [Fact]
@@ -85,8 +86,8 @@ namespace IVCRM.API.IntegrationTests.ApiTests
             var responseResult = actualResult.GetResponseResult<CustomerViewModel>();
 
             //Assert
-            actualResult.StatusCode.Should().Be(HttpStatusCode.OK);
-            responseResult.Should().BeEquivalentTo(viewModel);
+            actualResult.StatusCode.ShouldBe(HttpStatusCode.OK);
+            responseResult.ShouldBeEquivalentTo(viewModel);
         }
 
         [Fact]
@@ -109,9 +110,9 @@ namespace IVCRM.API.IntegrationTests.ApiTests
             Context.Entry(entity).Reload();
 
             //Assert
-            actualResult.StatusCode.Should().Be(HttpStatusCode.OK);
-            responseResult.Should().BeEquivalentTo(expectedViewModel);
-            entity.Should().BeEquivalentTo(expectedEntity);
+            actualResult.StatusCode.ShouldBe(HttpStatusCode.OK);
+            responseResult.ShouldBeEquivalentTo(expectedViewModel);
+            entity.ShouldBeEquivalentTo(expectedEntity);
         }
 
         [Fact]
@@ -127,7 +128,7 @@ namespace IVCRM.API.IntegrationTests.ApiTests
             var responseResult = actualResult.GetResponseResult<CustomerViewModel>();
 
             //Assert
-            actualResult.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+            actualResult.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
         }
 
         [Fact]
@@ -143,8 +144,8 @@ namespace IVCRM.API.IntegrationTests.ApiTests
             var actualResult = await Client.SendAsync(request);
 
             //Assert
-            actualResult.StatusCode.Should().Be(HttpStatusCode.OK);
-            Context.Customers.Should().NotContain(entity);
+            actualResult.StatusCode.ShouldBe(HttpStatusCode.OK);
+            Context.Customers.ShouldNotContain(entity);
         }
     }
 }

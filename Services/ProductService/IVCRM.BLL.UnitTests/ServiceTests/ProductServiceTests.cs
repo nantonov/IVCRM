@@ -30,7 +30,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
 
             //Assert
             mocker.GetMock<IProductRepository>().Verify(x => x.Create(It.IsAny<ProductEntity>()), Times.Once);
-            response.Should().BeEquivalentTo(model);
+            response.ShouldBeEquivalentTo(model);
         }
 
         [Fact]
@@ -52,7 +52,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
 
             //Assert
             mocker.GetMock<IProductRepository>().Verify(x => x.GetAll(), Times.Once);
-            response.Should().BeEquivalentTo(models);
+            response.ShouldBeEquivalentTo(models);
         }
 
         [Fact]
@@ -75,7 +75,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
 
             //Assert
             mocker.GetMock<IProductRepository>().Verify(x => x.GetById(It.IsAny<int>()), Times.Once);
-            response.Should().BeEquivalentTo(model);
+            response.ShouldBeEquivalentTo(model);
         }
 
         [Fact]
@@ -97,7 +97,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
 
             //Assert
             mocker.GetMock<IProductRepository>().Verify(x => x.Update(It.IsAny<ProductEntity>()), Times.Once);
-            response.Should().BeEquivalentTo(model);
+            response.ShouldBeEquivalentTo(model);
         }
         
         [Fact]
@@ -118,7 +118,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
             Func<Task<Product?>> update = async () => await service.Update(model);
 
             //Assert
-            await update.Should().ThrowAsync<ResourceNotFoundException>();
+            await update.ShouldThrowAsync<ResourceNotFoundException>();
             mocker.GetMock<IProductRepository>().Verify(x => x.Update(It.IsAny<ProductEntity>()), Times.Never);
         }
 
@@ -160,7 +160,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
             Func<Task> update = async () => await service.Delete(id);
 
             //Assert
-            await update.Should().ThrowAsync<ResourceNotFoundException>();
+            await update.ShouldThrowAsync<ResourceNotFoundException>();
             mocker.GetMock<IProductRepository>().Verify(x => x.Delete(It.IsAny<int>()), Times.Never);
         }
     }
