@@ -3,21 +3,21 @@ import Modal from "@mui/material/Modal";
 import Edit from '@mui/icons-material/Edit';
 import IconButton from '@mui/material/IconButton';
 import { StyledModalBox } from '../../../styles/Styles';
-import UpdateCustomerForm from '../forms/UpdateCustomerForm';
-import { ICustomer } from "../../../models/ICustomer";
+import UpdateCustomerForm from '../forms/UpdateCategoryForm';
+import { IProductCategory } from "../../../models/IProductCategory";
 
 interface Props {
-  customer: ICustomer
+  category: IProductCategory
 }
 
-const UpdateCustomerModal: React.FC<Props> = ({customer}) => {
+const UpdateCategoryModal: React.FC<Props> = ({category}) => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     
       return (
-        <div>
-        <IconButton onClick={handleOpen} color="primary" component="label">
+      <div>
+        <IconButton onClick={handleOpen} color="primary" component="label" size="small">
           <Edit />
         </IconButton>
 
@@ -27,12 +27,12 @@ const UpdateCustomerModal: React.FC<Props> = ({customer}) => {
             open={open}
             onClose={handleClose}
         >
-        <StyledModalBox>
-          <UpdateCustomerForm customer={customer} handleClose={handleClose}/>
-        </StyledModalBox>
-      </Modal>
+          <StyledModalBox>
+            <UpdateCustomerForm category={category} handleClose={handleClose}/>
+          </StyledModalBox>
+        </Modal>
       </div>
       );
     }
     
-    export default UpdateCustomerModal;
+    export default UpdateCategoryModal;

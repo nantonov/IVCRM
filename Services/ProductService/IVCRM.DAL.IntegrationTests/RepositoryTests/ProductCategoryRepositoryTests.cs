@@ -39,7 +39,7 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
             var expectedResult = Context.ProductCategories.Include(x => x.ChildCategories).Last(x => x.ParentCategoryId == null);
 
             //Act
-            var actualResult = _repository.GetAll();
+            var actualResult = _repository.GetCategoriesTree();
 
             //Assert
             actualResult.ShouldNotBeEmpty();
