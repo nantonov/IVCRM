@@ -1,3 +1,4 @@
+using System.Collections;
 using IVCRM.BLL.Exceptions;
 using IVCRM.BLL.Models;
 using IVCRM.BLL.Services;
@@ -34,21 +35,21 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
         }
 
         [Fact]
-        public void GetAll_DataExists_ReturnsModelCollection()
+        public async void GetAll_DataExists_ReturnsModelCollection()
         {
             //Arrange
             var models = TestProductCategoryModels.ProductCategoryModelCollection;
             var entities = TestProductCategoryEntities.ProductCategoryEntityCollection;
 
             var mocker = new AutoMocker(MockBehavior.Default, DefaultValue.Mock);
-            mocker.Setup<IProductCategoryRepository, IEnumerable<ProductCategoryEntity>>(x => x.GetCategoriesTree())
-                .Returns(entities);
+            mocker.Setup<IProductCategoryRepository, Task<IEnumerable<ProductCategoryEntity>>>(x => x.GetAll())
+                .ReturnsAsync(entities);
             mocker.Setup<IMapper, IEnumerable<ProductCategory>>(x => x.Map<IEnumerable<ProductCategory>>(entities)).Returns(models);
 
             var service = mocker.CreateInstance<ProductCategoryService>();
 
             //Act
-            var response = service.GetCategoriesTree();
+            var response = await service.GetAll();
 
             //Assert
             mocker.GetMock<IProductCategoryRepository>().Verify(x => x.GetAll(), Times.Once);
