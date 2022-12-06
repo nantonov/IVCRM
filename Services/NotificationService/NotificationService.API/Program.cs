@@ -1,7 +1,6 @@
 using NotificationService.BLL;
 using NotificationService.BLL.SignalR;
 using Serilog;
-using Serilog.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
