@@ -116,7 +116,7 @@ namespace IVCRM.API.IntegrationTests.ApiTests
         }
 
         [Fact]
-        public async void Update_ViewModelNotValid_ReturnsNotFound()
+        public async void Update_InvalidViewModel_ReturnsBadRequest()
         {
             //Arrange
             var id = 1;
@@ -132,7 +132,7 @@ namespace IVCRM.API.IntegrationTests.ApiTests
         }
 
         [Fact]
-        public async void Delete_Id_DeletesEntityWithSameId()
+        public async void Delete_ValidId_DeletesEntity()
         {
             //Arrange
             var entity = TestProductCategoryEntities.ProductCategoryEntity;
