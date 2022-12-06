@@ -31,7 +31,7 @@ namespace IVCRM.API.IntegrationTests.ApiTests
         }
 
         [Fact]
-        public async void Create_ViewModelNotValid_ReturnsNotFound()
+        public async void Create_InvalidViewModel_ReturnsBadRequest()
         {
             //Arrange
             var unchangedCollectionCount = Context.ProductCategories.Count();
@@ -71,7 +71,7 @@ namespace IVCRM.API.IntegrationTests.ApiTests
         }
         
         [Fact]
-        public async Task GetById_WhenDataExists_ShouldViewModel()
+        public async Task GetById_DataExists_ReturnsViewModel()
         {
             //Arrange
             var entity = TestProductCategoryEntities.ProductCategoryEntity;

@@ -57,7 +57,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
         }
 
         [Fact]
-        public async void GetById_Id_ReturnsModel()
+        public async void GetById_ValidId_ReturnsModel()
         {
             //Arrange
             var model = TestProductCategoryModels.ProductCategoryModel;
@@ -80,7 +80,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
         }
 
         [Fact]
-        public async void Update_Model_ReturnsModel()
+        public async void Update_ValidModel_ReturnsModel()
         {
             //Arrange
             var model = TestProductCategoryModels.ProductCategoryModel;
@@ -102,7 +102,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
         }
         
         [Fact]
-        public async void Update_EntityNotExists_ThrowsResourceNotFoundException()
+        public async void Update_InvalidModel_ThrowsResourceNotFoundException()
         {
             //Arrange
             var model = TestProductCategoryModels.ProductCategoryModel;
@@ -124,7 +124,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
         }
 
         [Fact]
-        public async void Delete_Id_ReturnsModel()
+        public async void Delete_ValidId_DeletesEntity()
         {
             //Arrange
             var model = TestProductCategoryModels.ProductCategoryModel;
@@ -144,7 +144,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
         }
 
         [Fact]
-        public async void Delete_EntityNotExists_ThrowsResourceNotFoundException()
+        public async void Delete_InvelidId_ThrowsResourceNotFoundException()
         {
             //Arrange
             var model = TestProductCategoryModels.ProductCategoryModel;

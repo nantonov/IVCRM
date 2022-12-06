@@ -78,7 +78,7 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
         }
 
         [Fact]
-        public async Task Delete_EntityExists_DeletesEntity()
+        public async Task Delete_ValidId_DeletesEntity()
         {
             //Arrange
             var entity = TestProductCategoryEntities.ProductCategoryEntity;
@@ -92,7 +92,7 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
         }
 
         [Fact]
-        public async Task Delete_EntityNotExists_Returns()
+        public async Task Delete_InvalidId_Returns()
         {
             //Arrange
             await AddToContext(TestProductCategoryEntities.ProductCategoryEntity);
