@@ -15,11 +15,11 @@ namespace NotificationService.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Notify([FromBody] string message)
+        public async Task<IActionResult> Notify([FromBody] int orderCount)
         {
-            await _notificationService.Send(message);
+            await _notificationService.Send(orderCount.ToString());
 
-            return Ok(message);
-        3}
+            return Ok(orderCount);
+        }
     }
 }

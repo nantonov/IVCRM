@@ -8,9 +8,9 @@ namespace NotificationService.BLL.Services
     {
         public const string HandlingMethodURL = "ReceiveNotification";
 
-        private readonly IHubContext<NotificationHub> _hubContext;
+        private readonly IHubContext<OrderNotificationHub> _hubContext;
 
-        public NotificationService(IHubContext<NotificationHub> hubContext)
+        public NotificationService(IHubContext<OrderNotificationHub> hubContext)
         {
             _hubContext = hubContext;
         }

@@ -33,6 +33,6 @@ app.UseCors(x => x
 
 app.MapControllers();
 
-app.MapHub<NotificationHub>("/notificationHub");
+app.MapHub<OrderNotificationHub>(OrderNotificationHub.NotificationHubURL);
 
 app.Run();
