@@ -125,7 +125,6 @@ namespace IVCRM.API.IntegrationTests.ApiTests
 
             //Act
             var actualResult = await Client.SendAsync(request);
-            var responseResult = actualResult.GetResponseResult<CustomerViewModel>();
 
             //Assert
             actualResult.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
