@@ -33,7 +33,7 @@ namespace NotificationService.BLL.Services
         {
             var client = new SmtpClient(_config.Server, _config.Port);
             client.Credentials = new NetworkCredential(_config.SenderEmail, _config.Password);
-            client.EnableSsl = _config.SSL;
+            client.EnableSsl = _config.Ssl;
 
             return client;
         }
