@@ -1,8 +1,11 @@
 ﻿using System.Net;
 using System.Net.Mail;
+using System.Reflection;
 using Microsoft.Extensions.Configuration;
 using NotificationService.BLL.Models;
 using NotificationService.BLL.Services.Interfaces;
+using NotificationService.BLL.Templates;
+using RazorLight;
 
 namespace NotificationService.BLL.Services
 {
@@ -15,21 +18,54 @@ namespace NotificationService.BLL.Services
         {
             _config = configuration.GetSection(EmailConfigurationSection).Get<EmailConfiguration>();
         }
+
         public async Task SendEmailAsync(MailModel request)
+        {
+            var emailMessage = await PrepareMailMessage(request);
+
+            using (var client = ConfigureSmtpClient())
+            {
+                await client.SendMailAsync(emailMessage);
+            }
+        }
+
+        private SmtpClient ConfigureSmtpClient()
+        {
+            var client = new SmtpClient(_config.Server, _config.Port);
+            client.Credentials = new NetworkCredential(_config.SenderEmail, _config.Password);
+            client.EnableSsl = _config.SSL;
+
+            return client;
+        }
+
+        private async Task<MailMessage> PrepareMailMessage(MailModel request)
         {
             var emailMessage = new MailMessage();
 
             emailMessage.From = new MailAddress(_config.SenderEmail, _config.SenderName);
             emailMessage.To.Add(new MailAddress("minuciusfelicis@gmail.com"));
             emailMessage.Subject = request.Subject;
-            emailMessage.Body = request.Body;
+            emailMessage.IsBodyHtml = true;
+            emailMessage.Body = await GetFilledTemplate(request.Message);
 
-            using (var client = new SmtpClient(_config.Server, _config.Port))
-            {
-                client.Credentials = new NetworkCredential(_config.SenderEmail, _config.Password);
-                client.EnableSsl = _config.SSL;
-                await client.SendMailAsync(emailMessage);
-            }
+            return emailMessage;
+        }
+
+        private async Task<string> GetFilledTemplate(string message)
+        {
+            string template = EmailTemplates.DefaultEmailTemplate;
+
+            RazorLightEngine engine = new RazorLightEngineBuilder()
+                .UseEmbeddedResourcesProject(Assembly.GetEntryAssembly())
+                .Build();
+
+            string result = await engine.CompileRenderStringAsync(
+                "cacheKey",
+                template,
+                message
+                );
+
+            return result;
         }
     }
 }
