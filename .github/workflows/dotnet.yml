@@ -17,7 +17,7 @@ jobs:
 
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+          fetch-depth: 0
 
       - name: Cache SonarCloud packages
         uses: actions/cache@v1
@@ -39,10 +39,8 @@ jobs:
 
       - name: Build and analyze
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          #SOLUTION_PATH: AirlineTickets/
-          #EXCLUDE_FROM_COVERAGE: " **/Controllers/**/*, **/Mapper/**/*, **/ViewModels/**/*, **/DI/**/*, **/Models/**/*, **/Constants/**/*, **/Enums/**/*, **/Context/**/*, **/Entities/**/*, **/EntityConfiugrations/**/*, **/Migrations/**/*"
         run: |
            dotnet-sonarscanner begin /k:"nantonov_IVCRM_ProductService" /o:"nantonov" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.opencover.reportsPaths="**/TestResults/**/coverage.opencover.xml" -d:sonar.cs.vstest.reportsPaths="**/TestResults/*.trx"
            dotnet build --configuration Debug
