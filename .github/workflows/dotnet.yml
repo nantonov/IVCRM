@@ -43,7 +43,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       with:
-          projectBaseDir: Services/Client/react-pmcs
+          projectBaseDir: Services/ProductService
           sonarProjectKey: nantonov_IVCRM_ProductService
           sonarProjectName:  IVCRM Product Service
           sonarOrganization: nantonov
