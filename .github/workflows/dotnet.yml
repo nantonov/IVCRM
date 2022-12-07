@@ -33,12 +33,19 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
 
-    - name: Product Service Scan
-      uses: SonarSource/sonarcloud-github-action@master
-      env:
+  ProductServiceScan:
+     name: ProductServiceScan
+     runs-on: ubuntu-latest
+     steps:
+     - uses: actions/checkout@v2
+       with:
+          fetch-depth: 0
+     - name: SonarScanner for .NET 6 with pull request decoration support
+       uses: SonarSource/sonarcloud-github-action@master
+       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      with:
+       with:
           projectBaseDir: Services/ProductService
           sonarProjectKey: nantonov_IVCRM_ProductService
           sonarProjectName:  IVCRM Product Service
@@ -82,4 +89,3 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           projectBaseDir: Client/ivcrm-react-client
-
