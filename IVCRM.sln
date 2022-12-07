@@ -6,7 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D6CD0938-C0AD-425C-9327-9A75E9E70F4E}"
 	ProjectSection(SolutionItems) = preProject
 		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
-		React.yml = React.yml
+		.github\workflows\react.yml = .github\workflows\react.yml
 		sonar-project.properties = sonar-project.properties
 	EndProjectSection
 EndProject
