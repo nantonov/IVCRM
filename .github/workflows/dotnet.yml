@@ -61,6 +61,20 @@ jobs:
           dotnetTestArguments: IVCRM.sln --logger trx --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
           sonarBeginArguments: /d:sonar.cs.opencover.reportsPaths="**/TestResults/**/coverage.opencover.xml" -d:sonar.cs.vstest.reportsPaths="**/TestResults/*.trx"
 
+    - name: Authorization Service Scan
+      uses: SonarSource/sonarcloud-github-action@master
+      env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+          projectBaseDir: Services/AuthorizationService
+          sonarProjectKey: nantonov_IVCRM_AuthorizationService
+          sonarProjectName:  PMCS Authorization Service
+          sonarOrganization: nantonov
+          dotnetBuildArguments: IVCRM.sln
+          dotnetTestArguments: IVCRM.sln --logger trx --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
+          sonarBeginArguments: /d:sonar.cs.opencover.reportsPaths="**/TestResults/**/coverage.opencover.xml" -d:sonar.cs.vstest.reportsPaths="**/TestResults/*.trx"
+
     - name: React Scan
       uses: SonarSource/sonarcloud-github-action@master
       env:
