@@ -32,7 +32,7 @@ jobs:
 
     - name: Test
       #run: dotnet test --no-build --verbosity normal -p:CollectCoverage=true -p:CoverletOutputFormat=opencover
-      run: dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage" --DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
+      run: dotnet test --no-build --verbosity normal --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
       #run: | 
       #  dotnet-coverage collect
       #  dotnet test --no-build --verbosity normal -f xml -o coverage.xml
