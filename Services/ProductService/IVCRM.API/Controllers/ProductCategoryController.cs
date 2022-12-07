@@ -8,7 +8,6 @@ using IVCRM.BLL.Models;
 using IVCRM.BLL.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing.Tree;
-using Microsoft.AspNetCore.Authorization;
 
 namespace IVCRM.Web.Controllers
 {
