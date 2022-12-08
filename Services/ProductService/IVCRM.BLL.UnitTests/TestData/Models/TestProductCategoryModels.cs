@@ -8,6 +8,7 @@ namespace IVCRM.BLL.UnitTests.TestData.Models
         {
             Id = 1,
             Name = "Name",
+            ChildCategories = new List<ProductCategory>(),
         };
 
         internal static List<ProductCategory> ProductCategoryModelCollection => new()

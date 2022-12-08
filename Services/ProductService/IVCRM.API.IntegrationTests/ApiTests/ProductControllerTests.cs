@@ -5,21 +5,21 @@ using System.Net;
 
 namespace IVCRM.API.IntegrationTests.ApiTests
 {
-    public class ProductCategoryControllerTests : IntegrationTestsBase
+    public class ProductControllerTests : IntegrationTestsBase
     {
         [Fact]
         public async void Create_ValidViewModel_ReturnsViewModel()
         {
             //Arrange
-            var viewModel = TestProductCategoryViewModels.ValidProductCategoryViewModel;
-            var entity = TestProductCategoryEntities.ProductCategoryEntity;
+            var viewModel = TestProductViewModels.ValidProductViewModel;
+            var entity = TestProductEntities.ProductEntity;
 
-            using var request = new HttpRequestMessage(HttpMethod.Post, $"/api/productCategory");
-            request.AddContent(TestProductCategoryViewModels.ValidChangeProductCategoryViewModel);
+            using var request = new HttpRequestMessage(HttpMethod.Post, $"/api/product");
+            request.AddContent(TestProductViewModels.ValidChangeProductViewModel);
 
             //Act
             var actualResult = await Client.SendAsync(request);
-            var responseResult = actualResult.GetResponseResult<ProductCategoryViewModel>();
+            var responseResult = actualResult.GetResponseResult<ProductViewModel>();
 
             entity.Id = responseResult.Id;
             viewModel.Id = responseResult.Id;
@@ -27,63 +27,62 @@ namespace IVCRM.API.IntegrationTests.ApiTests
             //Assert
             actualResult.StatusCode.ShouldBe(HttpStatusCode.OK);
             responseResult.ShouldBeEquivalentTo(viewModel);
-            Context.ProductCategories.Last().ShouldBeEquivalentTo(entity);
+            Context.Products.Last().ShouldBeEquivalentTo(entity);
         }
 
         [Fact]
         public async void Create_InvalidViewModel_ReturnsBadRequest()
         {
             //Arrange
-            var unchangedCollectionCount = Context.ProductCategories.Count();
+            var unchangedCollectionCount = Context.Products.Count();
 
-            using var request = new HttpRequestMessage(HttpMethod.Post, $"/api/productCategory");
-            request.AddContent(TestProductCategoryViewModels.InvalidChangeProductCategoryViewModel);
+            using var request = new HttpRequestMessage(HttpMethod.Post, $"/api/product");
+            request.AddContent(new ChangeProductViewModel());
 
             //Act
             var actualResult = await Client.SendAsync(request);
-            var responseResult = actualResult.GetResponseResult<CustomerViewModel>();
 
             //Assert
             actualResult.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
-            Context.ProductCategories.Count().ShouldBe(unchangedCollectionCount);
+            Context.Products.Count().ShouldBe(unchangedCollectionCount);
         }
 
         [Fact]
         public async Task GetAll_DataExists_ReturnsViewModelCollection()
         {
             //Arrange
-            var entityCollection = TestProductCategoryEntities.ProductCategoryEntityCollection;
-            var viewModelCollection = TestProductCategoryViewModels.ValidProductCategoryViewModelCollection;
+            var entityCollection = TestProductEntities.ProductEntityCollection;
+            var viewModelCollection = TestProductViewModels.ValidProductViewModelCollection;
             var entitiesCount = entityCollection.Count;
 
             await AddRangeToContext(entityCollection);
 
-            using var request = new HttpRequestMessage(HttpMethod.Get, $"/api/productCategory");
+            using var request = new HttpRequestMessage(HttpMethod.Get, $"/api/product");
 
             //Act
             var actualResult = await Client.SendAsync(request);
-            var responseResult = actualResult.GetResponseResult<IEnumerable<ProductCategoryViewModel>>();
+            var responseResult = actualResult.GetResponseResult<IEnumerable<ProductViewModel>>();
             viewModelCollection.Select(x => x.Id = responseResult.First(z => z.Name == x.Name).Id).ToList();
 
             //Assert
             actualResult.StatusCode.ShouldBe(HttpStatusCode.OK);
             responseResult.TakeLast(entitiesCount).ToList().ShouldBeEquivalentTo(viewModelCollection);
         }
-        
+
         [Fact]
         public async Task GetById_DataExists_ReturnsViewModel()
         {
             //Arrange
-            var entity = TestProductCategoryEntities.ProductCategoryEntity;
+            var entity = TestProductEntities.ProductEntity;
             var id = await AddToContext(entity);
-            var viewModel = TestProductCategoryViewModels.ValidProductCategoryViewModel;
+            var viewModel = TestProductViewModels.ValidProductViewModel;
             viewModel.Id = id;
 
-            using var request = new HttpRequestMessage(HttpMethod.Get, $"/api/productCategory/{id}");
+            using var request = new HttpRequestMessage(HttpMethod.Get, $"/api/product/{id}");
 
             //Act
             var actualResult = await Client.SendAsync(request);
-            var responseResult = actualResult.GetResponseResult<ProductCategoryViewModel>();
+            var responseResult = actualResult.GetResponseResult<ProductViewModel>();
 
             //Assert
             actualResult.StatusCode.ShouldBe(HttpStatusCode.OK);
@@ -94,19 +93,19 @@ namespace IVCRM.API.IntegrationTests.ApiTests
         public async void Update_ValidViewModel_ReturnsViewModel()
         {
             //Arrange
-            var entity = TestProductCategoryEntities.ProductCategoryEntity;
+            var entity = TestProductEntities.ProductEntity;
             var id = await AddToContext(entity);
-            var expectedEntity = TestProductCategoryEntities.UpdatedProductCategoryEntity;
-            var expectedViewModel = TestProductCategoryViewModels.UpdatedProductCategoryViewModel;
+            var expectedEntity = TestProductEntities.UpdatedProductEntity;
+            var expectedViewModel = TestProductViewModels.UpdatedProductViewModel;
             expectedViewModel.Id = id;
             expectedEntity.Id = id;
 
-            using var request = new HttpRequestMessage(HttpMethod.Put, $"/api/productCategory/{id}");
-            request.AddContent(TestProductCategoryViewModels.UpdatedChangeProductCategoryViewModel);
+            using var request = new HttpRequestMessage(HttpMethod.Put, $"/api/product/{id}");
+            request.AddContent(TestProductViewModels.UpdatedChangeProductViewModel);
 
             //Act
             var actualResult = await Client.SendAsync(request);
-            var responseResult = actualResult.GetResponseResult<ProductCategoryViewModel>();
+            var responseResult = actualResult.GetResponseResult<ProductViewModel>();
             Context.Entry(entity).Reload();
 
             //Assert
@@ -120,12 +119,11 @@ namespace IVCRM.API.IntegrationTests.ApiTests
         {
             //Arrange
             var id = 1;
-            using var request = new HttpRequestMessage(HttpMethod.Put, $"/api/productCategory/{id}");
-            request.AddContent(TestProductCategoryViewModels.InvalidChangeProductCategoryViewModel);
+            using var request = new HttpRequestMessage(HttpMethod.Put, $"/api/product/{id}");
+            request.AddContent(new ChangeProductViewModel());
 
             //Act
             var actualResult = await Client.SendAsync(request);
-            var responseResult = actualResult.GetResponseResult<ProductCategoryViewModel>();
 
             //Assert
             actualResult.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
@@ -135,17 +133,17 @@ namespace IVCRM.API.IntegrationTests.ApiTests
         public async void Delete_ValidId_DeletesEntity()
         {
             //Arrange
-            var entity = TestProductCategoryEntities.ProductCategoryEntity;
+            var entity = TestProductEntities.ProductEntity;
             var id = await AddToContext(entity);
 
-            using var request = new HttpRequestMessage(HttpMethod.Delete, $"/api/productCategory/{id}");
+            using var request = new HttpRequestMessage(HttpMethod.Delete, $"/api/product/{id}");
 
             //Act
             var actualResult = await Client.SendAsync(request);
 
             //Assert
             actualResult.StatusCode.ShouldBe(HttpStatusCode.OK);
-            Context.ProductCategories.ShouldNotContain(entity);
+            Context.Products.ShouldNotContain(entity);
         }
     }
 }

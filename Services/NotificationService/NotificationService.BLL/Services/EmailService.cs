@@ -43,7 +43,7 @@ namespace NotificationService.BLL.Services
             var emailMessage = new MailMessage();
 
             emailMessage.From = new MailAddress(_config.SenderEmail, _config.SenderName);
-            emailMessage.To.Add(new MailAddress("minuciusfelicis@gmail.com"));
+            emailMessage.To.Add(new MailAddress(request.Email));
             emailMessage.Subject = request.Subject;
             emailMessage.IsBodyHtml = true;
             emailMessage.Body = await GetFilledTemplate(request.Message);

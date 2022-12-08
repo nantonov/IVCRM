@@ -6,11 +6,11 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
 {
     public class CustomerRepositoryTests : IntegrationTestsBase
     {
-        private readonly ICustomerRepository _customerRepository;
+        private readonly ICustomerRepository _repository;
 
         public CustomerRepositoryTests()
         {
-            _customerRepository = new CustomerRepository(Context);
+            _repository = new CustomerRepository(Context);
         }
 
         [Fact]
@@ -20,11 +20,11 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
             var entity = TestCustomerEntities.CustomerEntity;
 
             //Act
-            var actualResult = await _customerRepository.Create(entity);
+            var actualResult = await _repository.Create(entity);
 
             //Assert
-            actualResult.Should().BeEquivalentTo(entity);
-            Context.Customers.Last().Should().BeEquivalentTo(entity);
+            actualResult.ShouldBeEquivalentTo(entity);
+            Context.Customers.Last().ShouldBeEquivalentTo(entity);
         }
 
         [Fact]
@@ -34,11 +34,11 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
             var entities = TestCustomerEntities.CustomerEntityCollection;
             await AddRangeToContext(entities);
             //Act
-            var actualResult = await _customerRepository.GetAll();
+            var actualResult = await _repository.GetAll();
 
             //Assert
-            actualResult.Should().NotBeEmpty();
-            actualResult.Should().Contain(entities);
+            actualResult.ShouldNotBeEmpty();
+            entities.ShouldBeSubsetOf(actualResult);
         }
 
         [Fact]
@@ -49,10 +49,10 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
             await AddToContext(entity);
 
             //Act
-            var actualResult = await _customerRepository.GetById(entity.Id);
+            var actualResult = await _repository.GetById(entity.Id);
 
             //Assert
-            actualResult.Should().BeEquivalentTo(entity);
+            actualResult.ShouldBeEquivalentTo(entity);
         }
 
         [Fact]
@@ -66,28 +66,28 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
             entity.FirstName = updatedEntity.FirstName;
 
             //Act
-            var actualResult = await _customerRepository.Update(entity);
+            var actualResult = await _repository.Update(entity);
 
             //Assert
-            actualResult.Should().BeEquivalentTo(entity);
+            actualResult.ShouldBeEquivalentTo(entity);
         }
 
         [Fact]
-        public async Task Delete_EntityExists_DeletesEntity()
+        public async Task Delete_ValidId_DeletesEntity()
         {
             //Arrange
             var entity = TestCustomerEntities.CustomerEntity;
             await AddToContext(TestCustomerEntities.CustomerEntity);
 
             //Act
-            await _customerRepository.Delete(entity.Id);
+            await _repository.Delete(entity.Id);
 
             //Assert
-            Context.Customers.Should().NotContain(entity);
+            Context.Customers.ShouldNotContain(entity);
         }
 
         [Fact]
-        public async Task Delete_EntityNotExists_Returns()
+        public async Task Delete_InvalidId_Returns()
         {
             //Arrange
             await AddToContext(TestCustomerEntities.CustomerEntity);
@@ -95,10 +95,10 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
             var unreachableId = int.MaxValue;
 
             //Act
-            await _customerRepository.Delete(unreachableId);
+            await _repository.Delete(unreachableId);
 
             //Assert
-            Context.Customers.Count().Should().Be(entitiesCount);
+            Context.Customers.Count().ShouldBe(entitiesCount);
         }
     }
 }
