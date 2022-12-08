@@ -12,7 +12,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
     public class OrderServiceTests
     {
         [Fact]
-        public async void Create_Model_ReturnsModel()
+        public async Task Create_Model_ReturnsModel()
         {
             //Arrange
             var model = TestOrderModels.OrderModel;
@@ -34,7 +34,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
         }
 
         [Fact]
-        public async void GetAll_DataExists_ReturnsModelCollection()
+        public async Task GetAll_DataExists_ReturnsModelCollection()
         {
             //Arrange
             var models = TestOrderModels.OrderModelCollection;
@@ -56,7 +56,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
         }
 
         [Fact]
-        public async void GetById_Id_ReturnsModel()
+        public async Task GetById_Id_ReturnsModel()
         {
             //Arrange
             var model = TestOrderModels.OrderModel;
@@ -79,7 +79,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
         }
 
         [Fact]
-        public async void Update_Model_ReturnsModel()
+        public async Task Update_Model_ReturnsModel()
         {
             //Arrange
             var model = TestOrderModels.OrderModel;
@@ -101,7 +101,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
         }
         
         [Fact]
-        public async void Update_EntityNotExists_ThrowsResourceNotFoundException()
+        public async Task Update_InvalidModel_ThrowsResourceNotFoundException()
         {
             //Arrange
             var model = TestOrderModels.OrderModel;
@@ -123,7 +123,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
         }
 
         [Fact]
-        public async void Delete_Id_ReturnsModel()
+        public async Task Delete_ValidId_DeletesEntity()
         {
             //Arrange
             var model = TestOrderModels.OrderModel;
@@ -143,11 +143,10 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
         }
 
         [Fact]
-        public async void Delete_EntityNotExists_ThrowsResourceNotFoundException()
+        public async Task Delete_InvalidId_ThrowsResourceNotFoundException()
         {
             //Arrange
             var model = TestOrderModels.OrderModel;
-            var entity = TestOrderEntities.OrderEntity;
             var id = model.Id;
 
             var mocker = new AutoMocker(MockBehavior.Default, DefaultValue.Mock);
