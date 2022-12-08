@@ -8,20 +8,20 @@ using IVCRM.DAL.Entities;
 
 namespace IVCRM.BLL.UnitTests.MappingTests
 {
-    public class CustomerMappingTests
+    public class ProductCategoryMappingTests
     {
         [Fact]
         public void Map_Entity_ReturnsModel()
         {
             //Arrange
-            var model = TestCustomerModels.CustomerModel;
-            var entity = TestCustomerEntities.CustomerEntity;
+            var model = TestProductCategoryModels.ProductCategoryModel;
+            var entity = TestProductCategoryEntities.ProductCategoryEntity;
 
             var config = new MapperConfiguration(cfg => cfg.AddProfile<BllMappingProfile>());
             var mapper = config.CreateMapper();
 
             //Act
-            var result = mapper.Map<Customer>(entity);
+            var result = mapper.Map<ProductCategory>(entity);
 
             //Assert
             result.ShouldBeEquivalentTo(model);
@@ -31,14 +31,14 @@ namespace IVCRM.BLL.UnitTests.MappingTests
         public void Map_Model_ReturnsEntity()
         {
             //Arrange
-            var model = TestCustomerModels.CustomerModel;
-            var entity = TestCustomerEntities.CustomerEntity;
+            var model = TestProductCategoryModels.ProductCategoryModel;
+            var entity = TestProductCategoryEntities.ProductCategoryEntity;
 
             var config = new MapperConfiguration(cfg => cfg.AddProfile<BllMappingProfile>());
             var mapper = config.CreateMapper();
 
             //Act
-            var result = mapper.Map<CustomerEntity>(model);
+            var result = mapper.Map<ProductCategoryEntity>(model);
 
             //Assert
             result.ShouldBeEquivalentTo(entity);
@@ -48,14 +48,14 @@ namespace IVCRM.BLL.UnitTests.MappingTests
         public void Map_Model_ReturnsViewModel()
         {
             //Arrange 
-            var model = TestCustomerModels.CustomerModel;
-            var viewModel = TestCustomerViewModels.ValidCustomerViewModel;
+            var model = TestProductCategoryModels.ProductCategoryModel;
+            var viewModel = TestProductCategoryViewModels.ValidProductCategoryViewModel;
 
             var config = new MapperConfiguration(cfg => cfg.AddProfile<ApiMappingProfile>());
             var mapper = config.CreateMapper();
 
             //Act 
-            var result = mapper.Map<CustomerViewModel>(model);
+            var result = mapper.Map<ProductCategoryViewModel>(model);
 
             //Assert 
             result.ShouldBeEquivalentTo(viewModel);
@@ -65,15 +65,16 @@ namespace IVCRM.BLL.UnitTests.MappingTests
         public void Map_ChangeViewModel_ReturnsModel()
         {
             //Arrange 
-            var viewModel = TestCustomerViewModels.ValidChangeCustomerViewModel;
-            var model = TestCustomerModels.CustomerModel;
+            var viewModel = TestProductCategoryViewModels.ValidChangeProductCategoryViewModel;
+            var model = TestProductCategoryModels.ProductCategoryModel;
 
             var config = new MapperConfiguration(cfg => cfg.AddProfile<ApiMappingProfile>());
             var mapper = config.CreateMapper();
 
             //Act 
-            var result = mapper.Map<Customer>(viewModel);
+            var result = mapper.Map<ProductCategory>(viewModel);
             result.Id = model.Id;
+            result.ChildCategories = new List<ProductCategory>();
 
             //Assert 
             result.ShouldBeEquivalentTo(model);

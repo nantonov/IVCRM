@@ -13,10 +13,6 @@ namespace ShippingService.DAL.IntegrationTests.RepositoryTests
         public ShipmentRepositoryTests()
         {
             _repository = new ShipmentRepository(Context);
-
-            AssertionOptions.AssertEquivalencyUsing(options => options
-                .Using<DateTime>(ctx => ctx.Subject.Should().BeWithin(TimeSpan.FromMilliseconds(1000))).WhenTypeIs<DateTime>()
-            );
         }
 
         [Fact]
@@ -29,8 +25,8 @@ namespace ShippingService.DAL.IntegrationTests.RepositoryTests
             var actualResult = await _repository.Create(entity);
 
             //Assert
-            actualResult.Should().BeEquivalentTo(entity);
-            ShipmentCollection.Find(x => x.Id == actualResult.Id).Single().Should().BeEquivalentTo(entity);
+            actualResult.ShouldBeEquivalentTo(entity);
+            ShipmentCollection.Find(x => x.Id == actualResult.Id).Single().ShouldNotBeNull();
         }
 
         [Fact]
@@ -44,7 +40,7 @@ namespace ShippingService.DAL.IntegrationTests.RepositoryTests
             var actualResult = await _repository.GetByOrderId(entity.OrderId);
 
             //Assert
-            actualResult.Should().BeEquivalentTo(entity);
+            actualResult.ShouldBeEquivalentTo(entity);
         }
     }
 }

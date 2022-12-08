@@ -1,56 +1,51 @@
-﻿using IVCRM.DAL.Entities;
-using IVCRM.DAL.IntegrationTests.TestData.Entities;
+﻿using IVCRM.DAL.IntegrationTests.TestData.Entities;
 using IVCRM.DAL.Repositories;
 using IVCRM.DAL.Repositories.Interfaces;
-using Microsoft.EntityFrameworkCore;
 
 namespace IVCRM.DAL.IntegrationTests.RepositoryTests
 {
-    public class ProductCategoryRepositoryTests : IntegrationTestsBase
+    public class ProductRepositoryTests : IntegrationTestsBase
     {
-        private readonly IProductCategoryRepository _repository;
+        private readonly IProductRepository _repository;
 
-        public ProductCategoryRepositoryTests()
+        public ProductRepositoryTests()
         {
-            _repository = new ProductCategoryRepository(Context);
+            _repository = new ProductRepository(Context);
         }
 
         [Fact]
         public async Task Create_Entity_ReturnsEntity()
         {
             //Arrange
-            var entity = TestProductCategoryEntities.ProductCategoryEntity;
+            var entity = TestProductEntities.ProductEntity;
 
             //Act
             var actualResult = await _repository.Create(entity);
 
             //Assert
             actualResult.ShouldBeEquivalentTo(entity);
-            Context.ProductCategories.Last().ShouldBeEquivalentTo(entity);
+            Context.Products.Last().ShouldBeEquivalentTo(entity);
         }
 
         [Fact]
-        public async Task GetAll_DataExists_ReturnsOrderedEntityCollection()
+        public async Task GetAll_DataExists_ReturnsEntityCollection()
         {
             //Arrange
-            var parentId = await AddToContext(new ProductCategoryEntity() { Name = "Name1" });
-            await AddToContext(new ProductCategoryEntity() { Name = "Name2", ParentCategoryId = parentId });
-
-            var expectedResult = Context.ProductCategories.Include(x => x.ChildCategories).Last(x => x.ParentCategoryId == null);
-
+            var entities = TestProductEntities.ProductEntityCollection;
+            await AddRangeToContext(entities);
             //Act
-            var actualResult = _repository.GetCategoriesTree();
+            var actualResult = await _repository.GetAll();
 
             //Assert
             actualResult.ShouldNotBeEmpty();
-            actualResult.ShouldContain(expectedResult);
+            entities.ShouldBeSubsetOf(actualResult);
         }
 
         [Fact]
         public async Task GetById_EntityExists_ReturnsEntity()
         {
             //Arrange
-            var entity = TestProductCategoryEntities.ProductCategoryEntity;
+            var entity = TestProductEntities.ProductEntity;
             await AddToContext(entity);
 
             //Act
@@ -64,8 +59,8 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
         public async Task Update_EntityExists_UpdateAndReturnsEntity()
         {
             //Arrange
-            var entity = TestProductCategoryEntities.ProductCategoryEntity;
-            var updatedEntity = TestProductCategoryEntities.UpdatedProductCategoryEntity;
+            var entity = TestProductEntities.ProductEntity;
+            var updatedEntity = TestProductEntities.UpdatedProductEntity;
             await AddToContext(entity);
             
             entity.Name = updatedEntity.Name;
@@ -81,29 +76,29 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
         public async Task Delete_ValidId_DeletesEntity()
         {
             //Arrange
-            var entity = TestProductCategoryEntities.ProductCategoryEntity;
-            await AddToContext(TestProductCategoryEntities.ProductCategoryEntity);
+            var entity = TestProductEntities.ProductEntity;
+            await AddToContext(TestProductEntities.ProductEntity);
 
             //Act
             await _repository.Delete(entity.Id);
 
             //Assert
-            Context.ProductCategories.ShouldNotContain(entity);
+            Context.Products.ShouldNotContain(entity);
         }
 
         [Fact]
         public async Task Delete_InvalidId_Returns()
         {
             //Arrange
-            await AddToContext(TestProductCategoryEntities.ProductCategoryEntity);
-            var entitiesCount = Context.ProductCategories.Count();
+            await AddToContext(TestProductEntities.ProductEntity);
+            var entitiesCount = Context.Products.Count();
             var unreachableId = int.MaxValue;
 
             //Act
             await _repository.Delete(unreachableId);
 
             //Assert
-            Context.ProductCategories.Count().ShouldBe(entitiesCount);
+            Context.Products.Count().ShouldBe(entitiesCount);
         }
     }
 }
