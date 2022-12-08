@@ -39,7 +39,7 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
             var expectedResult = Context.ProductCategories.Include(x => x.ChildCategories).Last(x => x.ParentCategoryId == null);
 
             //Act
-            var actualResult = _repository.GetAll();
+            var actualResult = _repository.GetCategoriesTree();
 
             //Assert
             actualResult.ShouldNotBeEmpty();
@@ -78,7 +78,7 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
         }
 
         [Fact]
-        public async Task Delete_EntityExists_DeletesEntity()
+        public async Task Delete_ValidId_DeletesEntity()
         {
             //Arrange
             var entity = TestProductCategoryEntities.ProductCategoryEntity;
@@ -92,7 +92,7 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
         }
 
         [Fact]
-        public async Task Delete_EntityNotExists_Returns()
+        public async Task Delete_InvalidId_Returns()
         {
             //Arrange
             await AddToContext(TestProductCategoryEntities.ProductCategoryEntity);

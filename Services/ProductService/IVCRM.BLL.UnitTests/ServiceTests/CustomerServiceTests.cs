@@ -101,7 +101,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
         }
         
         [Fact]
-        public async void Update_EntityNotExists_ThrowsResourceNotFoundException()
+        public async void Update_InvalidModel_ThrowsResourceNotFoundException()
         {
             //Arrange
             var model = TestCustomerModels.CustomerModel;
@@ -123,7 +123,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
         }
 
         [Fact]
-        public async void Delete_Id_ReturnsModel()
+        public async void Delete_ValidId_DeletesEntity()
         {
             //Arrange
             var model = TestCustomerModels.CustomerModel;
@@ -143,7 +143,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
         }
 
         [Fact]
-        public async void Delete_EntityNotExists_ThrowsResourceNotFoundException()
+        public async void Delete_InvalidId_ThrowsResourceNotFoundException()
         {
             //Arrange
             var model = TestCustomerModels.CustomerModel;

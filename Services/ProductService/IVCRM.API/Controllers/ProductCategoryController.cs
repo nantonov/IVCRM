@@ -7,6 +7,7 @@ using IVCRM.API.ViewModels;
 using IVCRM.BLL.Models;
 using IVCRM.BLL.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing.Tree;
 
 namespace IVCRM.Web.Controllers
 {
@@ -37,9 +38,17 @@ namespace IVCRM.Web.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<ProductCategoryViewModel> GetAll()
+        public async Task<IEnumerable<ProductCategoryViewModel>> GetAll()
         {
-            var categories = _service.GetAll();
+            var categories = await _service.GetAll();
+
+            return _mapper.Map<IEnumerable<ProductCategoryViewModel>>(categories);
+        }
+
+        [HttpGet("tree")]
+        public IEnumerable<ProductCategoryViewModel> GetCategoriesTree()
+        {
+            var categories = _service.GetCategoriesTree();
 
             return _mapper.Map<IEnumerable<ProductCategoryViewModel>>(categories);
         }

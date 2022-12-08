@@ -23,7 +23,12 @@ namespace IVCRM.DAL.Repositories
             return entity;
         }
 
-        public IEnumerable<ProductCategoryEntity> GetAll()
+        public async Task<IEnumerable<ProductCategoryEntity>> GetAll()
+        {
+            return await _context.ProductCategories.ToListAsync();
+        }
+
+        public IEnumerable<ProductCategoryEntity> GetCategoriesTree()
         {
             return _context.ProductCategories.AsEnumerable().Where(x => x.ParentCategoryId == null).ToList();
         }

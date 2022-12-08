@@ -1,3 +1,4 @@
+using System.Collections;
 using IVCRM.BLL.Exceptions;
 using IVCRM.BLL.Models;
 using IVCRM.BLL.Services;
@@ -34,21 +35,21 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
         }
 
         [Fact]
-        public void GetAll_DataExists_ReturnsModelCollection()
+        public async void GetAll_DataExists_ReturnsModelCollection()
         {
             //Arrange
             var models = TestProductCategoryModels.ProductCategoryModelCollection;
             var entities = TestProductCategoryEntities.ProductCategoryEntityCollection;
 
             var mocker = new AutoMocker(MockBehavior.Default, DefaultValue.Mock);
-            mocker.Setup<IProductCategoryRepository, IEnumerable<ProductCategoryEntity>>(x => x.GetAll())
-                .Returns(entities);
+            mocker.Setup<IProductCategoryRepository, Task<IEnumerable<ProductCategoryEntity>>>(x => x.GetAll())
+                .ReturnsAsync(entities);
             mocker.Setup<IMapper, IEnumerable<ProductCategory>>(x => x.Map<IEnumerable<ProductCategory>>(entities)).Returns(models);
 
             var service = mocker.CreateInstance<ProductCategoryService>();
 
             //Act
-            var response = service.GetAll();
+            var response = await service.GetAll();
 
             //Assert
             mocker.GetMock<IProductCategoryRepository>().Verify(x => x.GetAll(), Times.Once);
@@ -56,7 +57,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
         }
 
         [Fact]
-        public async void GetById_Id_ReturnsModel()
+        public async void GetById_ValidId_ReturnsModel()
         {
             //Arrange
             var model = TestProductCategoryModels.ProductCategoryModel;
@@ -79,7 +80,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
         }
 
         [Fact]
-        public async void Update_Model_ReturnsModel()
+        public async void Update_ValidModel_ReturnsModel()
         {
             //Arrange
             var model = TestProductCategoryModels.ProductCategoryModel;
@@ -101,7 +102,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
         }
         
         [Fact]
-        public async void Update_EntityNotExists_ThrowsResourceNotFoundException()
+        public async void Update_InvalidModel_ThrowsResourceNotFoundException()
         {
             //Arrange
             var model = TestProductCategoryModels.ProductCategoryModel;
@@ -123,7 +124,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
         }
 
         [Fact]
-        public async void Delete_Id_ReturnsModel()
+        public async void Delete_ValidId_DeletesEntity()
         {
             //Arrange
             var model = TestProductCategoryModels.ProductCategoryModel;
@@ -143,7 +144,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
         }
 
         [Fact]
-        public async void Delete_EntityNotExists_ThrowsResourceNotFoundException()
+        public async void Delete_InvelidId_ThrowsResourceNotFoundException()
         {
             //Arrange
             var model = TestProductCategoryModels.ProductCategoryModel;

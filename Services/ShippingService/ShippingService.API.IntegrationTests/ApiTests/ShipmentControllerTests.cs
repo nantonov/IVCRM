@@ -38,7 +38,7 @@ namespace ShippingService.API.IntegrationTests.ApiTests
         }
         
         [Fact]
-        public async void Create_ViewModelNotValid_ReturnsNotFound()
+        public async void Create_InvalidViewModel_ReturnsBadRequest()
         {
             //Arrange
             var unchangedCollectionCount = await ShipmentCollection.Find(_ => true).CountDocumentsAsync();

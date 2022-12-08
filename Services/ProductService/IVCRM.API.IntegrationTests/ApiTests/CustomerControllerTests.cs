@@ -8,7 +8,7 @@ namespace IVCRM.API.IntegrationTests.ApiTests
     public class CustomerControllerTests : IntegrationTestsBase
     {
         [Fact]
-        public async void Create_ViewModel_ReturnsViewModel()
+        public async void Create_ValidViewModel_ReturnsViewModel()
         {
             //Arrange
             var viewModel = TestCustomerViewModels.ValidCustomerViewModel;
@@ -31,7 +31,7 @@ namespace IVCRM.API.IntegrationTests.ApiTests
         }
 
         [Fact]
-        public async void Create_ViewModelNotValid_ReturnsNotFound()
+        public async void Create_InvalidViewModel_ReturnsBadRequest()
         {
             //Arrange
             var unchangedCollectionCount = Context.Customers.Count();
@@ -70,7 +70,7 @@ namespace IVCRM.API.IntegrationTests.ApiTests
         }
 
         [Fact]
-        public async Task GetById_WhenDataExists_ShouldViewModel()
+        public async Task GetById_DataExists_ReturnsViewModel()
         {
             //Arrange
             var entity = TestCustomerEntities.CustomerEntity;
@@ -90,7 +90,7 @@ namespace IVCRM.API.IntegrationTests.ApiTests
         }
 
         [Fact]
-        public async void Update_ViewModel_ReturnsViewModel()
+        public async void Update_ValidViewModel_ReturnsViewModel()
         {
             //Arrange
             var entity = TestCustomerEntities.CustomerEntity;
@@ -115,7 +115,7 @@ namespace IVCRM.API.IntegrationTests.ApiTests
         }
 
         [Fact]
-        public async void Update_ViewModelNotValid_ReturnsNotFound()
+        public async void Update_InvalidViewModel_ReturnsBadRequest()
         {
             //Arrange
             var id = 1;
@@ -130,7 +130,7 @@ namespace IVCRM.API.IntegrationTests.ApiTests
         }
 
         [Fact]
-        public async void Delete_Id_DeletesEntityWithSameId()
+        public async void Delete_ValidId_DeletesEntity()
         {
             //Arrange
             var entity = TestCustomerEntities.CustomerEntity;
