@@ -8,6 +8,7 @@ namespace IVCRM.API.IntegrationTests.TestData.Entities
         {
             FirstName = "FirstName",
             LastName = "LastName",
+            Email = "Email",
             PhoneNumber = "+1234567",
         };
 
@@ -15,6 +16,7 @@ namespace IVCRM.API.IntegrationTests.TestData.Entities
         {
             FirstName = "UpdatedFirstName",
             LastName = "UpdatedLastName",
+            Email = "Email",
             PhoneNumber = "+1234567",
         };
 
@@ -24,18 +26,21 @@ namespace IVCRM.API.IntegrationTests.TestData.Entities
             {
                 FirstName = "FirstName1",
                 LastName = "LastName1",
+                Email = "Email",
                 PhoneNumber = "+1234567",
             },
             new ()
             {
                 FirstName = "FirstName2",
                 LastName = "LastName2",
+                Email = "Email",
                 PhoneNumber = "+2234567",
             },
             new ()
             {
                 FirstName = "FirstName3",
                 LastName = "LastName3",
+                Email = "Email",
                 PhoneNumber = "+3234567",
             },
         };
