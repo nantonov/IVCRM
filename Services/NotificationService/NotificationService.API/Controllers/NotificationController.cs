@@ -26,7 +26,7 @@ namespace NotificationService.API.Controllers
         }
 
         [HttpPost("email")]
-        public async Task<IActionResult> NotifyByEmail([FromBody] MailModel request)
+        public async Task<IActionResult> NotifyByEmail([FromBody] CreateOrderMail request)
         {
             await _emailService.SendEmailAsync(request);
 

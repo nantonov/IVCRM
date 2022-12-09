@@ -9,7 +9,7 @@ using IVCRM.BLL.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing.Tree;
 
-namespace IVCRM.Web.Controllers
+namespace IVCRM.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
