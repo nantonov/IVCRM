@@ -7,7 +7,6 @@ using IVCRM.BLL.Services.Interfaces;
 using MassTransit;
 using MassTransit.Transports;
 using Messages;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IVCRM.API.Controllers
