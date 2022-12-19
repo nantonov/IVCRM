@@ -1,12 +1,9 @@
 using AutoMapper;
 using FluentValidation;
-using FluentValidation.AspNetCore;
-using IVCRM.API.Filters;
 using IVCRM.API.Validators;
 using IVCRM.API.ViewModels;
 using IVCRM.BLL.Models;
 using IVCRM.BLL.Services.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IVCRM.Web.Controllers

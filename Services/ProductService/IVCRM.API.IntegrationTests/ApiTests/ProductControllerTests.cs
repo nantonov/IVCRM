@@ -8,7 +8,7 @@ namespace IVCRM.API.IntegrationTests.ApiTests
     public class ProductControllerTests : IntegrationTestsBase
     {
         [Fact]
-        public async void Create_ValidViewModel_ReturnsViewModel()
+        public async Task Create_ValidViewModel_ReturnsViewModel()
         {
             //Arrange
             var viewModel = TestProductViewModels.ValidProductViewModel;
@@ -31,7 +31,7 @@ namespace IVCRM.API.IntegrationTests.ApiTests
         }
 
         [Fact]
-        public async void Create_InvalidViewModel_ReturnsBadRequest()
+        public async Task Create_InvalidViewModel_ReturnsBadRequest()
         {
             //Arrange
             var unchangedCollectionCount = Context.Products.Count();
@@ -90,7 +90,7 @@ namespace IVCRM.API.IntegrationTests.ApiTests
         }
 
         [Fact]
-        public async void Update_ValidViewModel_ReturnsViewModel()
+        public async Task Update_ValidViewModel_ReturnsViewModel()
         {
             //Arrange
             var entity = TestProductEntities.ProductEntity;
@@ -115,7 +115,7 @@ namespace IVCRM.API.IntegrationTests.ApiTests
         }
 
         [Fact]
-        public async void Update_InvalidViewModel_ReturnsBadRequest()
+        public async Task Update_InvalidViewModel_ReturnsBadRequest()
         {
             //Arrange
             var id = 1;
@@ -130,7 +130,7 @@ namespace IVCRM.API.IntegrationTests.ApiTests
         }
 
         [Fact]
-        public async void Delete_ValidId_DeletesEntity()
+        public async Task Delete_ValidId_DeletesEntity()
         {
             //Arrange
             var entity = TestProductEntities.ProductEntity;

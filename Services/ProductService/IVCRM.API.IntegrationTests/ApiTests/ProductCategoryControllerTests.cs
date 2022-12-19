@@ -8,7 +8,7 @@ namespace IVCRM.API.IntegrationTests.ApiTests
     public class ProductCategoryControllerTests : IntegrationTestsBase
     {
         [Fact]
-        public async void Create_ValidViewModel_ReturnsViewModel()
+        public async Task Create_ValidViewModel_ReturnsViewModel()
         {
             //Arrange
             var viewModel = TestProductCategoryViewModels.ValidProductCategoryViewModel;
@@ -31,7 +31,7 @@ namespace IVCRM.API.IntegrationTests.ApiTests
         }
 
         [Fact]
-        public async void Create_InvalidViewModel_ReturnsBadRequest()
+        public async Task Create_InvalidViewModel_ReturnsBadRequest()
         {
             //Arrange
             var unchangedCollectionCount = Context.ProductCategories.Count();
@@ -41,7 +41,6 @@ namespace IVCRM.API.IntegrationTests.ApiTests
 
             //Act
             var actualResult = await Client.SendAsync(request);
-            var responseResult = actualResult.GetResponseResult<CustomerViewModel>();
 
             //Assert
             actualResult.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
@@ -91,7 +90,7 @@ namespace IVCRM.API.IntegrationTests.ApiTests
         }
 
         [Fact]
-        public async void Update_ValidViewModel_ReturnsViewModel()
+        public async Task Update_ValidViewModel_ReturnsViewModel()
         {
             //Arrange
             var entity = TestProductCategoryEntities.ProductCategoryEntity;
@@ -116,7 +115,7 @@ namespace IVCRM.API.IntegrationTests.ApiTests
         }
 
         [Fact]
-        public async void Update_InvalidViewModel_ReturnsBadRequest()
+        public async Task Update_InvalidViewModel_ReturnsBadRequest()
         {
             //Arrange
             var id = 1;
@@ -125,14 +124,13 @@ namespace IVCRM.API.IntegrationTests.ApiTests
 
             //Act
             var actualResult = await Client.SendAsync(request);
-            var responseResult = actualResult.GetResponseResult<ProductCategoryViewModel>();
 
             //Assert
             actualResult.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
         }
 
         [Fact]
-        public async void Delete_ValidId_DeletesEntity()
+        public async Task Delete_ValidId_DeletesEntity()
         {
             //Arrange
             var entity = TestProductCategoryEntities.ProductCategoryEntity;
