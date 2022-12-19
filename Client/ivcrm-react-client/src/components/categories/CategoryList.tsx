@@ -5,7 +5,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import { IProductCategory } from '../../models/IProductCategory';
 import { Grid, Divider } from '@mui/material';
-import SubCategoriesList from './SubCategoryList';
+import ChildCategoriesList from './ChildCategoryList';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchCategoriesTree } from '../../store/reducers/categories/ActionCreators';
 import { useEffect } from 'react';
@@ -30,8 +30,7 @@ const CategoriesList = () => {
         return (
           <ListItem disablePadding key={treeItemData.id}>
             <ListItemButton onMouseEnter={() => handleMouseEnter(treeItemData)}>
-              {<ListItemText primary={treeItemData.name} />}
-              {/*treeItemData.name*/}
+              <ListItemText primary={treeItemData.name} />
             </ListItemButton>
           </ListItem>
         );
@@ -47,7 +46,7 @@ const CategoriesList = () => {
         </Grid>
         <Divider orientation="vertical" flexItem/>
         <Grid container item sm={8}>
-          <SubCategoriesList categories={subCategories}/>
+          <ChildCategoriesList categories={subCategories}/>
         </Grid>
       </Grid>
 

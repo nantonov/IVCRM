@@ -1,4 +1,3 @@
-using System.Collections;
 using IVCRM.BLL.Exceptions;
 using IVCRM.BLL.Models;
 using IVCRM.BLL.Services;
@@ -13,7 +12,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
     public class ProductCategoryServiceTests
     {
         [Fact]
-        public async void Create_Model_ReturnsModel()
+        public async Task Create_Model_ReturnsModel()
         {
             //Arrange
             var model = TestProductCategoryModels.ProductCategoryModel;
@@ -35,7 +34,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
         }
 
         [Fact]
-        public async void GetAll_DataExists_ReturnsModelCollection()
+        public async Task GetAll_DataExists_ReturnsModelCollection()
         {
             //Arrange
             var models = TestProductCategoryModels.ProductCategoryModelCollection;
@@ -57,7 +56,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
         }
 
         [Fact]
-        public async void GetById_ValidId_ReturnsModel()
+        public async Task GetById_ValidId_ReturnsModel()
         {
             //Arrange
             var model = TestProductCategoryModels.ProductCategoryModel;
@@ -80,7 +79,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
         }
 
         [Fact]
-        public async void Update_ValidModel_ReturnsModel()
+        public async Task Update_ValidModel_ReturnsModel()
         {
             //Arrange
             var model = TestProductCategoryModels.ProductCategoryModel;
@@ -102,7 +101,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
         }
         
         [Fact]
-        public async void Update_InvalidModel_ThrowsResourceNotFoundException()
+        public async Task Update_InvalidModel_ThrowsResourceNotFoundException()
         {
             //Arrange
             var model = TestProductCategoryModels.ProductCategoryModel;
@@ -124,7 +123,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
         }
 
         [Fact]
-        public async void Delete_ValidId_DeletesEntity()
+        public async Task Delete_ValidId_DeletesEntity()
         {
             //Arrange
             var model = TestProductCategoryModels.ProductCategoryModel;
@@ -144,11 +143,10 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
         }
 
         [Fact]
-        public async void Delete_InvelidId_ThrowsResourceNotFoundException()
+        public async Task Delete_InvalidId_ThrowsResourceNotFoundException()
         {
             //Arrange
             var model = TestProductCategoryModels.ProductCategoryModel;
-            var entity = TestProductCategoryEntities.ProductCategoryEntity;
             var id = model.Id;
 
             var mocker = new AutoMocker(MockBehavior.Default, DefaultValue.Mock);

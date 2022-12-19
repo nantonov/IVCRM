@@ -5,64 +5,68 @@ using System.Net;
 
 namespace IVCRM.API.IntegrationTests.ApiTests
 {
-    public class CustomerControllerTests : IntegrationTestsBase
+    public class OrderControllerTests : IntegrationTestsBase
     {
         [Fact]
         public async Task Create_ValidViewModel_ReturnsViewModel()
         {
             //Arrange
-            var viewModel = TestCustomerViewModels.ValidCustomerViewModel;
-            var entity = TestCustomerEntities.CustomerEntity;
+            var viewModel = TestOrderViewModels.ValidOrderViewModel;
+            var requestModel = TestOrderViewModels.ValidChangeOrderViewModel;
+            var customerId = await AddToContext(TestCustomerEntities.CustomerEntity);
 
-            using var request = new HttpRequestMessage(HttpMethod.Post, $"/api/customer");
-            request.AddContent(TestCustomerViewModels.ValidChangeCustomerViewModel);
+            requestModel.CustomerId = customerId;
+            viewModel.CustomerId = customerId;
+            viewModel.OrderDate = requestModel.OrderDate;
+
+            using var request = new HttpRequestMessage(HttpMethod.Post, $"/api/order");
+            request.AddContent(requestModel);
 
             //Act
             var actualResult = await Client.SendAsync(request);
-            var responseResult = actualResult.GetResponseResult<CustomerViewModel>();
+            var responseResult = actualResult.GetResponseResult<OrderViewModel>();
 
-            entity.Id = responseResult.Id;
             viewModel.Id = responseResult.Id;
 
             //Assert
             actualResult.StatusCode.ShouldBe(HttpStatusCode.OK);
             responseResult.ShouldBeEquivalentTo(viewModel);
-            Context.Customers.Last().ShouldBeEquivalentTo(entity);
+            Context.Orders.Last().Id.ShouldBeEquivalentTo(responseResult.Id);
         }
 
         [Fact]
         public async Task Create_InvalidViewModel_ReturnsBadRequest()
         {
             //Arrange
-            var unchangedCollectionCount = Context.Customers.Count();
+            var unchangedCollectionCount = Context.Orders.Count();
 
-            using var request = new HttpRequestMessage(HttpMethod.Post, $"/api/customer");
-            request.AddContent(new ChangeCustomerViewModel());
+            using var request = new HttpRequestMessage(HttpMethod.Post, $"/api/order");
+            request.AddContent(new ChangeOrderViewModel());
 
             //Act
             var actualResult = await Client.SendAsync(request);
 
             //Assert
             actualResult.StatusCode.ShouldBe(HttpStatusCode.BadRequest);
-            Context.Customers.Count().ShouldBe(unchangedCollectionCount);
+            Context.Orders.Count().ShouldBe(unchangedCollectionCount);
         }
 
         [Fact]
         public async Task GetAll_DataExists_ReturnsViewModelCollection()
         {
             //Arrange
-            var entityCollection = TestCustomerEntities.CustomerEntityCollection;
-            var viewModelCollection = TestCustomerViewModels.ValidCustomerViewModelCollection;
+            var entityCollection = TestOrderEntities.OrderEntityCollection;
+            var viewModelCollection = TestOrderViewModels.ValidOrderViewModelCollection;
             var entitiesCount = entityCollection.Count;
 
             await AddRangeToContext(entityCollection);
 
-            using var request = new HttpRequestMessage(HttpMethod.Get, $"/api/customer");
+            using var request = new HttpRequestMessage(HttpMethod.Get, $"/api/order");
 
             //Act
             var actualResult = await Client.SendAsync(request);
-            var responseResult = actualResult.GetResponseResult<IEnumerable<CustomerViewModel>>();
-            viewModelCollection.Select(x => x.Id = responseResult.First(z => z.FullName == x.FullName).Id).ToList();
+            var responseResult = actualResult.GetResponseResult<IEnumerable<OrderViewModel>>();
+            viewModelCollection.Select(x => x.Id = responseResult.First(z => z.Name == x.Name).Id).ToList();
 
             //Assert
             actualResult.StatusCode.ShouldBe(HttpStatusCode.OK);
@@ -73,16 +77,16 @@ namespace IVCRM.API.IntegrationTests.ApiTests
         public async Task GetById_DataExists_ReturnsViewModel()
         {
             //Arrange
-            var entity = TestCustomerEntities.CustomerEntity;
+            var entity = TestOrderEntities.OrderEntity;
             var id = await AddToContext(entity);
-            var viewModel = TestCustomerViewModels.ValidCustomerViewModel;
+            var viewModel = TestOrderViewModels.ValidOrderViewModel;
             viewModel.Id = id;
 
-            using var request = new HttpRequestMessage(HttpMethod.Get, $"/api/customer/{id}");
+            using var request = new HttpRequestMessage(HttpMethod.Get, $"/api/order/{id}");
 
             //Act
             var actualResult = await Client.SendAsync(request);
-            var responseResult = actualResult.GetResponseResult<CustomerViewModel>();
+            var responseResult = actualResult.GetResponseResult<OrderViewModel>();
 
             //Assert
             actualResult.StatusCode.ShouldBe(HttpStatusCode.OK);
@@ -93,25 +97,28 @@ namespace IVCRM.API.IntegrationTests.ApiTests
         public async Task Update_ValidViewModel_ReturnsViewModel()
         {
             //Arrange
-            var entity = TestCustomerEntities.CustomerEntity;
+            var entity = TestOrderEntities.OrderEntity;
             var id = await AddToContext(entity);
-            var expectedEntity = TestCustomerEntities.UpdatedCustomerEntity;
-            var expectedViewModel = TestCustomerViewModels.UpdatedCustomerViewModel;
-            expectedViewModel.Id = id;
-            expectedEntity.Id = id;
+            var expectedViewModel = TestOrderViewModels.UpdatedOrderViewModel;
+            var requestModel = TestOrderViewModels.UpdatedChangeOrderViewModel;
+            var customerId = await AddToContext(TestCustomerEntities.CustomerEntity);
 
-            using var request = new HttpRequestMessage(HttpMethod.Put, $"/api/customer/{id}");
-            request.AddContent(TestCustomerViewModels.UpdatedChangeCustomerViewModel);
+            requestModel.CustomerId = customerId;
+            expectedViewModel.Id = id;
+            expectedViewModel.CustomerId = customerId;
+            expectedViewModel.OrderDate = requestModel.OrderDate;
+
+
+            using var request = new HttpRequestMessage(HttpMethod.Put, $"/api/order/{id}");
+            request.AddContent(requestModel);
 
             //Act
             var actualResult = await Client.SendAsync(request);
-            var responseResult = actualResult.GetResponseResult<CustomerViewModel>();
-            Context.Entry(entity).Reload();
+            var responseResult = actualResult.GetResponseResult<OrderViewModel>();
 
             //Assert
             actualResult.StatusCode.ShouldBe(HttpStatusCode.OK);
             responseResult.ShouldBeEquivalentTo(expectedViewModel);
-            entity.ShouldBeEquivalentTo(expectedEntity);
         }
 
         [Fact]
@@ -119,8 +126,8 @@ namespace IVCRM.API.IntegrationTests.ApiTests
         {
             //Arrange
             var id = 1;
-            using var request = new HttpRequestMessage(HttpMethod.Put, $"/api/customer/{id}");
-            request.AddContent(new ChangeCustomerViewModel());
+            using var request = new HttpRequestMessage(HttpMethod.Put, $"/api/order/{id}");
+            request.AddContent(new ChangeOrderViewModel());
 
             //Act
             var actualResult = await Client.SendAsync(request);
@@ -133,17 +140,17 @@ namespace IVCRM.API.IntegrationTests.ApiTests
         public async Task Delete_ValidId_DeletesEntity()
         {
             //Arrange
-            var entity = TestCustomerEntities.CustomerEntity;
+            var entity = TestOrderEntities.OrderEntity;
             var id = await AddToContext(entity);
 
-            using var request = new HttpRequestMessage(HttpMethod.Delete, $"/api/customer/{id}");
+            using var request = new HttpRequestMessage(HttpMethod.Delete, $"/api/order/{id}");
 
             //Act
             var actualResult = await Client.SendAsync(request);
 
             //Assert
             actualResult.StatusCode.ShouldBe(HttpStatusCode.OK);
-            Context.Customers.ShouldNotContain(entity);
+            Context.Orders.ShouldNotContain(entity);
         }
     }
 }
