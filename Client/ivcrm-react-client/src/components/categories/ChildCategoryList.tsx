@@ -14,7 +14,6 @@ interface Props {
           return (
             <div key={treeItemData.id}>
             <ListItem disablePadding>
-
                 <ListItemButton>
                   <ListItemText primary={treeItemData.name} />
               </ListItemButton>

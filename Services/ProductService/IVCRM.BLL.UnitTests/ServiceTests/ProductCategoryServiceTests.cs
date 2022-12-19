@@ -12,7 +12,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
     public class ProductCategoryServiceTests
     {
         [Fact]
-        public async void Create_Model_ReturnsModel()
+        public async Task Create_Model_ReturnsModel()
         {
             //Arrange
             var model = TestProductCategoryModels.ProductCategoryModel;
@@ -30,33 +30,33 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
 
             //Assert
             mocker.GetMock<IProductCategoryRepository>().Verify(x => x.Create(It.IsAny<ProductCategoryEntity>()), Times.Once);
-            response.Should().BeEquivalentTo(model);
+            response.ShouldBeEquivalentTo(model);
         }
 
         [Fact]
-        public void GetAll_DataExists_ReturnsModelCollection()
+        public async Task GetAll_DataExists_ReturnsModelCollection()
         {
             //Arrange
             var models = TestProductCategoryModels.ProductCategoryModelCollection;
             var entities = TestProductCategoryEntities.ProductCategoryEntityCollection;
 
             var mocker = new AutoMocker(MockBehavior.Default, DefaultValue.Mock);
-            mocker.Setup<IProductCategoryRepository, IEnumerable<ProductCategoryEntity>>(x => x.GetCategoriesTree())
-                .Returns(entities);
+            mocker.Setup<IProductCategoryRepository, Task<IEnumerable<ProductCategoryEntity>>>(x => x.GetAll())
+                .ReturnsAsync(entities);
             mocker.Setup<IMapper, IEnumerable<ProductCategory>>(x => x.Map<IEnumerable<ProductCategory>>(entities)).Returns(models);
 
             var service = mocker.CreateInstance<ProductCategoryService>();
 
             //Act
-            var response = service.GetCategoriesTree();
+            var response = await service.GetAll();
 
             //Assert
-            mocker.GetMock<IProductCategoryRepository>().Verify(x => x.GetCategoriesTree(), Times.Once);
-            response.Should().BeEquivalentTo(models);
+            mocker.GetMock<IProductCategoryRepository>().Verify(x => x.GetAll(), Times.Once);
+            response.ShouldBeEquivalentTo(models);
         }
 
         [Fact]
-        public async void GetById_Id_ReturnsModel()
+        public async Task GetById_ValidId_ReturnsModel()
         {
             //Arrange
             var model = TestProductCategoryModels.ProductCategoryModel;
@@ -75,11 +75,11 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
 
             //Assert
             mocker.GetMock<IProductCategoryRepository>().Verify(x => x.GetById(It.IsAny<int>()), Times.Once);
-            response.Should().BeEquivalentTo(model);
+            response.ShouldBeEquivalentTo(model);
         }
 
         [Fact]
-        public async void Update_Model_ReturnsModel()
+        public async Task Update_ValidModel_ReturnsModel()
         {
             //Arrange
             var model = TestProductCategoryModels.ProductCategoryModel;
@@ -97,11 +97,11 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
 
             //Assert
             mocker.GetMock<IProductCategoryRepository>().Verify(x => x.Update(It.IsAny<ProductCategoryEntity>()), Times.Once);
-            response.Should().BeEquivalentTo(model);
+            response.ShouldBeEquivalentTo(model);
         }
         
         [Fact]
-        public async void Update_EntityNotExists_ThrowsResourceNotFoundException()
+        public async Task Update_InvalidModel_ThrowsResourceNotFoundException()
         {
             //Arrange
             var model = TestProductCategoryModels.ProductCategoryModel;
@@ -118,12 +118,12 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
             Func<Task<ProductCategory?>> update = async () => await service.Update(model);
 
             //Assert
-            await update.Should().ThrowAsync<ResourceNotFoundException>();
+            await update.ShouldThrowAsync<ResourceNotFoundException>();
             mocker.GetMock<IProductCategoryRepository>().Verify(x => x.Update(It.IsAny<ProductCategoryEntity>()), Times.Never);
         }
 
         [Fact]
-        public async void Delete_Id_ReturnsModel()
+        public async Task Delete_ValidId_DeletesEntity()
         {
             //Arrange
             var model = TestProductCategoryModels.ProductCategoryModel;
@@ -143,11 +143,10 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
         }
 
         [Fact]
-        public async void Delete_EntityNotExists_ThrowsResourceNotFoundException()
+        public async Task Delete_InvalidId_ThrowsResourceNotFoundException()
         {
             //Arrange
             var model = TestProductCategoryModels.ProductCategoryModel;
-            var entity = TestProductCategoryEntities.ProductCategoryEntity;
             var id = model.Id;
 
             var mocker = new AutoMocker(MockBehavior.Default, DefaultValue.Mock);
@@ -160,7 +159,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
             Func<Task> update = async () => await service.Delete(id);
 
             //Assert
-            await update.Should().ThrowAsync<ResourceNotFoundException>();
+            await update.ShouldThrowAsync<ResourceNotFoundException>();
             mocker.GetMock<IProductCategoryRepository>().Verify(x => x.Delete(It.IsAny<int>()), Times.Never);
         }
     }

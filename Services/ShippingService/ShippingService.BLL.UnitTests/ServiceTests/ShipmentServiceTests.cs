@@ -29,7 +29,7 @@ namespace SippingService.BLL.UnitTests.ServiceTests
 
             //Assert
             mocker.GetMock<IShipmentRepository>().Verify(x => x.Create(It.IsAny<ShipmentEntity>()), Times.Once);
-            response.Should().BeEquivalentTo(model);
+            response.ShouldBeEquivalentTo(model);
         }
 
         [Fact]
@@ -52,7 +52,7 @@ namespace SippingService.BLL.UnitTests.ServiceTests
 
             //Assert
             mocker.GetMock<IShipmentRepository>().Verify(x => x.GetByOrderId(It.IsAny<int>()), Times.Once);
-            response.Should().BeEquivalentTo(model);
+            response.ShouldBeEquivalentTo(model);
         }
     }
 }

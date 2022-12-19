@@ -25,7 +25,7 @@ namespace ShippingService.BLL.UnitTests.MappingTests
             var result = mapper.Map<Shipment>(entity);
 
             //Assert
-            result.Should().BeEquivalentTo(model);
+            result.ShouldBeEquivalentTo(model);
         }
 
         [Fact]
@@ -42,7 +42,7 @@ namespace ShippingService.BLL.UnitTests.MappingTests
             var result = mapper.Map<ShipmentEntity>(model);
 
             //Assert
-            result.Should().BeEquivalentTo(entity);
+            result.ShouldBeEquivalentTo(entity);
         }
 
         [Fact]
@@ -57,9 +57,10 @@ namespace ShippingService.BLL.UnitTests.MappingTests
 
             //Act
             var result = mapper.Map<Shipment>(command);
+            result.Id = model.Id;
 
             //Assert
-            result.Should().BeEquivalentTo(model, options => options.Excluding(x => x.Id));
+            result.ShouldBeEquivalentTo(model);
         }
 
         [Fact]
@@ -76,7 +77,7 @@ namespace ShippingService.BLL.UnitTests.MappingTests
             var result = mapper.Map<CreateShipmentCommand>(viewModel);
 
             //Assert
-            result.Should().BeEquivalentTo(command);
+            result.ShouldBeEquivalentTo(command);
         }
     }
 }

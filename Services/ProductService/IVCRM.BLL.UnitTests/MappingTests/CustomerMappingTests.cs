@@ -1,6 +1,9 @@
+using IVCRM.API.Profiles;
+using IVCRM.API.ViewModels;
 using IVCRM.BLL.Models;
 using IVCRM.BLL.Profiles;
 using IVCRM.BLL.UnitTests.TestData.Entities;
+using IVCRM.BLL.UnitTests.TestData.ViewModels;
 using IVCRM.DAL.Entities;
 
 namespace IVCRM.BLL.UnitTests.MappingTests
@@ -21,7 +24,7 @@ namespace IVCRM.BLL.UnitTests.MappingTests
             var result = mapper.Map<Customer>(entity);
 
             //Assert
-            result.Should().BeEquivalentTo(model);
+            result.ShouldBeEquivalentTo(model);
         }
 
         [Fact]
@@ -38,7 +41,43 @@ namespace IVCRM.BLL.UnitTests.MappingTests
             var result = mapper.Map<CustomerEntity>(model);
 
             //Assert
-            result.Should().BeEquivalentTo(entity);
+            result.ShouldBeEquivalentTo(entity);
+        }
+
+        [Fact]
+        public void Map_Model_ReturnsViewModel()
+        {
+            //Arrange 
+            var model = TestCustomerModels.CustomerModel;
+            var viewModel = TestCustomerViewModels.ValidCustomerViewModel;
+
+            var config = new MapperConfiguration(cfg => cfg.AddProfile<ApiMappingProfile>());
+            var mapper = config.CreateMapper();
+
+            //Act 
+            var result = mapper.Map<CustomerViewModel>(model);
+
+            //Assert 
+            result.ShouldBeEquivalentTo(viewModel);
+        }
+
+        [Fact]
+        public void Map_ChangeViewModel_ReturnsModel()
+        {
+            //Arrange 
+            var viewModel = TestCustomerViewModels.ValidChangeCustomerViewModel;
+            var model = TestCustomerModels.CustomerModel;
+
+            var config = new MapperConfiguration(cfg => cfg.AddProfile<ApiMappingProfile>());
+            var mapper = config.CreateMapper();
+
+            //Act 
+            var result = mapper.Map<Customer>(viewModel);
+            result.Id = model.Id;
+
+            //Assert 
+            result.ShouldBeEquivalentTo(model);
+
         }
     }
 }

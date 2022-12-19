@@ -12,7 +12,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
     public class CustomerServiceTests
     {
         [Fact]
-        public async void Create_Model_ReturnsModel()
+        public async Task Create_Model_ReturnsModel()
         {
             //Arrange
             var model = TestCustomerModels.CustomerModel;
@@ -30,11 +30,11 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
 
             //Assert
             mocker.GetMock<ICustomerRepository>().Verify(x => x.Create(It.IsAny<CustomerEntity>()), Times.Once);
-            response.Should().BeEquivalentTo(model);
+            response.ShouldBeEquivalentTo(model);
         }
 
         [Fact]
-        public async void GetAll_DataExists_ReturnsModelCollection()
+        public async Task GetAll_DataExists_ReturnsModelCollection()
         {
             //Arrange
             var models = TestCustomerModels.CustomerModelCollection;
@@ -52,11 +52,11 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
 
             //Assert
             mocker.GetMock<ICustomerRepository>().Verify(x => x.GetAll(), Times.Once);
-            response.Should().BeEquivalentTo(models);
+            response.ShouldBeEquivalentTo(models);
         }
 
         [Fact]
-        public async void GetById_Id_ReturnsModel()
+        public async Task GetById_Id_ReturnsModel()
         {
             //Arrange
             var model = TestCustomerModels.CustomerModel;
@@ -75,11 +75,11 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
 
             //Assert
             mocker.GetMock<ICustomerRepository>().Verify(x => x.GetById(It.IsAny<int>()), Times.Once);
-            response.Should().BeEquivalentTo(model);
+            response.ShouldBeEquivalentTo(model);
         }
 
         [Fact]
-        public async void Update_Model_ReturnsModel()
+        public async Task Update_Model_ReturnsModel()
         {
             //Arrange
             var model = TestCustomerModels.CustomerModel;
@@ -97,11 +97,11 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
 
             //Assert
             mocker.GetMock<ICustomerRepository>().Verify(x => x.Update(It.IsAny<CustomerEntity>()), Times.Once);
-            response.Should().BeEquivalentTo(model);
+            response.ShouldBeEquivalentTo(model);
         }
         
         [Fact]
-        public async void Update_EntityNotExists_ThrowsResourceNotFoundException()
+        public async Task Update_InvalidModel_ThrowsResourceNotFoundException()
         {
             //Arrange
             var model = TestCustomerModels.CustomerModel;
@@ -118,12 +118,12 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
             Func<Task<Customer?>> update = async () => await service.Update(model);
 
             //Assert
-            await update.Should().ThrowAsync<ResourceNotFoundException>();
+            await update.ShouldThrowAsync<ResourceNotFoundException>();
             mocker.GetMock<ICustomerRepository>().Verify(x => x.Update(It.IsAny<CustomerEntity>()), Times.Never);
         }
 
         [Fact]
-        public async void Delete_Id_ReturnsModel()
+        public async Task Delete_ValidId_DeletesEntity()
         {
             //Arrange
             var model = TestCustomerModels.CustomerModel;
@@ -143,11 +143,10 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
         }
 
         [Fact]
-        public async void Delete_EntityNotExists_ThrowsResourceNotFoundException()
+        public async Task Delete_InvalidId_ThrowsResourceNotFoundException()
         {
             //Arrange
             var model = TestCustomerModels.CustomerModel;
-            var entity = TestCustomerEntities.CustomerEntity;
             var id = model.Id;
 
             var mocker = new AutoMocker(MockBehavior.Default, DefaultValue.Mock);
@@ -160,7 +159,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
             Func<Task> update = async () => await service.Delete(id);
 
             //Assert
-            await update.Should().ThrowAsync<ResourceNotFoundException>();
+            await update.ShouldThrowAsync<ResourceNotFoundException>();
             mocker.GetMock<ICustomerRepository>().Verify(x => x.Delete(It.IsAny<int>()), Times.Never);
         }
     }
