@@ -1,0 +1,147 @@
+{
+    "GlobalConfiguration": {
+        "BaseUrl": "https://localhost:7125"
+    },
+    "Routes": [
+        {
+            "UpstreamPathTemplate": "/{controller}",
+            "UpstreamHttpMethod": [ "GET", "POST" ],
+            "DownstreamPathTemplate": "/{controller}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 7159
+                }
+            ],
+            /*"AuthenticationOptions": {
+                "AuthenticationProviderKey": "Identity",
+                "AllowedScopes": []
+            },*/
+            "SwaggerKey": "Product"
+        },
+        {
+            "UpstreamPathTemplate": "/{controller}/{id}",
+            "UpstreamHttpMethod": [ "GET", "DELETE", "PUT" ],
+            "DownstreamPathTemplate": "/{controller}/{id}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 7159
+                }
+            ],
+            /*"AuthenticationOptions": {
+                "AuthenticationProviderKey": "Identity",
+                "AllowedScopes": []
+            },*/
+            "SwaggerKey": "Product"
+        },
+        {
+            "UpstreamPathTemplate": "/Shipping",
+            "UpstreamHttpMethod": [ "GET", "POST" ],
+            "DownstreamPathTemplate": "/Shipping",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 7187
+                }
+            ],
+            "FileCacheOptions": {
+                "TtlSeconds": 1
+            },
+            /*"AuthenticationOptions": {
+                "AuthenticationProviderKey": "Identity",
+                "AllowedScopes": []
+            },*/
+            "SwaggerKey": "Shipping"
+        },
+        {
+            "UpstreamPathTemplate": "/Shipping/{id}",
+            "UpstreamHttpMethod": [ "GET", "DELETE", "PUT" ],
+            "DownstreamPathTemplate": "/Shipping/{id}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 7187
+                }
+            ],
+            /*"AuthenticationOptions": {
+                "AuthenticationProviderKey": "Identity",
+                "AllowedScopes": []
+            },*/
+            "SwaggerKey": "Shipping"
+        },
+        {
+            "UpstreamPathTemplate": "/Notification/Request",
+            "UpstreamHttpMethod": [ "POST" ],
+            "DownstreamPathTemplate": "/Notification/Request",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 7021
+                }
+            ],
+            /*"AuthenticationOptions": {
+                "AuthenticationProviderKey": "Identity",
+                "AllowedScopes": []
+            },*/
+            "SwaggerKey": "Notifications"
+        },
+        {
+            "UpstreamPathTemplate": "/Notification/Event",
+            "UpstreamHttpMethod": [ "POST" ],
+            "DownstreamPathTemplate": "/Notification/Event",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 7021
+                }
+            ],
+            /*"AuthenticationOptions": {
+                "AuthenticationProviderKey": "Identity",
+                "AllowedScopes": []
+            },*/
+            "SwaggerKey": "Notifications"
+        }
+    ],
+    "SwaggerEndPoints": [
+        {
+            "Key": "Products",
+            "TransformByOcelotConfig": false,
+            "Config": [
+                {
+                    "Name": "ProductServiceAPI",
+                    "Version": "v1",
+                    "Url": "https://localhost:7159/swagger/v1/swagger.json"
+                }
+            ]
+        },
+        {
+            "Key": "Shipping",
+            "TransformByOcelotConfig": false,
+            "Config": [
+                {
+                    "Name": "ShippingServiceAPI",
+                    "Version": "v1",
+                    "Url": "https://localhost:7187/swagger/v1/swagger.json"
+                }
+            ]
+        },
+        {
+            "Key": "Notifications",
+            "TransformByOcelotConfig": false,
+            "Config": [
+                {
+                    "Name": "NotificationServiceAPI",
+                    "Version": "v1",
+                    "Url": "https://localhost:7021/swagger/v1/swagger.json"
+                }
+            ]
+        }
+    ]
+}
