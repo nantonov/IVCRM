@@ -56,7 +56,7 @@ namespace AuthorizationService.BLL
             using var serviceScope = builder.ApplicationServices.GetService<IServiceScopeFactory>()?.CreateScope();
             var context = serviceScope?.ServiceProvider.GetRequiredService<AuthServiceDbContext>();
             var userManager = serviceScope?.ServiceProvider.GetRequiredService<UserManager<User>>();
-            var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<Role>>();
+            var roleManager = serviceScope?.ServiceProvider.GetRequiredService<RoleManager<Role>>();
 
             if (context is not null)
             {
