@@ -24,7 +24,7 @@ namespace ShippingService.DAL.Repositories
             return entity;
         }
 
-        public async Task<ShipmentEntity> GetByOrderId(int orderId)
+        public async Task<ShipmentEntity?> GetByOrderId(int orderId)
         {
             return await _shipmentCollection.Find(x => x.OrderId == orderId).SingleOrDefaultAsync();
         }
