@@ -1,8 +1,60 @@
 {
     "GlobalConfiguration": {
-        "BaseUrl": "https://localhost:7125"
+        "BaseUrl": "https://localhost:7025"
     },
     "Routes": [
+        {
+            "UpstreamPathTemplate": "/api/Shipment",
+            "UpstreamHttpMethod": [ "GET", "POST" ],
+            "DownstreamPathTemplate": "/api/Shipment",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 7187
+                }
+            ],
+            "SwaggerKey": "Shipping"
+        },
+        {
+            "UpstreamPathTemplate": "/api/Shipment/Orders/{id}",
+            "UpstreamHttpMethod": [ "GET" ],
+            "DownstreamPathTemplate": "/api/Shipment/orders/{id}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 7187
+                }
+            ],
+            "SwaggerKey": "Shipping"
+        },
+        {
+            "UpstreamPathTemplate": "/Notification/orderStatus",
+            "UpstreamHttpMethod": [ "POST" ],
+            "DownstreamPathTemplate": "/Notification/orderStatus",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 7021
+                }
+            ],
+            "SwaggerKey": "Notifications"
+        },
+        {
+            "UpstreamPathTemplate": "/Notification/email",
+            "UpstreamHttpMethod": [ "POST" ],
+            "DownstreamPathTemplate": "/Notification/email",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 7021
+                }
+            ],
+            "SwaggerKey": "Notifications"
+        },
         {
             "UpstreamPathTemplate": "/{controller}",
             "UpstreamHttpMethod": [ "GET", "POST" ],
@@ -14,6 +66,9 @@
                     "Port": 7159
                 }
             ],
+            "FileCacheOptions": {
+                "TtlSeconds": 10
+            },
             "SwaggerKey": "Product"
         },
         {
@@ -27,76 +82,13 @@
                     "Port": 7159
                 }
             ],
-            "SwaggerKey": "Product"
-        },
-        {
-            "UpstreamPathTemplate": "/Shipping",
-            "UpstreamHttpMethod": [ "GET", "POST" ],
-            "DownstreamPathTemplate": "/Shipping",
-            "DownstreamScheme": "https",
-            "DownstreamHostAndPorts": [
-                {
-                    "Host": "localhost",
-                    "Port": 7187
-                }
-            ],
             "FileCacheOptions": {
-                "TtlSeconds": 1
+                "TtlSeconds": 10
             },
-            "SwaggerKey": "Shipping"
-        },
-        {
-            "UpstreamPathTemplate": "/Shipping/{id}",
-            "UpstreamHttpMethod": [ "GET", "DELETE", "PUT" ],
-            "DownstreamPathTemplate": "/Shipping/{id}",
-            "DownstreamScheme": "https",
-            "DownstreamHostAndPorts": [
-                {
-                    "Host": "localhost",
-                    "Port": 7187
-                }
-            ],
-            "SwaggerKey": "Shipping"
-        },
-        {
-            "UpstreamPathTemplate": "/Notification/Request",
-            "UpstreamHttpMethod": [ "POST" ],
-            "DownstreamPathTemplate": "/Notification/Request",
-            "DownstreamScheme": "https",
-            "DownstreamHostAndPorts": [
-                {
-                    "Host": "localhost",
-                    "Port": 7021
-                }
-            ],
-            "SwaggerKey": "Notifications"
-        },
-        {
-            "UpstreamPathTemplate": "/Notification/Event",
-            "UpstreamHttpMethod": [ "POST" ],
-            "DownstreamPathTemplate": "/Notification/Event",
-            "DownstreamScheme": "https",
-            "DownstreamHostAndPorts": [
-                {
-                    "Host": "localhost",
-                    "Port": 7021
-                }
-            ],
-            "SwaggerKey": "Notifications"
+            "SwaggerKey": "Product"
         }
     ],
     "SwaggerEndPoints": [
-        {
-            "Key": "Products",
-            "TransformByOcelotConfig": false,
-            "Config": [
-                {
-                    "Name": "ProductServiceAPI",
-                    "Version": "v1",
-                    "Url": "https://localhost:7159/swagger/v1/swagger.json"
-                }
-            ]
-        },
         {
             "Key": "Shipping",
             "TransformByOcelotConfig": false,
@@ -116,6 +108,17 @@
                     "Name": "NotificationServiceAPI",
                     "Version": "v1",
                     "Url": "https://localhost:7021/swagger/v1/swagger.json"
+                }
+            ]
+        },
+        {
+            "Key": "Products",
+            "TransformByOcelotConfig": false,
+            "Config": [
+                {
+                    "Name": "ProductServiceAPI",
+                    "Version": "v1",
+                    "Url": "https://localhost:7159/swagger/v1/swagger.json"
                 }
             ]
         }
