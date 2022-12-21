@@ -4,7 +4,6 @@ using Ocelot.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var appsettingsConfig = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
 var ocelotConfig = new ConfigurationBuilder().AddJsonFile("ocelot.json").Build();
 
 builder.Services.AddOcelot(ocelotConfig).AddCacheManager(options => options.WithDictionaryHandle());
