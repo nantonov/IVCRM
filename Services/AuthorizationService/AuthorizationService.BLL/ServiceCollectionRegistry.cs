@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using AuthorizationService.BLL.Configs;
-using IdentityResource = IdentityServer4.EntityFramework.Entities.IdentityResource;
 
 namespace AuthorizationService.BLL
 {
