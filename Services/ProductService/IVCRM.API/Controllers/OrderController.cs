@@ -20,6 +20,7 @@ namespace IVCRM.API.Controllers
         private readonly IMapper _mapper;
         private readonly ChangeOrderValidator _changeOrderValidator;
         private readonly IPublishEndpoint _publishEndpoint;
+        private readonly IBus _bus;
 
         public OrderController(
                 IOrderService orderService, 
@@ -27,7 +28,7 @@ namespace IVCRM.API.Controllers
                 IMapper mapper, 
                 ChangeOrderValidator changeOrderValidator, 
                 IPublishEndpoint publishEndpoint
-                )
+        )
         {
             _orderService = orderService;
             _customerService = customerService;
@@ -47,6 +48,7 @@ namespace IVCRM.API.Controllers
             var message = _mapper.Map<CreateOrderMessage>(result);
             var customer = await _customerService.GetById(message.CustomerId);
             message.CustomerEmail = customer.Email;
+
             await _publishEndpoint.Publish<CreateOrderMessage>(message);
 
             return _mapper.Map<OrderViewModel>(result);

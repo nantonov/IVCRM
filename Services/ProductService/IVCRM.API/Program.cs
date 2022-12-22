@@ -46,7 +46,6 @@ builder.Services.AddCors(opt =>
 
 builder.Services.AddMassTransit(x =>
 {
-    x.AddDelayedMessageScheduler();
     x.SetKebabCaseEndpointNameFormatter();
     x.UsingRabbitMq();
 });
