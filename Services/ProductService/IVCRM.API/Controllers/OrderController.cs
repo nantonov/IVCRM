@@ -5,7 +5,6 @@ using IVCRM.API.ViewModels;
 using IVCRM.BLL.Models;
 using IVCRM.BLL.Services.Interfaces;
 using MassTransit;
-using MassTransit.Transports;
 using Messages;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,7 +19,6 @@ namespace IVCRM.API.Controllers
         private readonly IMapper _mapper;
         private readonly ChangeOrderValidator _changeOrderValidator;
         private readonly IPublishEndpoint _publishEndpoint;
-        private readonly IBus _bus;
 
         public OrderController(
                 IOrderService orderService, 
