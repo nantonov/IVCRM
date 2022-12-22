@@ -43,16 +43,6 @@ jobs:
             mongodb-replica-set: test-rs
             mongodb-port: 27017
 
-      - name: Start RabbitMQ
-        uses: namoshek/rabbitmq-github-action@v1
-        with:
-          version: '3.8.9'
-          ports: '5672:5672 15672:15672'
-          certificates: ${{ github.workspace }}/.ci/tls-certificates
-          config: ${{ github.workspace }}/.ci/rabbitmq.conf
-          definitions: ${{ github.workspace }}/.ci/definitions.json
-          container-name: 'mqtt'
-
       - name: Install SonarCloud scanner
         if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
         run: dotnet tool install --global dotnet-sonarscanner
