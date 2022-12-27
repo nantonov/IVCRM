@@ -6,6 +6,8 @@ using IVCRM.API.Validators;
 using IVCRM.API.ViewModels;
 using IVCRM.BLL.Models;
 using IVCRM.BLL.Services.Interfaces;
+using IVCRM.Core;
+using IVCRM.Core.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -38,11 +40,11 @@ namespace IVCRM.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<CustomerViewModel>> GetAll()
+        public async Task<PagedList<CustomerViewModel>> GetAll([FromQuery] TableParameters parameters)
         {
-            var result = await _service.GetAll();
+            var result = await _service.GetAll(parameters);
 
-            return _mapper.Map<IEnumerable<CustomerViewModel>>(result);
+            return _mapper.Map<PagedList<CustomerViewModel>>(result);
         }
 
         [HttpGet("{id}")]

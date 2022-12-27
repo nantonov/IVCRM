@@ -8,22 +8,33 @@ import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
-
 import UpdateCustomerModal from './modals/UpdateCustomerModal';
 import DeleteCustomerModal from './modals/DeleteCustomerModal';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchCustomers } from '../../store/reducers/customers/ActionCreators';
+import { Box, TablePagination } from '@mui/material';
+
 
 const CustomerTable = () => {
 
-  const {customer, customers, isLoading, error} = useAppSelector(state => state.customerReducer)
+  const {paginationData, customers, isLoading, error} = useAppSelector(state => state.customerReducer)
   const dispatch = useAppDispatch()
 
+  const handlePageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    var pageSize = (parseInt(event.target.value, 10))
+    dispatch(fetchCustomers({ pageNumber: paginationData.currentPage, pageSize: pageSize}))
+  };
+
+  const handlePageSizeChange = (event: unknown, newPage: number) => {
+    dispatch(fetchCustomers({ pageNumber: newPage, pageSize: paginationData.pageSize}))
+  };
+
   useEffect(() => {
-    dispatch(fetchCustomers())
+    dispatch(fetchCustomers({ pageNumber: paginationData.currentPage, pageSize: paginationData.pageSize}))
   }, [])
 
   return (
+    <Box sx={{ width: '100%' }}>
     <TableContainer component={Paper} >
       <Typography
           sx={{ flex: '1 1 100%' }}
@@ -69,6 +80,16 @@ const CustomerTable = () => {
         </TableBody>
       </Table>
     </TableContainer>
+            <TablePagination
+            rowsPerPageOptions={[5, 10, 25]}
+            component="div"
+            count={paginationData.totalCount}
+            rowsPerPage={paginationData.pageSize}
+            page={paginationData.currentPage}
+            onPageChange={handlePageSizeChange}
+            onRowsPerPageChange={handlePageChange}
+          />
+    </Box>
   );
 }
 
