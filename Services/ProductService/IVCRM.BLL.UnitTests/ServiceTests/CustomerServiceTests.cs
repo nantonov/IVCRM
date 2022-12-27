@@ -2,6 +2,8 @@ using IVCRM.BLL.Exceptions;
 using IVCRM.BLL.Models;
 using IVCRM.BLL.Services;
 using IVCRM.BLL.UnitTests.TestData.Entities;
+using IVCRM.Core;
+using IVCRM.Core.Models;
 using IVCRM.DAL.Entities;
 using IVCRM.DAL.Repositories.Interfaces;
 using Moq;
@@ -37,21 +39,22 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
         public async Task GetAll_DataExists_ReturnsModelCollection()
         {
             //Arrange
-            var models = TestCustomerModels.CustomerModelCollection;
-            var entities = TestCustomerEntities.CustomerEntityCollection;
+            var models = TestCustomerModels.PaginatedModelCollection;
+            var entities = TestCustomerEntities.PaginatedEntityCollection;
+            var request = new TableParameters {PageNumber = 1, PageSize = 10};
 
             var mocker = new AutoMocker(MockBehavior.Default, DefaultValue.Mock);
-            mocker.Setup<ICustomerRepository, Task<IEnumerable<CustomerEntity>>>(x => x.GetAll())
+            mocker.Setup<ICustomerRepository, Task<PagedList<CustomerEntity>>>(x => x.GetAll(request))
                 .ReturnsAsync(entities);
-            mocker.Setup<IMapper, IEnumerable<Customer>>(x => x.Map<IEnumerable<Customer>>(entities)).Returns(models);
+            mocker.Setup<IMapper, PagedList<Customer>>(x => x.Map<PagedList<Customer>>(entities)).Returns(models);
 
             var service = mocker.CreateInstance<CustomerService>();
 
             //Act
-            var response = await service.GetAll();
+            var response = await service.GetAll(request);
 
             //Assert
-            mocker.GetMock<ICustomerRepository>().Verify(x => x.GetAll(), Times.Once);
+            mocker.GetMock<ICustomerRepository>().Verify(x => x.GetAll(request), Times.Once);
             response.ShouldBeEquivalentTo(models);
         }
 

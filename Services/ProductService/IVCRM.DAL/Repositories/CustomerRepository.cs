@@ -27,8 +27,7 @@ namespace IVCRM.DAL.Repositories
 
         public async Task<PagedList<CustomerEntity>> GetAll(TableParameters parameters)
         {
-            var res = await _context.Customers.ToPagedList(parameters);
-            return res;
+            return await _context.Customers.ToPagedList(parameters);
         }
 
         public async Task<CustomerEntity?> GetById(int id)
