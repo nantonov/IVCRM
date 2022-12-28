@@ -4,6 +4,8 @@ using IVCRM.API.Validators;
 using IVCRM.API.ViewModels;
 using IVCRM.BLL.Models;
 using IVCRM.BLL.Services.Interfaces;
+using IVCRM.Core;
+using IVCRM.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IVCRM.API.Controllers

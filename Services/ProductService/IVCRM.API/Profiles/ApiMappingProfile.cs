@@ -1,6 +1,7 @@
 ﻿using IVCRM.API.ViewModels;
 using IVCRM.BLL.Models;
 using IVCRM.Core;
+using Messages;
 
 namespace IVCRM.API.Profiles
 {
