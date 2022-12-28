@@ -4,7 +4,7 @@ namespace ShippingService.BLL.Services.Interfaces
 {
     public interface IShipmentService
     {
-        Task<Shipment> Create(Shipment entity);
-        Task<Shipment?> GetByOrderId(int id);
+        Task<Shipment> Create(Shipment model);
+        Task<Shipment?> GetByOrderId(int orderId);
     }
 }

@@ -3,5 +3,5 @@ type AxiosConfig = {
 }
 
 export const axiosConfig : AxiosConfig = {
-    baseURL: 'https://localhost:7159/api',
+    baseURL: 'https://localhost:7025/api',
 };

@@ -1,5 +1,6 @@
 ﻿namespace IVCRM.BLL.Exceptions
 {
+    [Serializable]
     public class ResourceNotFoundException : Exception
     {
         public ResourceNotFoundException() { }

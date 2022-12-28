@@ -51,7 +51,7 @@ namespace NotificationService.BLL.Services
             return emailMessage;
         }
 
-        private async Task<string> GetFilledTemplate(string message)
+        private static async Task<string> GetFilledTemplate(string message)
         {
             string template = EmailTemplates.DefaultEmailTemplate;
 

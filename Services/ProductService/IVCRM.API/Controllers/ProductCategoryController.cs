@@ -6,7 +6,6 @@ using IVCRM.BLL.Models;
 using IVCRM.BLL.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
-
 namespace IVCRM.API.Controllers
 {
     [ApiController]
