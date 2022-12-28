@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using IVCRM.BLL.Exceptions;
-using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
 namespace IVCRM.API.Middlewares
@@ -22,7 +21,7 @@ namespace IVCRM.API.Middlewares
             }
             catch (ResourceNotFoundException ex)
             {
-                HandleResourceException(context, ex);
+                HandleResourceException(context);
             }
             catch (ValidationException ex)
             {
@@ -30,13 +29,13 @@ namespace IVCRM.API.Middlewares
             }
         }
 
-        private void HandleResourceException(HttpContext context, Exception exception)
+        private static void HandleResourceException(HttpContext context)
         {
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.NotFound;
         }
 
-        private void HandleValidationException(HttpContext context, ValidationException exception)
+        private static void HandleValidationException(HttpContext context, ValidationException exception)
         {
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.BadRequest;

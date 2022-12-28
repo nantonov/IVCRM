@@ -9,6 +9,7 @@ namespace IVCRM.DAL.IntegrationTests.TestData.Entities
         {
             FirstName = "FirstName",
             LastName = "LastName",
+            Email = "Email",
             PhoneNumber = "+1234567",
         };
 
@@ -16,6 +17,7 @@ namespace IVCRM.DAL.IntegrationTests.TestData.Entities
         {
             FirstName = "UpdatedFirstName",
             LastName = "UpdatedLastName",
+            Email = "Email",
             PhoneNumber = "+1234567",
         };
 

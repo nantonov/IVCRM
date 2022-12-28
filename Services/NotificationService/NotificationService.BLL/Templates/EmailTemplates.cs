@@ -1,8 +1,8 @@
 ﻿namespace NotificationService.BLL.Templates
 {
-    public class EmailTemplates
+    public static class EmailTemplates
     {
-        public static string DefaultEmailTemplate = "<html>" +
+        public const string DefaultEmailTemplate = "<html>" +
                                                     "<body>" +
                                                    "<div>" +
                                                    "<p>Hi</p>" +

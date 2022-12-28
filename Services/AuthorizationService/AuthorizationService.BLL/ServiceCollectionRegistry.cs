@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using AuthorizationService.BLL.Configs;
-using IdentityResource = IdentityServer4.EntityFramework.Entities.IdentityResource;
 
 namespace AuthorizationService.BLL
 {
@@ -57,7 +56,7 @@ namespace AuthorizationService.BLL
             using var serviceScope = builder.ApplicationServices.GetService<IServiceScopeFactory>()?.CreateScope();
             var context = serviceScope?.ServiceProvider.GetRequiredService<AuthServiceDbContext>();
             var userManager = serviceScope?.ServiceProvider.GetRequiredService<UserManager<User>>();
-            var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<Role>>();
+            var roleManager = serviceScope?.ServiceProvider.GetRequiredService<RoleManager<Role>>();
 
             if (context is not null)
             {

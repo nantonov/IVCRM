@@ -1,5 +1,7 @@
 ﻿using IVCRM.DAL.Entities.Interfaces;
 using IVCRM.DAL.Infrastructure;
+using MassTransit;
+using MassTransit.Testing;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +9,11 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace IVCRM.API.IntegrationTests.Infrastructure
 {
+    public interface ISecondBus :
+        IBus
+    {
+    }
+
     public class IntegrationTestsBase : IDisposable
     {
         public IntegrationTestsBase()
@@ -19,6 +26,11 @@ namespace IVCRM.API.IntegrationTests.Infrastructure
                     services.Remove(dbContextService!);
 
                     services.AddDbContext<AppDbContext>(options => options.UseInMemoryDatabase("TestDb"));
+
+                    services.AddMassTransitTestHarness(x =>
+                    {
+                        x.UsingInMemory();
+                    });
                 }));
             Server = factory.Server;
             Client = Server.CreateClient();

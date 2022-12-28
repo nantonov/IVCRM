@@ -10,6 +10,7 @@ namespace IVCRM.BLL.UnitTests.TestData.Entities
             Id = 1,
             FirstName = "FirstName",
             LastName = "LastName",
+            Email = "Email",
             PhoneNumber = "+1234567",
         };
 

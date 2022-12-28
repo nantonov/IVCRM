@@ -10,6 +10,7 @@ namespace IVCRM.API.Validators
             RuleFor(customer => customer.FirstName).NotNull().NotEmpty().Length(1, 250);
             RuleFor(customer => customer.LastName).NotNull().NotEmpty().Length(1, 250);
             RuleFor(customer => customer.PhoneNumber).NotEmpty().WithMessage("Please add a phone number");
+            RuleFor(customer => customer.Email).NotEmpty().WithMessage("Please add an email");
         }
     }
 }

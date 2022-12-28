@@ -8,6 +8,7 @@ namespace IVCRM.BLL.UnitTests.TestData.ViewModels
         {
             Id = 1,
             FullName = "FirstName LastName",
+            Email = "Email",
             PhoneNumber = "+1234567",
         };
 
@@ -15,6 +16,7 @@ namespace IVCRM.BLL.UnitTests.TestData.ViewModels
         {
             FirstName = "FirstName",
             LastName = "LastName",
+            Email = "Email",
             PhoneNumber = "+1234567",
         };
     }

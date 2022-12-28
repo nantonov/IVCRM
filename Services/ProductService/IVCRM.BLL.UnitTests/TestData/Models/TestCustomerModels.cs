@@ -11,6 +11,7 @@ namespace IVCRM.BLL.UnitTests.TestData.Models
             Id = 1,
             FirstName = "FirstName",
             LastName = "LastName",
+            Email = "Email",
             PhoneNumber = "+1234567",
         };
 

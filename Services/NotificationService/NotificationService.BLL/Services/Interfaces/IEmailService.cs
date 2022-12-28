@@ -4,6 +4,6 @@ namespace NotificationService.BLL.Services.Interfaces
 {
     public interface IEmailService
     {
-        public Task SendEmailAsync(MailModel request);
+        public Task SendEmailAsync(CreateOrderMail request);
     }
 }

@@ -10,6 +10,7 @@ namespace IVCRM.API.IntegrationTests.TestData.ViewModels
         {
             Id = 1,
             FullName = "FirstName LastName",
+            Email = "Email",
             PhoneNumber = "+1234567",
         };
 
@@ -17,6 +18,7 @@ namespace IVCRM.API.IntegrationTests.TestData.ViewModels
         {
             Id = 1,
             FullName = "UpdatedFirstName UpdatedLastName",
+            Email = "Email",
             PhoneNumber = "+1234567",
         };
 
@@ -25,16 +27,19 @@ namespace IVCRM.API.IntegrationTests.TestData.ViewModels
             new ()
             {
                 FullName = "FirstName1 LastName1",
+                Email = "Email",
                 PhoneNumber = "+1234567",
             },
             new ()
             {
                 FullName = "FirstName2 LastName2",
+                Email = "Email",
                 PhoneNumber = "+2234567",
             },
             new ()
             {
                 FullName = "FirstName3 LastName3",
+                Email = "Email",
                 PhoneNumber = "+3234567",
             },
         };
@@ -43,6 +48,7 @@ namespace IVCRM.API.IntegrationTests.TestData.ViewModels
         {
             FirstName = "FirstName",
             LastName = "LastName",
+            Email = "Email",
             PhoneNumber = "+1234567",
         };
 
@@ -50,6 +56,7 @@ namespace IVCRM.API.IntegrationTests.TestData.ViewModels
         {
             FirstName = "UpdatedFirstName",
             LastName = "UpdatedLastName",
+            Email = "Email",
             PhoneNumber = "+1234567",
         };
 
