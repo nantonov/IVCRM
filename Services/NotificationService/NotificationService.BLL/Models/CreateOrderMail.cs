@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-
-namespace NotificationService.BLL.Models
+﻿namespace NotificationService.BLL.Models
 {
     public class CreateOrderMail
     {
