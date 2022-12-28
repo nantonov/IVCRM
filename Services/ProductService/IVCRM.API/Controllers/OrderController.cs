@@ -4,7 +4,6 @@ using IVCRM.API.Validators;
 using IVCRM.API.ViewModels;
 using IVCRM.BLL.Models;
 using IVCRM.BLL.Services.Interfaces;
-using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IVCRM.API.Controllers
