@@ -19,7 +19,7 @@ namespace NotificationService.BLL.Services
             _config = configuration.GetSection(EmailConfigurationSection).Get<EmailConfiguration>();
         }
 
-        public async Task SendEmailAsync(MailModel request)
+        public async Task SendEmailAsync(CreateOrderMail request)
         {
             var emailMessage = await PrepareMailMessage(request);
 
@@ -38,7 +38,7 @@ namespace NotificationService.BLL.Services
             return client;
         }
 
-        private async Task<MailMessage> PrepareMailMessage(MailModel request)
+        private async Task<MailMessage> PrepareMailMessage(CreateOrderMail request)
         {
             var emailMessage = new MailMessage();
 

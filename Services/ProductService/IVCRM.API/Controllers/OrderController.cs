@@ -4,6 +4,8 @@ using IVCRM.API.Validators;
 using IVCRM.API.ViewModels;
 using IVCRM.BLL.Models;
 using IVCRM.BLL.Services.Interfaces;
+using MassTransit;
+using Messages;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IVCRM.API.Controllers
@@ -12,15 +14,25 @@ namespace IVCRM.API.Controllers
     [Route("api/[controller]")]
     public class OrderController : ControllerBase
     {
-        private readonly IOrderService _service;
+        private readonly IOrderService _orderService;
+        private readonly ICustomerService _customerService;
         private readonly IMapper _mapper;
         private readonly ChangeOrderValidator _changeOrderValidator;
+        private readonly IPublishEndpoint _publishEndpoint;
 
-        public OrderController(IOrderService service, IMapper mapper, ChangeOrderValidator changeOrderValidator)
+        public OrderController(
+                IOrderService orderService, 
+                ICustomerService customerService,
+                IMapper mapper, 
+                ChangeOrderValidator changeOrderValidator, 
+                IPublishEndpoint publishEndpoint
+        )
         {
-            _service = service;
+            _orderService = orderService;
+            _customerService = customerService;
             _mapper = mapper;
             _changeOrderValidator = changeOrderValidator;
+            _publishEndpoint = publishEndpoint;
         }
 
         [HttpPost]
@@ -29,7 +41,13 @@ namespace IVCRM.API.Controllers
             await _changeOrderValidator.ValidateAndThrowAsync(viewModel);
             
             var model = _mapper.Map<Order>(viewModel);
-            var result = await _service.Create(model);
+            var result = await _orderService.Create(model);
+
+            var message = _mapper.Map<CreateOrderMessage>(result);
+            var customer = await _customerService.GetById(message.CustomerId);
+            message.CustomerEmail = customer.Email;
+
+            await _publishEndpoint.Publish<CreateOrderMessage>(message);
 
             return _mapper.Map<OrderViewModel>(result);
         }
@@ -37,7 +55,7 @@ namespace IVCRM.API.Controllers
         [HttpGet]
         public async Task<IEnumerable<OrderViewModel>> GetAll()
         {
-            var result = await _service.GetAll();
+            var result = await _orderService.GetAll();
 
             return _mapper.Map<IEnumerable<OrderViewModel>>(result);
         }
@@ -45,7 +63,7 @@ namespace IVCRM.API.Controllers
         [HttpGet("{id}")]
         public async Task<OrderViewModel> GetById(int id)
         {
-            var model = await _service.GetById(id);
+            var model = await _orderService.GetById(id);
 
             return _mapper.Map<OrderViewModel>(model);
         }
@@ -58,7 +76,7 @@ namespace IVCRM.API.Controllers
             var model = _mapper.Map<Order>(viewModel);
             model.Id = id;
 
-            var result = await _service.Update(model);
+            var result = await _orderService.Update(model);
 
             return _mapper.Map<OrderViewModel>(result);
         }
@@ -66,7 +84,7 @@ namespace IVCRM.API.Controllers
         [HttpDelete("{id}")]
         public async Task Delete(int id)
         {
-            await _service.Delete(id);
+            await _orderService.Delete(id);
         }
     }
 }
