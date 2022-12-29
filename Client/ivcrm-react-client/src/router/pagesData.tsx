@@ -5,7 +5,7 @@ import CatalogPage from "../components/pages/CatalogPage";
 import CategoriesPage from "../components/pages/CategoriesPage";
 import CustomersPage from "../components/pages/CustomersPage";
 import HomePage from "../components/pages/HomePage";
-import OrderPage from "../components/pages/OrderPage";
+import OrdersPage from "../components/pages/OrdersPage";
 import ProductsPage from "../components/pages/ProductsPage";
 
 export interface routerType {
@@ -19,7 +19,7 @@ export const privateRoutes: routerType[] = [
     { title: "Products", path: '/products', element: <ProductsPage />},
     { title: "Categories", path: '/categories', element: <CategoriesPage />},
     { title: "Customer", path: '/customers', element: <CustomersPage />},
-    { title: "Order", path: '/orders',  element: <OrderPage />},
+    { title: "Order", path: '/orders',  element: <OrdersPage />},
     { title: "Callback", path: '/callback',  element: <Callback />},
     { title: "Logout", path: '/logout',  element: <Logout />},
     { title: "Refresh", path: '/refresh',  element: <Refresh />},

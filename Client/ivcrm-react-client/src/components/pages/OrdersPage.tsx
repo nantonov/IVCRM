@@ -1,6 +1,6 @@
 import Typography from '@mui/material/Typography';
 
-function OrderPage() {
+function OrdersPage() {
 
 
   return (
@@ -15,4 +15,4 @@ function OrderPage() {
   );
 }
 
-export default OrderPage;
+export default OrdersPage;
