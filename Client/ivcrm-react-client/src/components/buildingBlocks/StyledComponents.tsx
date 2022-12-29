@@ -10,4 +10,4 @@ export const StyledModalBox = styled.div`
     border: 2px solid #000;
     box-shadow: 24;
     padding: 40px;
-`
+    `

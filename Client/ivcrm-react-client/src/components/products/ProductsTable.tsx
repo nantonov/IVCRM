@@ -15,6 +15,7 @@ import Delete from '@mui/icons-material/Delete';
 import ModalWrapper from '../buildingBlocks/ModalWrapper';
 import UpdateProductForm from './forms/UpdateProductForm';
 import DeleteProductForm from './forms/DeleteProductForm';
+import { CircularProgress } from '@mui/material';
 
 const ProductTable = () => {
 
@@ -36,7 +37,7 @@ const ProductTable = () => {
           Products
       </Typography>
 
-      {isLoading && <h1>Loading...</h1>}
+      {isLoading && <CircularProgress />}
       {error && <h1>{error}</h1>}
 
       <hr />

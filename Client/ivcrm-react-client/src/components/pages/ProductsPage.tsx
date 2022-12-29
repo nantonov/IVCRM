@@ -1,11 +1,10 @@
 import { Divider, Grid } from '@mui/material';
-import React, { useState } from 'react';
 import ModalWrapper from '../buildingBlocks/ModalWrapper';
 import ProductTable from '../products/ProductsTable';
 import Add from '@mui/icons-material/Add';
 import CreateProductForm from '../products/forms/CreateProductForm';
 
-function Products() {
+function ProductsPage() {
   return (
     <Grid direction='row' container spacing={1}>
     <Grid container item sm={3}>
@@ -22,4 +21,4 @@ function Products() {
   );
 }
 
-export default Products;
+export default ProductsPage;

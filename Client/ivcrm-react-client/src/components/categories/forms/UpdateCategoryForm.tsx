@@ -5,16 +5,14 @@ import Typography from '@mui/material/Typography';
 import FormControl from '@mui/material/FormControl';
 import { IProductCategory } from "../../../models/IProductCategory";
 import { IChangeProductCategory } from "../../../models/IChangeProductCategory";
-import { useAppDispatch } from "../../../hooks/redux";
+import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import { updateCategory } from "../../../store/reducers/categories/ActionCreators";
+import { ModalActions } from "../../../store/reducers/modal/ModalSlice";
 
-interface Props {
-  category: IProductCategory
-  handleClose: () => void
-}
+const UpdateCategoryForm = () => {
 
-
-const UpdateCustomerForm: React.FC<Props> = ({category, handleClose}) => {
+  const {data} = useAppSelector(state => state.modalReducer)
+  var category = data as IProductCategory
 
   const [changeCategory, setChangeCategory] = useState<IChangeProductCategory>({id: category.id, name: category.name, parentCategoryId: category.parentCategoryId})
   const dispatch = useAppDispatch()
@@ -24,7 +22,7 @@ const UpdateCustomerForm: React.FC<Props> = ({category, handleClose}) => {
     
         dispatch(updateCategory(changeCategory));
         setChangeCategory({} as IChangeProductCategory);
-        handleClose();
+        dispatch(ModalActions.closeModal());
       }
 
       return (
@@ -44,4 +42,4 @@ const UpdateCustomerForm: React.FC<Props> = ({category, handleClose}) => {
       );
     }
     
-    export default UpdateCustomerForm;
+    export default UpdateCategoryForm;
