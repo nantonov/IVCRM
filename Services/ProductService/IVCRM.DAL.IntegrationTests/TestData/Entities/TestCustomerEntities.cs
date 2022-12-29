@@ -1,4 +1,5 @@
-﻿using IVCRM.DAL.Entities;
+﻿using IVCRM.Core;
+using IVCRM.DAL.Entities;
 
 namespace IVCRM.DAL.IntegrationTests.TestData.Entities
 {
@@ -23,6 +24,15 @@ namespace IVCRM.DAL.IntegrationTests.TestData.Entities
         internal static List<CustomerEntity> CustomerEntityCollection => new ()
         {
             CustomerEntity,
+        };
+
+        internal static PagedList<CustomerEntity> PaginatedEntityCollection => new()
+        {
+            PageSize = 10,
+            CurrentPage = 0,
+            TotalCount = 1,
+            TotalPages = 1,
+            Data = CustomerEntityCollection,
         };
     }
 }

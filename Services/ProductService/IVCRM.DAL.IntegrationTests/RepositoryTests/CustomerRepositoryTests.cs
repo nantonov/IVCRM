@@ -1,4 +1,5 @@
-﻿using IVCRM.DAL.IntegrationTests.TestData.Entities;
+﻿using IVCRM.Core.Models;
+using IVCRM.DAL.IntegrationTests.TestData.Entities;
 using IVCRM.DAL.Repositories;
 using IVCRM.DAL.Repositories.Interfaces;
 
@@ -32,13 +33,14 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
         {
             //Arrange
             var entities = TestCustomerEntities.CustomerEntityCollection;
+            var request = new TableParameters { PageNumber = 0, PageSize = 10 };
             await AddRangeToContext(entities);
             //Act
-            var actualResult = await _repository.GetAll();
+            var actualResult = await _repository.GetAll(request);
 
             //Assert
-            actualResult.ShouldNotBeEmpty();
-            entities.ShouldBeSubsetOf(actualResult);
+            actualResult.Data.ShouldNotBeEmpty();
+            entities.ShouldBeSubsetOf(actualResult.Data);
         }
 
         [Fact]

@@ -1,4 +1,6 @@
-﻿namespace IVCRM.API.ViewModels
+﻿using IVCRM.Core.Models;
+
+namespace IVCRM.API.ViewModels
 {
     public class CustomerViewModel
     {
