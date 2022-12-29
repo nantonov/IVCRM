@@ -1,4 +1,6 @@
+import { CardContent, Typography } from "@mui/material";
 import { IOrder } from "../../models/IOrder";
+import { StyledCard } from "../buildingBlocks/StyledComponents";
 
 interface Props {
     order: IOrder
@@ -7,14 +9,26 @@ interface Props {
 const OrderDetails: React.FC<Props> = ({ order }) => {
 
 return (
-<div>
-<h1>Order Info</h1>
-    <p>{order.id}</p>
-    <p>{order.orderStatus}</p>
-    <p>{order.orderDate}</p>
-    <p>{order.name}</p>
-    <p>{order.customerId}</p>
-</div>
+    <StyledCard>
+      <CardContent>
+        <Typography variant="h5" component="div">
+            Order status
+        </Typography>
+        <hr/>
+        <Typography variant="body2">
+            Id: {order.id}
+        </Typography>
+        <Typography variant="body2">
+            Name: {order.name}
+        </Typography>
+        <Typography variant="body2">
+            Order status: {order.orderStatus}
+        </Typography>
+        <Typography variant="body2">
+            Order date: {order.orderDate}
+        </Typography>
+      </CardContent>
+    </StyledCard>
 );
 }
 

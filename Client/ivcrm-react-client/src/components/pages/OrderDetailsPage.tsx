@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { getOrderById } from '../../store/reducers/orders/ActionCreators';
 import { getCustomerById } from '../../store/reducers/customers/ActionCreators';
 import CustomerDetails from '../customer/CustomerDetails';
+import { Grid } from '@mui/material';
 
 const OrderDetailsPage = () => {
 
@@ -25,10 +26,14 @@ useEffect(() => {
 }, [])
 
   return (
-    <div>
-      <OrderDetails order={order}/>
-      <CustomerDetails customer={customer}/>
-    </div>
+    <Grid container spacing={2} alignItems="stretch">
+      <Grid item style={{display: "flex"}} xs={12} sm={12} md={6} lg={6} xl={6}>
+        <OrderDetails order={order}/>
+      </Grid>
+      <Grid item style={{display: "flex"}} xs={12} sm={12} md={6} lg={6} xl={6}>
+        <CustomerDetails customer={customer}/>
+      </Grid>
+    </Grid>
   );
 }
 
