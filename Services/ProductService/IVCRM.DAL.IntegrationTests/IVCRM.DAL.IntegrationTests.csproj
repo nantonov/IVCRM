@@ -25,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\IVCRM.Core\IVCRM.Core.csproj" />
     <ProjectReference Include="..\IVCRM.DAL\IVCRM.DAL.csproj" />
   </ItemGroup>
 
