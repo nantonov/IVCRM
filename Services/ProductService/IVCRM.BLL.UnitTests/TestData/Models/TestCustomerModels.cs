@@ -1,4 +1,5 @@
 ﻿using IVCRM.BLL.Models;
+using IVCRM.Core;
 using IVCRM.DAL.Entities;
 
 namespace IVCRM.BLL.UnitTests.TestData.Models
@@ -17,6 +18,15 @@ namespace IVCRM.BLL.UnitTests.TestData.Models
         internal static List<Customer> CustomerModelCollection => new()
         {
             CustomerModel,
+        };
+
+        internal static PagedList<Customer> PaginatedModelCollection => new()
+        {
+            PageSize = 10,
+            CurrentPage = 0,
+            TotalCount = 1,
+            TotalPages = 1,
+            Data = CustomerModelCollection,
         };
     }
 }

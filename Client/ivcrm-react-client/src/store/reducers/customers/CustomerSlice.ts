@@ -1,8 +1,12 @@
 import { ICustomer } from "../../../models/ICustomer";
+import { IPagedList } from "../../../models/IPagedList";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { createCustomer, deleteCustomer, fetchCustomers, updateCustomer } from "./ActionCreators";
+import { IPaginationData } from "../../../models/IPaginationData";
 import { createCustomer, deleteCustomer, getCustomerById, fetchCustomers, updateCustomer } from "./ActionCreators";
 
 interface ICustomerState {
+    paginationData: IPaginationData;
     customers: ICustomer[];
     customer: ICustomer;
     isLoading: boolean;
@@ -10,6 +14,7 @@ interface ICustomerState {
 }
 
 const initialState: ICustomerState = {
+    paginationData: {pageSize: 10, currentPage: 0, totalCount: 0, totalPages: 0} as IPaginationData,
     customers: [],
     customer: {} as ICustomer,
     isLoading: false,
@@ -21,10 +26,16 @@ export const customerSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: {
-        [fetchCustomers.fulfilled.type]: (state, action: PayloadAction<Array<ICustomer>>) => {
+        [fetchCustomers.fulfilled.type]: (state, action: PayloadAction<IPagedList<ICustomer>>) => {
             state.isLoading = false;
             state.error = '';
-            state.customers = action.payload;
+            state.customers = action.payload.data;
+            state.paginationData = {
+                pageSize: action.payload.pageSize,
+                totalPages: action.payload.totalPages,
+                currentPage: action.payload.currentPage,
+                totalCount: action.payload.totalCount,
+            };
         },
         [fetchCustomers.pending.type]: (state) => {
             state.isLoading = true;

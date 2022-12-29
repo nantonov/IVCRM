@@ -1,14 +1,13 @@
 import CustomerService from "../../../services/CustomerService";
-import { AppDispatch } from "../../store";
-import { customerSlice } from './CustomerSlice';
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 import { IChangeCustomer } from "../../../models/IChangeCustomer";
+import { ITableParameters } from "../../../models/ITableParameters";
 
 export const fetchCustomers = createAsyncThunk(
     'customer/getAll',
-    async (_, thunkAPI) => { 
+    async (params: ITableParameters, thunkAPI) => { 
         try {
-            const response = await CustomerService.getAll()
+            const response = await CustomerService.getAll(params)
             return response;
         } catch (e: any) {
             return thunkAPI.rejectWithValue(e.response.data);

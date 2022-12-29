@@ -3,6 +3,9 @@ using IVCRM.API.IntegrationTests.Infrastructure;
 using IVCRM.API.IntegrationTests.TestData.Entities;
 using IVCRM.API.IntegrationTests.TestData.ViewModels;
 using IVCRM.API.ViewModels;
+using IVCRM.Core.Models;
+using System.Net;
+using IVCRM.Core;
 
 namespace IVCRM.API.IntegrationTests.ApiTests
 {
@@ -54,20 +57,21 @@ namespace IVCRM.API.IntegrationTests.ApiTests
             //Arrange
             var entityCollection = TestCustomerEntities.CustomerEntityCollection;
             var viewModelCollection = TestCustomerViewModels.ValidCustomerViewModelCollection;
+            var requestModel = new TableParameters { PageNumber = 0, PageSize = 10 };
             var entitiesCount = entityCollection.Count;
 
             await AddRangeToContext(entityCollection);
 
-            using var request = new HttpRequestMessage(HttpMethod.Get, $"/api/customer");
+            using var request = new HttpRequestMessage(HttpMethod.Get, $"/api/customer?{requestModel.ToQueryString()}");
 
             //Act
             var actualResult = await Client.SendAsync(request);
-            var responseResult = actualResult.GetResponseResult<IEnumerable<CustomerViewModel>>();
-            viewModelCollection.Select(x => x.Id = responseResult.First(z => z.FullName == x.FullName).Id).ToList();
+            var responseResult = actualResult.GetResponseResult<PagedList<CustomerViewModel>>();
+            viewModelCollection.Select(x => x.Id = responseResult.Data.First(z => z.FullName == x.FullName).Id).ToList();
 
             //Assert
             actualResult.StatusCode.ShouldBe(HttpStatusCode.OK);
-            responseResult.TakeLast(entitiesCount).ToList().ShouldBeEquivalentTo(viewModelCollection);
+            responseResult.Data.TakeLast(entitiesCount).ToList().ShouldBeEquivalentTo(viewModelCollection);
         }
 
         [Fact]

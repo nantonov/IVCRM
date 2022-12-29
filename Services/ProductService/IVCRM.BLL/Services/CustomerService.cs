@@ -2,6 +2,8 @@
 using IVCRM.BLL.Exceptions;
 using IVCRM.BLL.Models;
 using IVCRM.BLL.Services.Interfaces;
+using IVCRM.Core;
+using IVCRM.Core.Models;
 using IVCRM.DAL.Entities;
 using IVCRM.DAL.Repositories.Interfaces;
 
@@ -26,11 +28,11 @@ namespace IVCRM.BLL.Services
             return _mapper.Map<Customer>(result);
         }
 
-        public async Task<IEnumerable<Customer>> GetAll()
+        public async Task<PagedList<Customer>> GetAll(TableParameters parameters)
         {
-            var entity = await _customerRepository.GetAll();
+            var entities = await _customerRepository.GetAll(parameters);
 
-            return _mapper.Map<IEnumerable<Customer>>(entity);
+            return _mapper.Map<PagedList<Customer>>(entities);
         }
 
         public async Task<Customer> GetById(int id)
