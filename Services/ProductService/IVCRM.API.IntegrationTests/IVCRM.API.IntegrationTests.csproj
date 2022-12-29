@@ -29,4 +29,10 @@
     <ProjectReference Include="..\IVCRM.DAL\IVCRM.DAL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="IVCRM.Core">
+      <HintPath>..\..\..\IVCRM.Core\obj\Debug\net6.0\ref\IVCRM.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
