@@ -16,6 +16,18 @@ export const fetchCustomers = createAsyncThunk(
     }
 )
 
+export const getCustomerById = createAsyncThunk(
+    'customer/getById',
+    async (id: number, thunkAPI) => { 
+        try {
+            const response = await CustomerService.getById(id)
+            return response;
+        } catch (e: any) {
+            return thunkAPI.rejectWithValue(e.response.data);
+        }
+    }
+)
+
 export const createCustomer = createAsyncThunk(
     'customer/create',
     async (customer :IChangeCustomer, thunkAPI) => { 

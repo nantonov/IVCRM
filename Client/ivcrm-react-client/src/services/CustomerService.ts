@@ -22,5 +22,10 @@ export default class CustomerService {
         const response = await axiosInstance.get<Array<ICustomer>>(`/customer`)
         return response.data;
     }
+
+    static async getById(id: number) {
+        const response = await axiosInstance.get<ICustomer>(`/customer/${id}`)
+        return response.data;
+    }
 }
  

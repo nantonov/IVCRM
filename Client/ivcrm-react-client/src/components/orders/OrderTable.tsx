@@ -9,19 +9,29 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 
-import UpdateCustomerModal from './modals/UpdateCustomerModal';
-import DeleteCustomerModal from './modals/DeleteCustomerModal';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { fetchCustomers } from '../../store/reducers/customers/ActionCreators';
+import { fetchOrders } from '../../store/reducers/orders/ActionCreators';
+import ModalWrapper from '../buildingBlocks/ModalWrapper';
+import Edit from '@mui/icons-material/Edit';
+import Delete from '@mui/icons-material/Delete';
+import UpdateOrderForm from './forms/UpdateOrderForm';
+import DeleteOrderForm from './forms/DeleteOrderForm';
+import { useNavigate } from 'react-router-dom';
+import { CircularProgress } from '@mui/material';
 
-const CustomerTable = () => {
+const OrderTable = () => {
 
-  const {customer, customers, isLoading, error} = useAppSelector(state => state.customerReducer)
+  const {orders, isLoading, error} = useAppSelector(state => state.orderReducer)
   const dispatch = useAppDispatch()
+  const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(fetchCustomers())
+    dispatch(fetchOrders())
   }, [])
+
+  const handleClick = (event: React.MouseEvent<unknown>, id: number) => {
+    navigate(`/orders/${id}`)
+  }
 
   return (
     <TableContainer component={Paper} >
@@ -31,10 +41,10 @@ const CustomerTable = () => {
           variant="h6"
           component="div"
         >
-          Customers
+          Orders
       </Typography>
 
-      {isLoading && <h1>Loading...</h1>}
+      {isLoading && <CircularProgress />}
       {error && <h1>{error}</h1>}
 
       <hr />
@@ -42,28 +52,31 @@ const CustomerTable = () => {
         <TableHead>
           <TableRow>
             <TableCell>Id</TableCell>
-            <TableCell align="right">FullName</TableCell>
-            <TableCell align="right">PhoneNumber</TableCell>
-            <TableCell align="right">Email</TableCell>
+            <TableCell align="right">Name</TableCell>
+            <TableCell align="right">CustomerId</TableCell>
             <TableCell align="right"></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {customers.map((row) => (
+          {orders.map((row) => (
             <TableRow
+              onClick={(event) => handleClick(event, row.id)}
               key={row.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
                 {row.id}
               </TableCell>
-              <TableCell align="right">{row.fullName}</TableCell>
-              <TableCell align="right">{row.phoneNumber}</TableCell>
-              <TableCell align="right">{row.email}</TableCell>
+              <TableCell align="right">{row.name}</TableCell>
+              <TableCell align="right">{row.customerId}</TableCell>
               <TableCell align="right">
               <Stack spacing={0} direction="row">
-                <UpdateCustomerModal customer={row}/>
-                <DeleteCustomerModal customerId={row.id}/>
+              <ModalWrapper icon={<Edit />} data={row}>
+                    <UpdateOrderForm/>
+                  </ModalWrapper>
+                  <ModalWrapper icon={<Delete />} data={row.id}>
+                    <DeleteOrderForm/>
+                  </ModalWrapper>
                 </Stack>
                 </TableCell>
             </TableRow>
@@ -74,4 +87,4 @@ const CustomerTable = () => {
   );
 }
 
-export default CustomerTable;
+export default OrderTable;

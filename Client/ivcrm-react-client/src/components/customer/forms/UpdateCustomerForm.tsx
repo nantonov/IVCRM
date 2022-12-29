@@ -17,7 +17,7 @@ interface Props {
 const UpdateCustomerForm: React.FC<Props> = ({customer, handleClose}) => {
 
   const names = customer.fullName.split(" ");
-  const [changeCustomer, setChangeCustomer] = useState<IChangeCustomer>({id: customer.id, firstName: names[0], lastName: names[1], phoneNumber: customer.phoneNumber})
+  const [changeCustomer, setChangeCustomer] = useState<IChangeCustomer>({id: customer.id, firstName: names[0], lastName: names[1], phoneNumber: customer.phoneNumber, email: customer.email})
   const dispatch = useAppDispatch()
 
     const handleSubmit = (e: React.MouseEvent<HTMLElement>) => {
@@ -51,6 +51,14 @@ const UpdateCustomerForm: React.FC<Props> = ({customer, handleClose}) => {
               value={changeCustomer.phoneNumber} 
               onChange={e => setChangeCustomer({...changeCustomer, phoneNumber: e.target.value})} 
               label="Phone Number" 
+              variant="outlined" 
+              margin="dense"
+              autoComplete='off'
+              />
+            <TextField 
+              value={changeCustomer.email} 
+              onChange={e => setChangeCustomer({...changeCustomer, email: e.target.value})} 
+              label="Email" 
               variant="outlined" 
               margin="dense"
               autoComplete='off'

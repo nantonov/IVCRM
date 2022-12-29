@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import {Routes, Route} from "react-router-dom";
-import {privateRoutes} from "../router/pagesData";
+import {privateRoutes} from "./pagesData";
 
 const AppRouter = () => {
     const routes = privateRoutes.map(route =>

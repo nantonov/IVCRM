@@ -52,6 +52,14 @@ const CreateCustomerForm: React.FC<Props> = ({handleClose}) => {
                 margin="dense" 
                 autoComplete='off'
                 />
+            <TextField 
+                value={customer.phoneNumber} 
+                onChange={e => setCustomer({...customer, email: e.target.value})} 
+                label="Phone Number" 
+                variant="outlined" 
+                margin="dense" 
+                autoComplete='off'
+                />
 
             <Button variant="contained" onClick={handleSubmit}>Save</Button>
         </FormControl>

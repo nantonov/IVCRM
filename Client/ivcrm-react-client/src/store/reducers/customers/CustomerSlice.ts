@@ -1,6 +1,6 @@
 import { ICustomer } from "../../../models/ICustomer";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { createCustomer, deleteCustomer, fetchCustomers, updateCustomer } from "./ActionCreators";
+import { createCustomer, deleteCustomer, getCustomerById, fetchCustomers, updateCustomer } from "./ActionCreators";
 
 interface ICustomerState {
     customers: ICustomer[];
@@ -30,6 +30,18 @@ export const customerSlice = createSlice({
             state.isLoading = true;
         },
         [fetchCustomers.rejected.type]: (state, action: PayloadAction<string>) => {
+            state.isLoading = false;
+            state.error = action.payload;
+        },
+        [getCustomerById.fulfilled.type]: (state, action: PayloadAction<ICustomer>) => {
+            state.isLoading = false;
+            state.error = '';
+            state.customer = action.payload;
+        },
+        [getCustomerById.pending.type]: (state) => {
+            state.isLoading = true;
+        },
+        [getCustomerById.rejected.type]: (state, action: PayloadAction<string>) => {
             state.isLoading = false;
             state.error = action.payload;
         },
