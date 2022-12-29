@@ -1,5 +1,7 @@
 import { IChangeCustomer } from "../models/IChangeCustomer";
 import { ICustomer } from "../models/ICustomer";
+import { IPagedList } from "../models/IPagedList";
+import { ITableParameters } from "../models/ITableParameters";
 import axiosInstance from "./AxiosInstance";
 
 export default class CustomerService {
@@ -18,8 +20,8 @@ export default class CustomerService {
         return response;
     }
     
-    static async getAll() {
-        const response = await axiosInstance.get<Array<ICustomer>>(`/customer`)
+    static async getAll(tableParams: ITableParameters) {
+        const response = await axiosInstance.get<IPagedList<ICustomer>>(`/customer?pageNumber=${tableParams.pageNumber}&pageSize=${tableParams.pageSize}`)
         return response.data;
     }
 }

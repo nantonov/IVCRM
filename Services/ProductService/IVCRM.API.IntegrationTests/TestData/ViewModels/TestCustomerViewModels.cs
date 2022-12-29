@@ -1,4 +1,6 @@
 ﻿using IVCRM.API.ViewModels;
+using IVCRM.Core;
+using IVCRM.DAL.Entities;
 
 namespace IVCRM.API.IntegrationTests.TestData.ViewModels
 {
@@ -56,6 +58,15 @@ namespace IVCRM.API.IntegrationTests.TestData.ViewModels
             LastName = "UpdatedLastName",
             Email = "Email",
             PhoneNumber = "+1234567",
+        };
+
+        internal static PagedList<CustomerViewModel> PaginatedCustomerViewModel => new()
+        {
+            PageSize = 10,
+            CurrentPage = 0,
+            TotalCount = 1,
+            TotalPages = 1,
+            Data = ValidCustomerViewModelCollection,
         };
     }
 }

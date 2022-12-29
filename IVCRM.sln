@@ -57,6 +57,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotificationService.API", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NotificationService.BLL", "Services\NotificationService\NotificationService.BLL\NotificationService.BLL.csproj", "{0F830804-44EC-4959-9429-BBD8BFC044AA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IVCRM.Core", "IVCRM.Core\IVCRM.Core.csproj", "{FB78A8CC-97AD-4E35-8575-FC1FC08E7C05}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gateway", "Gateway", "{F249A983-37FC-4092-BC51-60ABB898B56D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Gateway", "Services\Gateway\Gateway.csproj", "{0F47836C-7686-4DDE-AD3A-C4CDB262EA1B}"
@@ -139,6 +141,10 @@ Global
 		{0F830804-44EC-4959-9429-BBD8BFC044AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F830804-44EC-4959-9429-BBD8BFC044AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F830804-44EC-4959-9429-BBD8BFC044AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB78A8CC-97AD-4E35-8575-FC1FC08E7C05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB78A8CC-97AD-4E35-8575-FC1FC08E7C05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB78A8CC-97AD-4E35-8575-FC1FC08E7C05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB78A8CC-97AD-4E35-8575-FC1FC08E7C05}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0F47836C-7686-4DDE-AD3A-C4CDB262EA1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0F47836C-7686-4DDE-AD3A-C4CDB262EA1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F47836C-7686-4DDE-AD3A-C4CDB262EA1B}.Release|Any CPU.ActiveCfg = Release|Any CPU

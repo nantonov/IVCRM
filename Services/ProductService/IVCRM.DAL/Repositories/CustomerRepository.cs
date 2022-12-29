@@ -1,7 +1,10 @@
-﻿using IVCRM.DAL.Infrastructure;
+﻿using IVCRM.Core.Models;
+using IVCRM.DAL.Infrastructure;
 using IVCRM.DAL.Entities;
+using IVCRM.DAL.Extensions;
 using IVCRM.DAL.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using IVCRM.Core;
 
 namespace IVCRM.DAL.Repositories
 {
@@ -22,9 +25,9 @@ namespace IVCRM.DAL.Repositories
             return entity;
         }
 
-        public async Task<IEnumerable<CustomerEntity>> GetAll()
+        public async Task<PagedList<CustomerEntity>> GetAll(TableParameters parameters)
         {
-            return await _context.Customers.ToListAsync();
+            return await _context.Customers.ToPagedList(parameters);
         }
 
         public async Task<CustomerEntity?> GetById(int id)
