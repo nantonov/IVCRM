@@ -1,9 +1,8 @@
 import { ICustomer } from "../../../models/ICustomer";
 import { IPagedList } from "../../../models/IPagedList";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { createCustomer, deleteCustomer, fetchCustomers, updateCustomer } from "./ActionCreators";
-import { IPaginationData } from "../../../models/IPaginationData";
 import { createCustomer, deleteCustomer, getCustomerById, fetchCustomers, updateCustomer } from "./ActionCreators";
+import { IPaginationData } from "../../../models/IPaginationData";
 
 interface ICustomerState {
     paginationData: IPaginationData;
