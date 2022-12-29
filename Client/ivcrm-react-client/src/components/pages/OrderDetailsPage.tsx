@@ -20,11 +20,8 @@ if (typeof(params.orderId) !== 'undefined' && params.orderId != null) {
 }
 
 useEffect(() => {
-  console.log(orderId)
   dispatch(getOrderById(orderId))
-  console.log(order)
   dispatch(getCustomerById(order.customerId))
-  //TODO Fix the PROBLEM with consistent request after reloads
 }, [])
 
   return (
