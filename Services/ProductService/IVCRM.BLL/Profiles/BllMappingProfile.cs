@@ -1,6 +1,7 @@
 ﻿using IVCRM.BLL.Models;
 using IVCRM.Core;
 using IVCRM.DAL.Entities;
+using Messages.Models;
 
 namespace IVCRM.BLL.Profiles
 {
@@ -15,6 +16,8 @@ namespace IVCRM.BLL.Profiles
             CreateMap<Product, ProductEntity>().ReverseMap();
 
             CreateMap<Order, OrderEntity>().ReverseMap();
+
+            CreateMap<OrderEntity, CreateOrderMessage>();
 
             CreateMap<ProductCategory, ProductCategoryEntity>().ReverseMap();
         }
