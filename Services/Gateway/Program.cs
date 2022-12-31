@@ -29,8 +29,6 @@ app.UseSwaggerForOcelotUI(opt =>
     opt.PathToSwaggerGenerator = "/swagger/docs";
 });
 
-await app.UseOcelot();
-
 app.UseRouting();
 
 app.UseAuthentication();
@@ -38,5 +36,7 @@ app.UseAuthentication();
 app.UseCors("DefaultPolicy");
 
 app.MapGet("/", () => "Ocelot API Gateway");
+
+await app.UseOcelot();
 
 app.Run();

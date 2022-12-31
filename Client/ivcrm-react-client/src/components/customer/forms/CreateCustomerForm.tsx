@@ -6,12 +6,9 @@ import FormControl from '@mui/material/FormControl';
 import { IChangeCustomer } from "../../../models/IChangeCustomer";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import { createCustomer } from "../../../store/reducers/customers/ActionCreators";
+import { ModalActions } from "../../../store/reducers/modal/ModalSlice";
 
-interface Props {
-    handleClose: () => void
-}
-
-const CreateCustomerForm: React.FC<Props> = ({handleClose}) => {
+const CreateCustomerForm = () => {
 
     const [customer, setCustomer] = useState<IChangeCustomer>({} as IChangeCustomer)
     const dispatch = useAppDispatch()
@@ -21,7 +18,7 @@ const CreateCustomerForm: React.FC<Props> = ({handleClose}) => {
     
         dispatch(createCustomer(customer));
         setCustomer({} as IChangeCustomer);
-        handleClose();
+        dispatch(ModalActions.closeModal());
       }
 
       return (

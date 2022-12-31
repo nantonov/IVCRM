@@ -1,9 +1,9 @@
 import React, { ReactElement, useState } from "react";
 import Modal from "@mui/material/Modal";
 import IconButton from '@mui/material/IconButton';
-import { StyledModalBox } from '../../styles/Styles';
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
 import { ModalActions } from "../../store/reducers/modal/ModalSlice";
+import { StyledModalBox } from "./StyledComponents";
 
 interface Props {
   data?: any

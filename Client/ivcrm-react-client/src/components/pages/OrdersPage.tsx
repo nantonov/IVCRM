@@ -1,7 +1,6 @@
-import React from 'react';
 import Typography from '@mui/material/Typography';
 
-function Order() {
+function OrdersPage() {
 
 
   return (
@@ -16,4 +15,4 @@ function Order() {
   );
 }
 
-export default Order;
+export default OrdersPage;
