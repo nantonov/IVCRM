@@ -33,11 +33,11 @@ namespace IVCRM.BLL.Services
             return _mapper.Map<IEnumerable<Order>>(entity);
         }
 
-        public async Task<Order> GetById(int id)
+        public async Task<OrderDetails> GetById(int id)
         {
             var entity = await _repository.GetById(id);
 
-            return _mapper.Map<Order>(entity);
+            return _mapper.Map<OrderDetails>(entity);
         }
 
         public async Task<Order> Update(Order model)

@@ -29,7 +29,11 @@ namespace IVCRM.DAL.Repositories
 
         public async Task<OrderEntity?> GetById(int id)
         {
-            return await _context.Orders.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Orders.AsNoTracking()
+                .Include(x => x.Customer)
+                .Include(x => x.ProductOrders)
+                .ThenInclude(x => x.Product)
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<OrderEntity?> Update(OrderEntity entity)

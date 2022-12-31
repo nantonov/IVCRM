@@ -18,11 +18,14 @@ namespace IVCRM.API.Profiles
             CreateMap<ChangeProductViewModel, Product>();
 
             CreateMap<Order, OrderViewModel>();
+            CreateMap<OrderDetails, OrderDetailsViewModel>();
             CreateMap<ChangeOrderViewModel, Order>();
             CreateMap<Order, CreateOrderMessage>();
 
             CreateMap<ProductCategory, ProductCategoryViewModel>();
             CreateMap<ChangeProductCategoryViewModel, ProductCategory>();
+
+            CreateMap<ProductOrder, ProductOrderViewModel>();
         }
     }
 }

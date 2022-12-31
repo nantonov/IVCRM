@@ -7,7 +7,7 @@ namespace IVCRM.BLL.Services.Interfaces
     {
         Task<Order> Create(Order model);
         Task<IEnumerable<Order>> GetAll();
-        Task<Order> GetById(int id);
+        Task<OrderDetails> GetById(int id);
         Task<Order> Update(Order model);
         Task Delete(int id);
         Task<bool> IsEntityExists(int id);
