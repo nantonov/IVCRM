@@ -9,10 +9,13 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 
-import UpdateCategoryModal from './modals/UpdateCategoryModal';
-import DeleteCategoryModal from './modals/DeleteCategoryModal';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchCategories } from '../../store/reducers/categories/ActionCreators';
+import ModalWrapper from '../buildingBlocks/ModalWrapper';
+import UpdateProductForm from '../products/forms/UpdateProductForm';
+import { Delete, Edit } from '@mui/icons-material';
+import DeleteProductForm from '../products/forms/DeleteProductForm';
+import { CircularProgress } from '@mui/material';
 
 const CustomerTable = () => {
 
@@ -34,7 +37,7 @@ const CustomerTable = () => {
           Categories
       </Typography>
 
-      {isLoading && <h1>Loading...</h1>}
+      {isLoading && <CircularProgress />}
       {error && <h1>{error}</h1>}
 
       <hr />
@@ -60,8 +63,12 @@ const CustomerTable = () => {
               <TableCell align="right">{row.parentCategoryId}</TableCell>
               <TableCell align="right">
               <Stack spacing={0} direction="row">
-                <UpdateCategoryModal category={row}/>
-                <DeleteCategoryModal categoryId={row.id}/>
+              <ModalWrapper icon={<Edit />} data={row}>
+                    <UpdateProductForm/>
+                  </ModalWrapper>
+                  <ModalWrapper icon={<Delete />} data={row.id}>
+                    <DeleteProductForm/>
+                  </ModalWrapper>
                 </Stack>
                 </TableCell>
             </TableRow>

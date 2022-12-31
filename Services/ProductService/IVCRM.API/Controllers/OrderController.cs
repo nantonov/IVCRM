@@ -4,8 +4,6 @@ using IVCRM.API.Validators;
 using IVCRM.API.ViewModels;
 using IVCRM.BLL.Models;
 using IVCRM.BLL.Services.Interfaces;
-using MassTransit;
-using Messages;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IVCRM.API.Controllers
@@ -15,24 +13,18 @@ namespace IVCRM.API.Controllers
     public class OrderController : ControllerBase
     {
         private readonly IOrderService _orderService;
-        private readonly ICustomerService _customerService;
         private readonly IMapper _mapper;
         private readonly ChangeOrderValidator _changeOrderValidator;
-        private readonly IPublishEndpoint _publishEndpoint;
 
         public OrderController(
-                IOrderService orderService, 
-                ICustomerService customerService,
+                IOrderService orderService,
                 IMapper mapper, 
-                ChangeOrderValidator changeOrderValidator, 
-                IPublishEndpoint publishEndpoint
+                ChangeOrderValidator changeOrderValidator
         )
         {
             _orderService = orderService;
-            _customerService = customerService;
             _mapper = mapper;
             _changeOrderValidator = changeOrderValidator;
-            _publishEndpoint = publishEndpoint;
         }
 
         [HttpPost]
@@ -42,12 +34,6 @@ namespace IVCRM.API.Controllers
             
             var model = _mapper.Map<Order>(viewModel);
             var result = await _orderService.Create(model);
-
-            var message = _mapper.Map<CreateOrderMessage>(result);
-            var customer = await _customerService.GetById(message.CustomerId);
-            message.CustomerEmail = customer.Email;
-
-            await _publishEndpoint.Publish<CreateOrderMessage>(message);
 
             return _mapper.Map<OrderViewModel>(result);
         }

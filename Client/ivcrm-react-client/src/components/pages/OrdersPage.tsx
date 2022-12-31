@@ -4,7 +4,7 @@ import { Add } from '@mui/icons-material';
 import CreateOrderForm from '../orders/forms/CreateOrderForm';
 import OrderTable from '../orders/OrderTable';
 
-function Order() {
+function OrdersPage() {
 
 
   return (
@@ -23,4 +23,4 @@ function Order() {
   );
 }
 
-export default Order;
+export default OrdersPage;

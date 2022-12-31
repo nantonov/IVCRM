@@ -1,4 +1,4 @@
-﻿namespace Messages
+﻿namespace Messages.Models
 {
     public record CreateOrderMessage
     {

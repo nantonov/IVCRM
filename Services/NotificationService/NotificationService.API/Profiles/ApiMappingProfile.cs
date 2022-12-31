@@ -1,5 +1,5 @@
 ﻿using NotificationService.BLL.Models;
-using Messages;
+using Messages.Models;
 
 namespace NotificationService.API.Profiles
 {
