@@ -3,26 +3,25 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { getOrderById } from '../../store/reducers/orders/ActionCreators';
-import { getCustomerById } from '../../store/reducers/customers/ActionCreators';
 import CustomerDetails from '../customer/CustomerDetails';
 import { Grid } from '@mui/material';
+import { ICustomer } from '../../models/ICustomer';
+import OrderItemTable from '../orderItems/OrderItemTable';
 
 const OrderDetailsPage = () => {
 
-  const {order, isLoading, error} = useAppSelector(state => state.orderReducer)
-  const {customer} = useAppSelector(state => state.customerReducer)
-  const dispatch = useAppDispatch()
+  const {order} = useAppSelector(state => state.orderReducer)
   const params = useParams();
+  const dispatch = useAppDispatch()
   
   var orderId = 0;
-
 if (typeof(params.orderId) !== 'undefined' && params.orderId != null) {
   orderId = parseInt(params.orderId, 10);
 }
 
 useEffect(() => {
   dispatch(getOrderById(orderId))
-  dispatch(getCustomerById(order.customerId))
+  console.log(order)
 }, [])
 
   return (
@@ -31,7 +30,10 @@ useEffect(() => {
         <OrderDetails order={order}/>
       </Grid>
       <Grid item style={{display: "flex"}} xs={12} sm={12} md={6} lg={6} xl={6}>
-        <CustomerDetails customer={customer}/>
+        <CustomerDetails customer={order.customer}/>
+      </Grid>
+      <Grid item style={{display: "flex"}} xs={12}>
+        <OrderItemTable orderItems={order.productOrders}/>
       </Grid>
     </Grid>
   );
