@@ -1,5 +1,4 @@
 ﻿using IVCRM.BLL.Models;
-using IVCRM.DAL.Entities;
 
 namespace IVCRM.BLL.Services.Interfaces
 {

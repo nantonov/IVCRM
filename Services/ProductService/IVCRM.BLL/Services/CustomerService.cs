@@ -35,11 +35,11 @@ namespace IVCRM.BLL.Services
             return _mapper.Map<PagedList<Customer>>(entities);
         }
 
-        public async Task<Customer> GetById(int id)
+        public async Task<CustomerDetails> GetById(int id)
         {
             var entity = await _customerRepository.GetById(id);
 
-            return _mapper.Map<Customer>(entity);
+            return _mapper.Map<CustomerDetails>(entity);
         }
 
         public async Task<Customer> Update(Customer model)
