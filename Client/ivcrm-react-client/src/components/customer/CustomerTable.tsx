@@ -57,6 +57,7 @@ const CustomerTable = () => {
             <TableCell>Id</TableCell>
             <TableCell align="right">FullName</TableCell>
             <TableCell align="right">PhoneNumber</TableCell>
+            <TableCell align="right">Email</TableCell>
             <TableCell align="right"></TableCell>
           </TableRow>
         </TableHead>
@@ -71,6 +72,7 @@ const CustomerTable = () => {
               </TableCell>
               <TableCell align="right">{row.fullName}</TableCell>
               <TableCell align="right">{row.phoneNumber}</TableCell>
+              <TableCell align="right">{row.email}</TableCell>
               <TableCell align="right">
               <Stack spacing={0} direction="row">
                   <ModalWrapper icon={<Edit />} data={row}>

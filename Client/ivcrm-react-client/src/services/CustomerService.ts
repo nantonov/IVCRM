@@ -24,5 +24,10 @@ export default class CustomerService {
         const response = await axiosInstance.get<IPagedList<ICustomer>>(`/customer?pageNumber=${tableParams.pageNumber}&pageSize=${tableParams.pageSize}`)
         return response.data;
     }
+
+    static async getById(id: number) {
+        const response = await axiosInstance.get<ICustomer>(`/customer/${id}`)
+        return response.data;
+    }
 }
  

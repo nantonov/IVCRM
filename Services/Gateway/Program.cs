@@ -11,12 +11,9 @@ builder.Services.AddOcelot(ocelotConfig).AddCacheManager(options => options.With
 builder.Services.AddCors(config =>
 {
     config.AddPolicy("DefaultPolicy",
-        builder =>
-        {
-            builder.WithOrigins("http://localhost:3000")
-                .AllowAnyMethod()
-                .AllowAnyHeader();
-        });
+        builder => builder.WithOrigins("http://localhost:3000")
+            .AllowAnyMethod()
+            .AllowAnyHeader());
 });
 
 builder.Services.AddEndpointsApiExplorer();

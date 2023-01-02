@@ -1,17 +1,25 @@
-import Typography from '@mui/material/Typography';
+import { Divider, Grid } from '@mui/material';
+import ModalWrapper from '../buildingBlocks/ModalWrapper';
+import { Add } from '@mui/icons-material';
+import CreateOrderForm from '../orders/forms/CreateOrderForm';
+import OrderTable from '../orders/OrderTable';
 
 function OrdersPage() {
 
 
   return (
-    <Typography
-    sx={{ flex: '1 1 100%' }}
-    padding="10px"
-    variant="h6"
-    component="div"
-  >
-    Test
-</Typography>
+    <Grid direction='row' container spacing={1}>
+    <Grid container item sm={3}>
+        filters...
+    </Grid>
+    <Divider orientation="vertical" flexItem/>
+    <Grid container item sm={9}>
+        <ModalWrapper icon={<Add />}>
+            <CreateOrderForm/>
+        </ModalWrapper>
+    <OrderTable/>
+    </Grid>
+  </Grid>
   );
 }
 
