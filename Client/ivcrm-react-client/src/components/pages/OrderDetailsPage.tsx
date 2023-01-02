@@ -5,7 +5,6 @@ import { useEffect } from 'react';
 import { getOrderById } from '../../store/reducers/orders/ActionCreators';
 import CustomerDetails from '../customer/CustomerDetails';
 import { Grid } from '@mui/material';
-import { ICustomer } from '../../models/ICustomer';
 import OrderItemTable from '../orderItems/OrderItemTable';
 
 const OrderDetailsPage = () => {
@@ -21,7 +20,6 @@ if (typeof(params.orderId) !== 'undefined' && params.orderId != null) {
 
 useEffect(() => {
   dispatch(getOrderById(orderId))
-  console.log(order)
 }, [])
 
   return (

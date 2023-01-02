@@ -1,4 +1,6 @@
-﻿namespace IVCRM.DAL.Entities
+﻿using IVCRM.DAL.Entities.Interfaces;
+
+namespace IVCRM.DAL.Entities
 {
     public class ProductOrderEntity
     {

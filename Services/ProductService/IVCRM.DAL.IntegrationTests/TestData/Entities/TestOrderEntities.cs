@@ -19,6 +19,15 @@ namespace IVCRM.DAL.IntegrationTests.TestData.Entities
             CustomerId = 1,
         };
 
+        internal static OrderEntity OrderDetailsEntity => new()
+        {
+            Name = "Name",
+            OrderStatus = OrderStatus.Created,
+            CustomerId = 1,
+            Customer = TestCustomerEntities.CustomerEntity,
+            ProductOrders = TestProductOrderEntities.ProductOrderEntityCollection,
+        };
+
         internal static List<OrderEntity> OrderEntityCollection => new ()
         {
             OrderEntity,

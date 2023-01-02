@@ -49,7 +49,7 @@ namespace IVCRM.BLL.UnitTests.MappingTests
         {
             //Arrange
             var model = TestOrderModels.OrderDetailsModel;
-            var entity = TestOrderEntities.OrderEntity;
+            var entity = TestOrderEntities.OrderDetailsEntity;
 
             var config = new MapperConfiguration(cfg => cfg.AddProfile<BllMappingProfile>());
             var mapper = config.CreateMapper();
@@ -89,7 +89,7 @@ namespace IVCRM.BLL.UnitTests.MappingTests
             var mapper = config.CreateMapper();
 
             //Act 
-            var result = mapper.Map<OrderViewModel>(model);
+            var result = mapper.Map<OrderDetailsViewModel>(model);
 
             //Assert 
             result.ShouldBeEquivalentTo(viewModel);

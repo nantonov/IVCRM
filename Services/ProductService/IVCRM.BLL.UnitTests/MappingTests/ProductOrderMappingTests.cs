@@ -21,7 +21,7 @@ namespace IVCRM.BLL.UnitTests.MappingTests
             var mapper = config.CreateMapper();
 
             //Act
-            var result = mapper.Map<Product>(entity);
+            var result = mapper.Map<ProductOrder>(entity);
 
             //Assert
             result.ShouldBeEquivalentTo(model);

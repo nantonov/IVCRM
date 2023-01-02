@@ -17,7 +17,7 @@ interface Props {
 const OrderItemTable: React.FC<Props> = ({ orderItems }) => {
   const navigate = useNavigate();
 
-  const navigateToProductClick = (event: React.MouseEvent<unknown>, id: number) => {
+  const redirectOnProductClick = (event: React.MouseEvent<unknown>, id: number) => {
     navigate(`/products/${id}`)
   }
 
@@ -49,7 +49,7 @@ const OrderItemTable: React.FC<Props> = ({ orderItems }) => {
         <TableBody>
           {orderItems.map((row) => (
             <TableRow
-              onClick={(event) => navigateToProductClick(event, row.productId)}
+              onClick={(event) => redirectOnProductClick(event, row.productId)}
               key={row.productId}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
