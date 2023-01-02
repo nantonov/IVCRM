@@ -7,17 +7,15 @@ import { ICustomer } from "../../../models/ICustomer";
 import { IChangeCustomer } from "../../../models/IChangeCustomer";
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
 import { updateCustomer } from "../../../store/reducers/customers/ActionCreators";
+import { ModalActions } from "../../../store/reducers/modal/ModalSlice";
 
-interface Props {
-  customer: ICustomer
-  handleClose: () => void
-}
+const UpdateCustomerForm = () => {
 
-
-const UpdateCustomerForm: React.FC<Props> = ({customer, handleClose}) => {
+  const {data} = useAppSelector(state => state.modalReducer)
+  var customer = data as ICustomer
 
   const names = customer.fullName.split(" ");
-  const [changeCustomer, setChangeCustomer] = useState<IChangeCustomer>({id: customer.id, firstName: names[0], lastName: names[1], phoneNumber: customer.phoneNumber})
+  const [changeCustomer, setChangeCustomer] = useState<IChangeCustomer>({id: customer.id, firstName: names[0], lastName: names[1], phoneNumber: customer.phoneNumber, email: customer.email})
   const dispatch = useAppDispatch()
 
     const handleSubmit = (e: React.MouseEvent<HTMLElement>) => {
@@ -25,7 +23,7 @@ const UpdateCustomerForm: React.FC<Props> = ({customer, handleClose}) => {
     
         dispatch(updateCustomer(changeCustomer));
         setChangeCustomer({} as IChangeCustomer);
-        handleClose();
+        dispatch(ModalActions.closeModal());
       }
 
       return (
@@ -51,6 +49,14 @@ const UpdateCustomerForm: React.FC<Props> = ({customer, handleClose}) => {
               value={changeCustomer.phoneNumber} 
               onChange={e => setChangeCustomer({...changeCustomer, phoneNumber: e.target.value})} 
               label="Phone Number" 
+              variant="outlined" 
+              margin="dense"
+              autoComplete='off'
+              />
+            <TextField 
+              value={changeCustomer.email} 
+              onChange={e => setChangeCustomer({...changeCustomer, email: e.target.value})} 
+              label="Email" 
               variant="outlined" 
               margin="dense"
               autoComplete='off'

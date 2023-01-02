@@ -1,11 +1,12 @@
 import { Divider, Grid } from '@mui/material';
-import React, { useState } from 'react';
 import ModalWrapper from '../buildingBlocks/ModalWrapper';
-import ProductTable from '../products/ProductsTable';
-import Add from '@mui/icons-material/Add';
-import CreateProductForm from '../products/forms/CreateProductForm';
+import { Add } from '@mui/icons-material';
+import CreateOrderForm from '../orders/forms/CreateOrderForm';
+import OrderTable from '../orders/OrderTable';
 
-function Products() {
+function OrdersPage() {
+
+
   return (
     <Grid direction='row' container spacing={1}>
     <Grid container item sm={3}>
@@ -14,12 +15,12 @@ function Products() {
     <Divider orientation="vertical" flexItem/>
     <Grid container item sm={9}>
         <ModalWrapper icon={<Add />}>
-            <CreateProductForm/>
+            <CreateOrderForm/>
         </ModalWrapper>
-    <ProductTable/>
+    <OrderTable/>
     </Grid>
   </Grid>
   );
 }
 
-export default Products;
+export default OrdersPage;

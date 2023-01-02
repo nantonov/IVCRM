@@ -4,25 +4,25 @@ import Typography from '@mui/material/Typography';
 import FormControl from '@mui/material/FormControl';
 import Stack from '@mui/material/Stack';
 import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
-import { deleteCustomer } from "../../../store/reducers/customers/ActionCreators";
 import { ModalActions } from "../../../store/reducers/modal/ModalSlice";
+import { deleteOrder } from "../../../store/reducers/orders/ActionCreators";
 
-const DeleteCustomerForm = () => {
+const DeleteOrderForm = () => {
 
   const {data} = useAppSelector(state => state.modalReducer)
-  var customerId = data as number
+  var orderId = data as number
   const dispatch = useAppDispatch()
-  
+
     const handleSubmit = (e : React.MouseEvent<HTMLElement>) => {
       e.preventDefault()
   
-      dispatch(deleteCustomer(customerId));
+      dispatch(deleteOrder(orderId));
       dispatch(ModalActions.closeModal());
     }
 
       return (
         <FormControl>
-            <Typography variant="h6" fontWeight={700} margin="dense">Delete customer with ID={customerId}?</Typography>
+            <Typography variant="h6" fontWeight={700} margin="dense">Delete order with ID={orderId}?</Typography>
             <Stack spacing={2} direction="row">
               <Button variant="contained" onClick={handleSubmit}>delete</Button>
               <Button variant="contained" onClick={() => ModalActions.closeModal()}>cancel</Button>
@@ -31,4 +31,4 @@ const DeleteCustomerForm = () => {
       );
     }
     
-    export default DeleteCustomerForm;
+    export default DeleteOrderForm;

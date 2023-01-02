@@ -10,21 +10,28 @@ import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { fetchCategories } from '../../store/reducers/categories/ActionCreators';
+import { fetchOrders } from '../../store/reducers/orders/ActionCreators';
 import ModalWrapper from '../buildingBlocks/ModalWrapper';
-import UpdateProductForm from '../products/forms/UpdateProductForm';
-import { Delete, Edit } from '@mui/icons-material';
-import DeleteProductForm from '../products/forms/DeleteProductForm';
+import Edit from '@mui/icons-material/Edit';
+import Delete from '@mui/icons-material/Delete';
+import UpdateOrderForm from './forms/UpdateOrderForm';
+import DeleteOrderForm from './forms/DeleteOrderForm';
+import { useNavigate } from 'react-router-dom';
 import { CircularProgress } from '@mui/material';
 
-const CustomerTable = () => {
+const OrderTable = () => {
 
-  const {categories, isLoading, error} = useAppSelector(state => state.categoryReducer)
+  const {orders, isLoading, error} = useAppSelector(state => state.orderReducer)
   const dispatch = useAppDispatch()
+  const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(fetchCategories())
+    dispatch(fetchOrders())
   }, [])
+
+  const handleClick = (event: React.MouseEvent<unknown>, id: number) => {
+    navigate(`/orders/${id}`)
+  }
 
   return (
     <TableContainer component={Paper} >
@@ -34,7 +41,7 @@ const CustomerTable = () => {
           variant="h6"
           component="div"
         >
-          Categories
+          Orders
       </Typography>
 
       {isLoading && <CircularProgress />}
@@ -46,13 +53,14 @@ const CustomerTable = () => {
           <TableRow>
             <TableCell>Id</TableCell>
             <TableCell align="right">Name</TableCell>
-            <TableCell align="right">Parent category id</TableCell>
+            <TableCell align="right">CustomerId</TableCell>
             <TableCell align="right"></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {categories.map((row) => (
+          {orders.map((row) => (
             <TableRow
+              onClick={(event) => handleClick(event, row.id)}
               key={row.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
@@ -60,14 +68,14 @@ const CustomerTable = () => {
                 {row.id}
               </TableCell>
               <TableCell align="right">{row.name}</TableCell>
-              <TableCell align="right">{row.parentCategoryId}</TableCell>
+              <TableCell align="right">{row.customerId}</TableCell>
               <TableCell align="right">
               <Stack spacing={0} direction="row">
               <ModalWrapper icon={<Edit />} data={row}>
-                    <UpdateProductForm/>
+                    <UpdateOrderForm/>
                   </ModalWrapper>
                   <ModalWrapper icon={<Delete />} data={row.id}>
-                    <DeleteProductForm/>
+                    <DeleteOrderForm/>
                   </ModalWrapper>
                 </Stack>
                 </TableCell>
@@ -79,4 +87,4 @@ const CustomerTable = () => {
   );
 }
 
-export default CustomerTable;
+export default OrderTable;

@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Messages\Messages\Messages.csproj" />
     <ProjectReference Include="..\NotificationService.BLL\NotificationService.BLL.csproj" />
   </ItemGroup>
 

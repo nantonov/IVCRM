@@ -8,11 +8,13 @@ import TableRow from '@mui/material/TableRow';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
-import UpdateCustomerModal from './modals/UpdateCustomerModal';
-import DeleteCustomerModal from './modals/DeleteCustomerModal';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchCustomers } from '../../store/reducers/customers/ActionCreators';
-import { Box, TablePagination } from '@mui/material';
+import { Box, CircularProgress, TablePagination } from '@mui/material';
+import ModalWrapper from '../buildingBlocks/ModalWrapper';
+import { Delete, Edit } from '@mui/icons-material';
+import UpdateCustomerForm from './forms/UpdateCustomerForm';
+import DeleteCustomerForm from './forms/DeleteCustomerForm';
 
 
 const CustomerTable = () => {
@@ -45,7 +47,7 @@ const CustomerTable = () => {
           Customers
       </Typography>
 
-      {isLoading && <h1>Loading...</h1>}
+      {isLoading && <CircularProgress />}
       {error && <h1>{error}</h1>}
 
       <hr />
@@ -55,6 +57,7 @@ const CustomerTable = () => {
             <TableCell>Id</TableCell>
             <TableCell align="right">FullName</TableCell>
             <TableCell align="right">PhoneNumber</TableCell>
+            <TableCell align="right">Email</TableCell>
             <TableCell align="right"></TableCell>
           </TableRow>
         </TableHead>
@@ -69,10 +72,15 @@ const CustomerTable = () => {
               </TableCell>
               <TableCell align="right">{row.fullName}</TableCell>
               <TableCell align="right">{row.phoneNumber}</TableCell>
+              <TableCell align="right">{row.email}</TableCell>
               <TableCell align="right">
               <Stack spacing={0} direction="row">
-                <UpdateCustomerModal customer={row}/>
-                <DeleteCustomerModal customerId={row.id}/>
+                  <ModalWrapper icon={<Edit />} data={row}>
+                    <UpdateCustomerForm/>
+                  </ModalWrapper>
+                  <ModalWrapper icon={<Delete />} data={row.id}>
+                    <DeleteCustomerForm/>
+                  </ModalWrapper>
                 </Stack>
                 </TableCell>
             </TableRow>
