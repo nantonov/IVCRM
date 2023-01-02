@@ -1,6 +1,5 @@
 ﻿using IVCRM.BLL.Models;
 using IVCRM.Core;
-using IVCRM.DAL.Entities;
 
 namespace IVCRM.BLL.UnitTests.TestData.Models
 {
@@ -13,6 +12,18 @@ namespace IVCRM.BLL.UnitTests.TestData.Models
             LastName = "LastName",
             Email = "Email",
             PhoneNumber = "+1234567",
+        };
+
+        internal static CustomerDetails CustomerDetailsModel => new()
+        {
+            Id = 1,
+            FirstName = "FirstName",
+            LastName = "LastName",
+            Email = "Email",
+            PhoneNumber = "+1234567",
+            DateOfBirth = DateTime.MaxValue,
+            Address = TestAddressModels.AddressModel,
+            Orders = TestOrderModels.OrderModelCollection,
         };
 
         internal static List<Customer> CustomerModelCollection => new()

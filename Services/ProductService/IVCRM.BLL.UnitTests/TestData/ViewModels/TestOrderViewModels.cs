@@ -19,5 +19,10 @@ namespace IVCRM.BLL.UnitTests.TestData.ViewModels
             OrderStatus = OrderStatus.Created,
             CustomerId = 1,
         };
+
+        internal static List<OrderViewModel> OrderViewModelCollection => new()
+        {
+            ValidOrderViewModel,
+        };
     }
 }

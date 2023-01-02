@@ -6,6 +6,7 @@ using IVCRM.API.ViewModels;
 using IVCRM.Core.Models;
 using System.Net;
 using IVCRM.Core;
+using AutoMapper;
 
 namespace IVCRM.API.IntegrationTests.ApiTests
 {
@@ -78,16 +79,17 @@ namespace IVCRM.API.IntegrationTests.ApiTests
         public async Task GetById_DataExists_ReturnsViewModel()
         {
             //Arrange
-            var entity = TestCustomerEntities.CustomerEntity;
+            var entity = TestCustomerEntities.CustomerDetailsModel;
             var id = await AddToContext(entity);
-            var viewModel = TestCustomerViewModels.ValidCustomerViewModel;
+            var viewModel = TestCustomerViewModels.CustomerDetailsViewModel;
             viewModel.Id = id;
 
             using var request = new HttpRequestMessage(HttpMethod.Get, $"/api/customer/{id}");
 
             //Act
             var actualResult = await Client.SendAsync(request);
-            var responseResult = actualResult.GetResponseResult<CustomerViewModel>();
+            var responseResult = actualResult.GetResponseResult<CustomerDetailsViewModel>();
+            viewModel.Orders = responseResult.Orders;
 
             //Assert
             actualResult.StatusCode.ShouldBe(HttpStatusCode.OK);

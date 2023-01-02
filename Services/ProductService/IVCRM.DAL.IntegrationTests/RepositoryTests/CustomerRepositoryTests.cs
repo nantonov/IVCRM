@@ -47,11 +47,12 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
         public async Task GetById_EntityExists_ReturnsEntity()
         {
             //Arrange
-            var entity = TestCustomerEntities.CustomerEntity;
+            var entity = TestCustomerEntities.CustomerDetailsModel;
             await AddToContext(entity);
 
             //Act
             var actualResult = await _repository.GetById(entity.Id);
+            actualResult!.Orders = actualResult.Orders?.ToList();
 
             //Assert
             actualResult.ShouldBeEquivalentTo(entity);

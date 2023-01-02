@@ -12,6 +12,18 @@ namespace IVCRM.BLL.UnitTests.TestData.ViewModels
             PhoneNumber = "+1234567",
         };
 
+        internal static CustomerDetailsViewModel CustomerDetailsViewModel => new()
+        {
+            Id = 1,
+            FirstName = "FirstName",
+            LastName = "LastName",
+            Email = "Email",
+            PhoneNumber = "+1234567",
+            DateOfBirth = DateTime.MaxValue,
+            Address = TestAddressViewModels.ValidAddressViewModel,
+            Orders = TestOrderViewModels.OrderViewModelCollection,
+        };
+
         internal static ChangeCustomerViewModel ValidChangeCustomerViewModel => new()
         {
             FirstName = "FirstName",

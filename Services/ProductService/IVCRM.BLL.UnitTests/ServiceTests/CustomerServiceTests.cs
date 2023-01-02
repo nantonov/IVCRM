@@ -62,14 +62,14 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
         public async Task GetById_Id_ReturnsModel()
         {
             //Arrange
-            var model = TestCustomerModels.CustomerModel;
+            var model = TestCustomerModels.CustomerDetailsModel;
             var entity = TestCustomerEntities.CustomerEntity;
             var id = model.Id;
 
             var mocker = new AutoMocker(MockBehavior.Default, DefaultValue.Mock);
             mocker.Setup<ICustomerRepository, Task<CustomerEntity?>>(x => x.GetById(It.IsAny<int>()))
                 .ReturnsAsync(entity);
-            mocker.Setup<IMapper, Customer>(x => x.Map<Customer>(entity)).Returns(model);
+            mocker.Setup<IMapper, CustomerDetails>(x => x.Map<CustomerDetails>(entity)).Returns(model);
 
             var service = mocker.CreateInstance<CustomerService>();
 
