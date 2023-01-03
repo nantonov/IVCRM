@@ -8,6 +8,7 @@ namespace IVCRM.DAL.Repositories.Interfaces
         Task<IEnumerable<ProductEntity>> GetAll();
         Task<ProductEntity?> GetById(int id);
         Task<ProductEntity?> Update(ProductEntity entity);
+        Task UpdatePictureUri(int id, string uri);
         Task Delete(int id);
     }
 }

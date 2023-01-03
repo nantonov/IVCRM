@@ -53,6 +53,16 @@ namespace IVCRM.BLL.Services
             return _mapper.Map<Product>(result);
         }
 
+        public async Task UpdatePictureUri(int id, string uri)
+        {
+            if (!await IsEntityExists(id))
+            {
+                throw new ResourceNotFoundException();
+            }
+
+            await _repository.UpdatePictureUri(id, uri);
+        }
+
         public async Task Delete(int id)
         {
             if (!await IsEntityExists(id))
