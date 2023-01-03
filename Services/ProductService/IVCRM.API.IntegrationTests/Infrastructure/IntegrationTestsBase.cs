@@ -1,4 +1,6 @@
-﻿using IVCRM.DAL.Entities.Interfaces;
+﻿using FakeItEasy;
+using IVCRM.BLL.Services.Interfaces;
+using IVCRM.DAL.Entities.Interfaces;
 using IVCRM.DAL.Infrastructure;
 using MassTransit;
 using MassTransit.Testing;
@@ -31,6 +33,8 @@ namespace IVCRM.API.IntegrationTests.Infrastructure
                     {
                         x.UsingInMemory();
                     });
+
+                    services.AddScoped(serviceProvider => A.Fake<IPictureService>());
                 }));
             Server = factory.Server;
             Client = Server.CreateClient();
