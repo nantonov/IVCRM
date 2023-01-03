@@ -7,7 +7,7 @@ namespace IVCRM.API.Validators
     {
         public LoadPictureValidator()
         {
-            RuleFor(x => x.Picture).SetValidator(new FileValidator());
+            RuleFor(x => x.Picture).SetValidator(new FileValidator()!);
         }
     }
 }

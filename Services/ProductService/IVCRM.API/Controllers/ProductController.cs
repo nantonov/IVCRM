@@ -78,7 +78,7 @@ namespace IVCRM.API.Controllers
         {
             await _loadPictureValidator.ValidateAndThrowAsync(request);
 
-            var pictureUri = await _pictureService.UploadPictureAsync(PicturesCategory, request.Id.ToString(), request.Picture.OpenReadStream());
+            var pictureUri = await _pictureService.UploadPictureAsync(PicturesCategory, request.Id.ToString(), request.Picture!.OpenReadStream());
 
             await _productService.UpdatePictureUri(request.Id, pictureUri);
         }
