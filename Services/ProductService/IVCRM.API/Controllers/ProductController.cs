@@ -72,8 +72,8 @@ namespace IVCRM.API.Controllers
 
             return _mapper.Map<ProductViewModel>(result);
         }
-
-        [HttpPost]
+        
+        [HttpPost("picture")]
         public async Task UploadPicture([FromForm] LoadPictureViewModel request)
         {
             await _loadPictureValidator.ValidateAndThrowAsync(request);
@@ -82,11 +82,12 @@ namespace IVCRM.API.Controllers
 
             await _productService.UpdatePictureUri(request.Id, pictureUri);
         }
-
+        
         [HttpDelete("{id}")]
         public async Task Delete(int id)
         {
             await _productService.Delete(id);
+            await _pictureService.DeletePictureAsync(PicturesCategory, id.ToString());
         }
     }
 }
