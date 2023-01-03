@@ -2,8 +2,9 @@ using IVCRM.API.Profiles;
 using IVCRM.API.ViewModels;
 using IVCRM.BLL.Models;
 using IVCRM.BLL.Profiles;
-using IVCRM.BLL.UnitTests.TestData.Entities;
-using IVCRM.BLL.UnitTests.TestData.ViewModels;
+using IVCRM.TestData.Entities;
+using IVCRM.TestData.Models;
+using IVCRM.TestData.ViewModels;
 using IVCRM.DAL.Entities;
 
 namespace IVCRM.BLL.UnitTests.MappingTests

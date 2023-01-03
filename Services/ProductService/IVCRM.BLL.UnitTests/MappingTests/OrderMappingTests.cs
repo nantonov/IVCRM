@@ -2,8 +2,9 @@ using IVCRM.API.Profiles;
 using IVCRM.API.ViewModels;
 using IVCRM.BLL.Models;
 using IVCRM.BLL.Profiles;
-using IVCRM.BLL.UnitTests.TestData.Entities;
-using IVCRM.BLL.UnitTests.TestData.ViewModels;
+using IVCRM.TestData.Entities;
+using IVCRM.TestData.Models;
+using IVCRM.TestData.ViewModels;
 using IVCRM.DAL.Entities;
 
 namespace IVCRM.BLL.UnitTests.MappingTests
@@ -66,7 +67,7 @@ namespace IVCRM.BLL.UnitTests.MappingTests
         {
             //Arrange 
             var viewModel = TestOrderViewModels.ValidChangeOrderViewModel;
-            var model = TestOrderModels.OrderModel;
+            var model = TestOrderModels.UpdatedOrderModel;
 
             var config = new MapperConfiguration(cfg => cfg.AddProfile<ApiMappingProfile>());
             var mapper = config.CreateMapper();

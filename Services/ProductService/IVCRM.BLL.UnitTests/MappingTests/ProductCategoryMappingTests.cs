@@ -2,8 +2,9 @@ using IVCRM.API.Profiles;
 using IVCRM.API.ViewModels;
 using IVCRM.BLL.Models;
 using IVCRM.BLL.Profiles;
-using IVCRM.BLL.UnitTests.TestData.Entities;
-using IVCRM.BLL.UnitTests.TestData.ViewModels;
+using IVCRM.TestData.Entities;
+using IVCRM.TestData.Models;
+using IVCRM.TestData.ViewModels;
 using IVCRM.DAL.Entities;
 
 namespace IVCRM.BLL.UnitTests.MappingTests
@@ -22,6 +23,7 @@ namespace IVCRM.BLL.UnitTests.MappingTests
 
             //Act
             var result = mapper.Map<ProductCategory>(entity);
+            result.ChildCategories = null;
 
             //Assert
             result.ShouldBeEquivalentTo(model);
@@ -39,6 +41,7 @@ namespace IVCRM.BLL.UnitTests.MappingTests
 
             //Act
             var result = mapper.Map<ProductCategoryEntity>(model);
+            result.ChildCategories = null;
 
             //Assert
             result.ShouldBeEquivalentTo(entity);
@@ -74,7 +77,6 @@ namespace IVCRM.BLL.UnitTests.MappingTests
             //Act 
             var result = mapper.Map<ProductCategory>(viewModel);
             result.Id = model.Id;
-            result.ChildCategories = new List<ProductCategory>();
 
             //Assert 
             result.ShouldBeEquivalentTo(model);

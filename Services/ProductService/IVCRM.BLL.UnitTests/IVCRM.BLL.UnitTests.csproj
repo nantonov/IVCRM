@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\IVCRM.Core\IVCRM.Core.csproj" />
+    <ProjectReference Include="..\..\..\IVCRM.TestData\IVCRM.TestData.csproj" />
     <ProjectReference Include="..\IVCRM.API\IVCRM.API.csproj" />
     <ProjectReference Include="..\IVCRM.BLL\IVCRM.BLL.csproj" />
     <ProjectReference Include="..\IVCRM.DAL\IVCRM.DAL.csproj" />
