@@ -22,14 +22,14 @@ namespace IVCRM.DAL.Repositories
             return entity;
         }
 
-        public async Task<IEnumerable<AddressEntity>> GetAll()
+        public Task<List<AddressEntity>> GetAll()
         {
-            return await _context.Addresses.ToListAsync();
+            return _context.Addresses.ToListAsync();
         }
 
-        public async Task<AddressEntity?> GetById(int id)
+        public Task<AddressEntity?> GetById(int id)
         {
-            return await _context.Addresses.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+            return _context.Addresses.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<AddressEntity?> Update(AddressEntity entity)

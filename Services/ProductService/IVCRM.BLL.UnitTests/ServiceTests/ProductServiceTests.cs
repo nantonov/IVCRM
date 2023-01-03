@@ -41,7 +41,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
             var entities = TestProductEntities.ProductEntityCollection;
 
             var mocker = new AutoMocker(MockBehavior.Default, DefaultValue.Mock);
-            mocker.Setup<IProductRepository, Task<IEnumerable<ProductEntity>>>(x => x.GetAll())
+            mocker.Setup<IProductRepository, Task<List<ProductEntity>>>(x => x.GetAll())
                 .ReturnsAsync(entities);
             mocker.Setup<IMapper, IEnumerable<Product>>(x => x.Map<IEnumerable<Product>>(entities)).Returns(models);
 

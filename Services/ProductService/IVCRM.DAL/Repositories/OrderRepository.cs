@@ -22,9 +22,9 @@ namespace IVCRM.DAL.Repositories
             return entity;
         }
 
-        public async Task<IEnumerable<OrderEntity>> GetAll()
+        public Task<List<OrderEntity>> GetAll()
         {
-            return await _context.Orders.ToListAsync();
+            return _context.Orders.ToListAsync();
         }
 
         public async Task<OrderEntity?> GetById(int id)

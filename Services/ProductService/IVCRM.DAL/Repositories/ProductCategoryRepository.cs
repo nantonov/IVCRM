@@ -23,9 +23,9 @@ namespace IVCRM.DAL.Repositories
             return entity;
         }
 
-        public async Task<IEnumerable<ProductCategoryEntity>> GetAll()
+        public Task<List<ProductCategoryEntity>> GetAll()
         {
-            return await _context.ProductCategories.ToListAsync();
+            return _context.ProductCategories.ToListAsync();
         }
 
         public IEnumerable<ProductCategoryEntity> GetCategoriesTree()
@@ -33,9 +33,9 @@ namespace IVCRM.DAL.Repositories
             return _context.ProductCategories.AsEnumerable().Where(x => x.ParentCategoryId == null).ToList();
         }
 
-        public async Task<ProductCategoryEntity?> GetById(int id)
+        public Task<ProductCategoryEntity?> GetById(int id)
         {
-            return await _context.ProductCategories.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+            return _context.ProductCategories.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<ProductCategoryEntity?> Update(ProductCategoryEntity entity)
