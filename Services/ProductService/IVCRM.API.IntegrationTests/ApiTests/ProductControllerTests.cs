@@ -1,7 +1,6 @@
 using System.Net;
-using IVCRM.API.IntegrationTests.Infrastructure;
-using IVCRM.API.IntegrationTests.TestData.Entities;
-using IVCRM.API.IntegrationTests.TestData.ViewModels;
+using IVCRM.TestData.Entities;
+using IVCRM.TestData.ViewModels;
 using IVCRM.API.ViewModels;
 
 namespace IVCRM.API.IntegrationTests.ApiTests
@@ -63,7 +62,7 @@ namespace IVCRM.API.IntegrationTests.ApiTests
             //Act
             var actualResult = await Client.SendAsync(request);
             var responseResult = actualResult.GetResponseResult<IEnumerable<ProductViewModel>>();
-            viewModelCollection.Select(x => x.Id = responseResult.First(z => z.Name == x.Name).Id).ToList();
+            viewModelCollection.Select(x => x.Id = responseResult.Last(z => z.Name == x.Name).Id).ToList();
 
             //Assert
             actualResult.StatusCode.ShouldBe(HttpStatusCode.OK);

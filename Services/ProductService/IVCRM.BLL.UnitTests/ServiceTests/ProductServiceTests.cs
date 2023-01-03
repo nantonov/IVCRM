@@ -1,9 +1,10 @@
 using IVCRM.BLL.Exceptions;
 using IVCRM.BLL.Models;
 using IVCRM.BLL.Services;
-using IVCRM.BLL.UnitTests.TestData.Entities;
 using IVCRM.DAL.Entities;
 using IVCRM.DAL.Repositories.Interfaces;
+using IVCRM.TestData.Entities;
+using IVCRM.TestData.Models;
 using Moq;
 using Moq.AutoMock;
 

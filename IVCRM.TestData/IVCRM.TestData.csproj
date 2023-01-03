@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Services\ProductService\IVCRM.API\IVCRM.API.csproj" />
+    <ProjectReference Include="..\Services\ProductService\IVCRM.BLL\IVCRM.BLL.csproj" />
+    <ProjectReference Include="..\Services\ProductService\IVCRM.DAL\IVCRM.DAL.csproj" />
+  </ItemGroup>
+
+</Project>

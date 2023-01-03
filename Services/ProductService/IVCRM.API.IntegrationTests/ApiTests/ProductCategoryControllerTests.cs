@@ -1,7 +1,6 @@
 using System.Net;
-using IVCRM.API.IntegrationTests.Infrastructure;
-using IVCRM.API.IntegrationTests.TestData.Entities;
-using IVCRM.API.IntegrationTests.TestData.ViewModels;
+using IVCRM.TestData.Entities;
+using IVCRM.TestData.ViewModels;
 using IVCRM.API.ViewModels;
 
 namespace IVCRM.API.IntegrationTests.ApiTests

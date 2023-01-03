@@ -1,5 +1,5 @@
 ﻿using IVCRM.DAL.Entities;
-using IVCRM.DAL.IntegrationTests.TestData.Entities;
+using IVCRM.TestData.Entities;
 using IVCRM.DAL.Repositories;
 using IVCRM.DAL.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;

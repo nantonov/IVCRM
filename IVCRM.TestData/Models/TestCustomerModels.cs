@@ -1,26 +1,24 @@
 ﻿using IVCRM.BLL.Models;
 using IVCRM.Core;
-using IVCRM.DAL.Entities;
 
-namespace IVCRM.BLL.UnitTests.TestData.Models
+namespace IVCRM.TestData.Models
 {
-    internal static class TestCustomerModels
+    public static class TestCustomerModels
     {
-        internal static Customer CustomerModel => new()
+        public static Customer CustomerModel => new()
         {
-            Id = 1,
             FirstName = "FirstName",
             LastName = "LastName",
             Email = "Email",
             PhoneNumber = "+1234567",
         };
 
-        internal static List<Customer> CustomerModelCollection => new()
+        public static List<Customer> CustomerModelCollection => new()
         {
             CustomerModel,
         };
 
-        internal static PagedList<Customer> PaginatedModelCollection => new()
+        public static PagedList<Customer> PaginatedModelCollection => new()
         {
             PageSize = 10,
             CurrentPage = 0,
