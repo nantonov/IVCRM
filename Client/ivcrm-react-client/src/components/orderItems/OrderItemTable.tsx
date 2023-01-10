@@ -9,6 +9,8 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import { useNavigate } from 'react-router-dom';
 import { IOrderItem } from '../../models/IOrderItem';
+import Avatar from '@mui/material/Avatar';
+
 
 interface Props {
   orderItems: IOrderItem[]
@@ -40,6 +42,7 @@ const OrderItemTable: React.FC<Props> = ({ orderItems }) => {
       <Table sx={{ minWidth: 650 }} aria-label="simple table" size='small'>
         <TableHead>
           <TableRow>
+            <TableCell></TableCell>
             <TableCell>Id</TableCell>
             <TableCell align="right">Name</TableCell>
             <TableCell align="right">Quantity</TableCell>
@@ -53,6 +56,9 @@ const OrderItemTable: React.FC<Props> = ({ orderItems }) => {
               key={row.productId}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
+              <TableCell component="th" scope="row">
+                <Avatar variant="square" alt="Remy Sharp" src={row.product.pictureUri} >O</Avatar>
+              </TableCell>
               <TableCell component="th" scope="row">
                 {row.productId}
               </TableCell>
