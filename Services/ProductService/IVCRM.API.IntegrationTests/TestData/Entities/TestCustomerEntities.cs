@@ -12,6 +12,17 @@ namespace IVCRM.API.IntegrationTests.TestData.Entities
             PhoneNumber = "+1234567",
         };
 
+        internal static CustomerEntity CustomerDetailsModel => new()
+        {
+            FirstName = "FirstName",
+            LastName = "LastName",
+            Email = "Email",
+            PhoneNumber = "+1234567",
+            DateOfBirth = DateTime.MaxValue,
+            Address = TestAddressEntities.AddressEntity,
+            Orders = TestOrderEntities.OrderEntityCollection,
+        };
+
         internal static CustomerEntity UpdatedCustomerEntity => new()
         {
             FirstName = "UpdatedFirstName",

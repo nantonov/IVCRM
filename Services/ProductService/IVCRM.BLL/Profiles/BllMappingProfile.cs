@@ -10,6 +10,9 @@ namespace IVCRM.BLL.Profiles
         public BllMappingProfile()
         {
             CreateMap<Customer, CustomerEntity>().ReverseMap();
+            CreateMap<CustomerEntity, CustomerDetails>();
+
+            CreateMap<Address, AddressEntity>().ReverseMap();
 
             CreateMap<PagedList<Customer>, PagedList<CustomerEntity>>().ReverseMap();
 

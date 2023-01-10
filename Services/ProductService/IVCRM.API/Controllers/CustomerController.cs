@@ -45,11 +45,11 @@ namespace IVCRM.API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<CustomerViewModel> GetById(int id)
+        public async Task<CustomerDetailsViewModel> GetById(int id)
         {
             var model = await _service.GetById(id);
 
-            return _mapper.Map<CustomerViewModel>(model);
+            return _mapper.Map<CustomerDetailsViewModel>(model);
         }
 
         [HttpPut("{id}")]

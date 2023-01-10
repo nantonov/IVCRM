@@ -11,6 +11,7 @@ namespace IVCRM.DAL.Infrastructure
         }
 
         public DbSet<CustomerEntity> Customers { get; set; } = null!;
+        public DbSet<AddressEntity> Addresses { get; set; } = null!;
         public DbSet<OrderEntity> Orders { get; set; } = null!;
         public DbSet<ProductEntity> Products { get; set; } = null!;
         public DbSet<ProductCategoryEntity> ProductCategories { get; set; } = null!;
@@ -20,6 +21,7 @@ namespace IVCRM.DAL.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<CustomerEntity>().HasOne(x => x.Address).WithMany(x => x.Customers).HasForeignKey(x => x.AddressId);
             modelBuilder.Entity<ProductEntity>(p => p.Property(x => x.Price).HasColumnType("decimal(18,2)"));
             modelBuilder.Entity<ProductEntity>().HasOne(x => x.Category).WithMany(x => x.Products).HasForeignKey(x => x.CategoryId);
             modelBuilder.Entity<ProductCategoryEntity>().HasOne(x => x.ParentCategory).WithMany(x => x.ChildCategories)

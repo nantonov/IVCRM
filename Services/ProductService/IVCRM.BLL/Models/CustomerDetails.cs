@@ -1,8 +1,6 @@
-﻿using IVCRM.DAL.Entities.Interfaces;
-
-namespace IVCRM.DAL.Entities
+﻿namespace IVCRM.BLL.Models
 {
-    public class CustomerEntity : IEntity
+    public class CustomerDetails
     {
         public int Id { get; set; }
         public string? FirstName { get; set; }
@@ -10,9 +8,8 @@ namespace IVCRM.DAL.Entities
         public string? Email { get; set; }
         public string? PhoneNumber { get; set; }
         public DateTime DateOfBirth { get; set; }
-        public int? AddressId { get; set; }
 
-        public AddressEntity? Address { get; set; }
-        public ICollection<OrderEntity>? Orders { get; set; }
+        public Address? Address { get; set; }
+        public ICollection<Order>? Orders { get; set; }
     }
 }

@@ -41,7 +41,7 @@ namespace IVCRM.BLL.UnitTests.ServiceTests
             var entities = TestOrderEntities.OrderEntityCollection;
 
             var mocker = new AutoMocker(MockBehavior.Default, DefaultValue.Mock);
-            mocker.Setup<IOrderRepository, Task<IEnumerable<OrderEntity>>>(x => x.GetAll())
+            mocker.Setup<IOrderRepository, Task<List<OrderEntity>>>(x => x.GetAll())
                 .ReturnsAsync(entities);
             mocker.Setup<IMapper, IEnumerable<Order>>(x => x.Map<IEnumerable<Order>>(entities)).Returns(models);
 

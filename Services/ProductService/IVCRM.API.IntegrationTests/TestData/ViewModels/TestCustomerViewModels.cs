@@ -1,6 +1,5 @@
 ﻿using IVCRM.API.ViewModels;
 using IVCRM.Core;
-using IVCRM.DAL.Entities;
 
 namespace IVCRM.API.IntegrationTests.TestData.ViewModels
 {
@@ -12,6 +11,18 @@ namespace IVCRM.API.IntegrationTests.TestData.ViewModels
             FullName = "FirstName LastName",
             Email = "Email",
             PhoneNumber = "+1234567",
+        };
+
+        internal static CustomerDetailsViewModel CustomerDetailsViewModel => new()
+        {
+            Id = 1,
+            FirstName = "FirstName",
+            LastName = "LastName",
+            Email = "Email",
+            PhoneNumber = "+1234567",
+            DateOfBirth = DateTime.MaxValue,
+            Address = TestAddressViewModels.ValidAddressViewModel,
+            Orders = TestOrderViewModels.ValidOrderViewModelCollection,
         };
 
         internal static CustomerViewModel UpdatedCustomerViewModel => new()

@@ -1,6 +1,4 @@
-﻿using IVCRM.Core.Models;
-
-namespace IVCRM.API.ViewModels
+﻿namespace IVCRM.API.ViewModels
 {
     public class CustomerViewModel
     {
@@ -8,5 +6,6 @@ namespace IVCRM.API.ViewModels
         public string? FullName { get; set; }
         public string? Email { get; set; }
         public string? PhoneNumber { get; set; }
+        public DateTime DateOfBirth { get; set; }
     }
 }

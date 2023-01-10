@@ -5,38 +5,34 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IVCRM.DAL.Repositories
 {
-    public class OrderRepository : IOrderRepository
+    public class AddressRepository : IAddressRepository
     {
         private readonly AppDbContext _context;
 
-        public OrderRepository(AppDbContext context)
+        public AddressRepository(AppDbContext context)
         {
             _context = context;
         }
 
-        public async Task<OrderEntity> Create(OrderEntity entity)
+        public async Task<AddressEntity> Create(AddressEntity entity)
         {
-            await _context.Orders.AddAsync(entity);
+            await _context.Addresses.AddAsync(entity);
             await _context.SaveChangesAsync();
             
             return entity;
         }
 
-        public Task<List<OrderEntity>> GetAll()
+        public Task<List<AddressEntity>> GetAll()
         {
-            return _context.Orders.ToListAsync();
+            return _context.Addresses.ToListAsync();
         }
 
-        public async Task<OrderEntity?> GetById(int id)
+        public Task<AddressEntity?> GetById(int id)
         {
-            return await _context.Orders.AsNoTracking()
-                .Include(x => x.Customer)
-                .Include(x => x.ProductOrders)!
-                .ThenInclude(x => x.Product)
-                .FirstOrDefaultAsync(x => x.Id == id);
+            return _context.Addresses.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<OrderEntity?> Update(OrderEntity entity)
+        public async Task<AddressEntity?> Update(AddressEntity entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
             await _context.SaveChangesAsync();
@@ -49,7 +45,7 @@ namespace IVCRM.DAL.Repositories
             var entity = await GetById(id);
             if (entity is not null)
             {
-                _context.Orders.Remove(entity);
+                _context.Addresses.Remove(entity);
                 await _context.SaveChangesAsync();
             }
         }

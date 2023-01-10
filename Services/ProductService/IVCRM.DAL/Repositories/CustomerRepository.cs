@@ -25,14 +25,17 @@ namespace IVCRM.DAL.Repositories
             return entity;
         }
 
-        public async Task<PagedList<CustomerEntity>> GetAll(TableParameters parameters)
+        public Task<PagedList<CustomerEntity>> GetAll(TableParameters parameters)
         {
-            return await _context.Customers.ToPagedList(parameters);
+            return _context.Customers.ToPagedList(parameters);
         }
 
-        public async Task<CustomerEntity?> GetById(int id)
+        public Task<CustomerEntity?> GetById(int id)
         {
-            return await _context.Customers.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+            return _context.Customers.AsNoTracking()
+                .Include(x => x.Address)
+                .Include(x => x.Orders)
+                .FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<CustomerEntity?> Update(CustomerEntity entity)
