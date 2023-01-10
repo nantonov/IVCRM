@@ -1,6 +1,8 @@
 ﻿using IVCRM.DAL.IntegrationTests.TestData.Entities;
 using IVCRM.DAL.Repositories;
 using IVCRM.DAL.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Shouldly;
 
 namespace IVCRM.DAL.IntegrationTests.RepositoryTests
 {
@@ -33,12 +35,12 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
             //Arrange
             var entities = TestOrderEntities.OrderEntityCollection;
             await AddRangeToContext(entities);
+            var expectedResult = Context.Orders.ToList();
             //Act
             var actualResult = await _repository.GetAll();
 
             //Assert
-            actualResult.ShouldNotBeEmpty();
-            entities.ShouldBeSubsetOf(actualResult);
+            actualResult.ShouldBeEquivalentTo(expectedResult);
         }
 
         [Fact]

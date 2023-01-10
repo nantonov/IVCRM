@@ -2,12 +2,7 @@
 
 namespace IVCRM.DAL.Repositories.Interfaces
 {
-    public interface IAddressRepository
+    public interface IAddressRepository : IBaseRepository<AddressEntity>
     {
-        Task<AddressEntity> Create(AddressEntity entity);
-        Task<List<AddressEntity>> GetAll();
-        Task<AddressEntity?> GetById(int id);
-        Task<AddressEntity?> Update(AddressEntity entity);
-        Task Delete(int id);
     }
 }
