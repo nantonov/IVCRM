@@ -44,6 +44,5 @@ namespace IVCRM.BLL.Services
 
             return _mapper.Map<OrderDetails>(entity);
         }
-
     }
 }
