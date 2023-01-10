@@ -40,6 +40,14 @@ namespace IVCRM.DAL.Repositories
             return entity;
         }
 
+        public async Task UpdatePictureUri(int id, string uri)
+        {
+            var product = new ProductEntity() { Id = id, PictureUri = uri };
+            _context.Products.Attach(product).Property(x => x.PictureUri).IsModified = true;
+
+            await _context.SaveChangesAsync();
+        }
+
         public async Task Delete(int id)
         {
             var entity = await GetById(id);
