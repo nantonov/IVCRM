@@ -14,7 +14,7 @@ namespace IVCRM.DAL.Entities
         public int CategoryId { get; set; }
 
         public ProductCategoryEntity? Category { get; set; }
-        public ICollection<ProductOrderEntity>? ProductOrders { get; set; }
+        public ICollection<OrderItemEntity>? OrderItems { get; set; }
         public ICollection<ProductStorageEntity>? ProductStorages { get; set; }
     }
 }

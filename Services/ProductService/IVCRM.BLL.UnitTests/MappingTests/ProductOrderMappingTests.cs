@@ -14,14 +14,14 @@ namespace IVCRM.BLL.UnitTests.MappingTests
         public void Map_Entity_ReturnsModel()
         {
             //Arrange
-            var model = TestProductOrderModels.ProductOrderModel;
-            var entity = TestProductOrderEntities.ProductOrderEntity;
+            var model = TestProductOrderModels.OrderItemModel;
+            var entity = TestProductOrderEntities.OrderItemEntity;
 
             var config = new MapperConfiguration(cfg => cfg.AddProfile<BllMappingProfile>());
             var mapper = config.CreateMapper();
 
             //Act
-            var result = mapper.Map<ProductOrder>(entity);
+            var result = mapper.Map<OrderItem>(entity);
 
             //Assert
             result.ShouldBeEquivalentTo(model);

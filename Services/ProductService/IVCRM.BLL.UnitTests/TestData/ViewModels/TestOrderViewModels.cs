@@ -21,7 +21,7 @@ namespace IVCRM.BLL.UnitTests.TestData.ViewModels
             OrderStatus = OrderStatus.Created,
             CustomerId = 1,
             Customer = TestCustomerViewModels.ValidCustomerViewModel,
-            ProductOrders = TestProductOrderViewModels.ProductOrderViewModelCollection,
+            OrderItems = TestProductOrderViewModels.ProductOrderViewModelCollection,
         };
 
         internal static ChangeOrderViewModel ValidChangeOrderViewModel => new()

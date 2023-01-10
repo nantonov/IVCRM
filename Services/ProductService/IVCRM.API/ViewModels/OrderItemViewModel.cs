@@ -1,6 +1,6 @@
 ﻿namespace IVCRM.API.ViewModels
 {
-    public class ProductOrderViewModel
+    public class OrderItemViewModel
     {
         public int ProductId { get; set; }
         public int OrderId { get; set; }

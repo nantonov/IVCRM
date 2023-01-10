@@ -25,7 +25,7 @@ namespace IVCRM.DAL.IntegrationTests.TestData.Entities
             OrderStatus = OrderStatus.Created,
             CustomerId = 1,
             Customer = TestCustomerEntities.CustomerEntity,
-            ProductOrders = TestProductOrderEntities.ProductOrderEntityCollection,
+            OrderItems = TestProductOrderEntities.ProductOrderEntityCollection,
         };
 
         internal static List<OrderEntity> OrderEntityCollection => new ()

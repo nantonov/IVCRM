@@ -31,7 +31,7 @@ namespace IVCRM.DAL.Repositories
         {
             return await _context.Orders.AsNoTracking()
                 .Include(x => x.Customer)
-                .Include(x => x.ProductOrders)!
+                .Include(x => x.OrderItems)!
                 .ThenInclude(x => x.Product)
                 .FirstOrDefaultAsync(x => x.Id == id);
         }

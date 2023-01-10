@@ -50,7 +50,7 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
 
             //Act
             var actualResult = await _repository.GetById(entity.Id);
-            actualResult!.ProductOrders = actualResult.ProductOrders?.ToList();
+            actualResult!.OrderItems = actualResult.OrderItems?.ToList();
 
             //Assert
             actualResult.ShouldBeEquivalentTo(entity);

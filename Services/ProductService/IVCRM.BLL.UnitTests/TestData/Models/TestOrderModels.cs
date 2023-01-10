@@ -20,7 +20,7 @@ namespace IVCRM.BLL.UnitTests.TestData.Models
             OrderStatus = OrderStatus.Created,
             CustomerId = 1,
             Customer = TestCustomerModels.CustomerModel,
-            ProductOrders = TestProductOrderModels.ProductOrderModelCollection
+            OrderItems = TestProductOrderModels.ProductOrderModelCollection
 
         };
 

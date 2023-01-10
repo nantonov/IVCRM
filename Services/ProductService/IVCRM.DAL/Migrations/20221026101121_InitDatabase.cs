@@ -94,7 +94,7 @@ namespace IVCRM.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductOrders",
+                name: "OrderItems",
                 columns: table => new
                 {
                     ProductId = table.Column<int>(type: "int", nullable: false),
@@ -151,7 +151,7 @@ namespace IVCRM.DAL.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_ProductOrders_OrderId",
-                table: "ProductOrders",
+                table: "OrderItems",
                 column: "OrderId");
 
             migrationBuilder.CreateIndex(
@@ -168,7 +168,7 @@ namespace IVCRM.DAL.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ProductOrders");
+                name: "OrderItems");
 
             migrationBuilder.DropTable(
                 name: "ProductStorages");

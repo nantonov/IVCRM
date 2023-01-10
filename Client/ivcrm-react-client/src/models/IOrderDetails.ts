@@ -8,5 +8,5 @@ export interface IOrderDetails {
     orderStatus: string;
     customerId: number;
     customer: ICustomer;
-    productOrders: IOrderItem[]
+    orderItems: IOrderItem[]
 }
