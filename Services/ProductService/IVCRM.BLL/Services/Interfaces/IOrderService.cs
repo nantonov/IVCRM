@@ -2,13 +2,8 @@
 
 namespace IVCRM.BLL.Services.Interfaces
 {
-    public interface IOrderService
+    public interface IOrderService : IBaseService<Order>
     {
-        Task<Order> Create(Order model);
-        Task<IEnumerable<Order>> GetAll();
-        Task<OrderDetails> GetById(int id);
-        Task<Order> Update(Order model);
-        Task Delete(int id);
-        Task<bool> IsEntityExists(int id);
+        new Task<OrderDetails> GetById(int id);
     }
 }
