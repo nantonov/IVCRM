@@ -7,16 +7,9 @@ using IVCRM.DAL.Repositories.Interfaces;
 
 namespace IVCRM.BLL.Services
 {
-    public class AddressService : IAddressService
+    public class AddressService : BaseService<Address, AddressEntity>, IAddressService
     {
-        private readonly IAddressRepository _repository;
-        private readonly IMapper _mapper;
-
-        public AddressService(IAddressRepository repository, IMapper mapper)
-        {
-            _repository = repository;
-            _mapper = mapper;
-        }
+        public AddressService(IAddressRepository repository, IMapper mapper) : base(repository, mapper) { }
 
         public async Task<Address> Create(Address model)
         {
