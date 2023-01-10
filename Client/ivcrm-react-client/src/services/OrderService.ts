@@ -1,5 +1,6 @@
 import { IChangeOrder } from "../models/IChangeOrder";
 import { IOrder } from "../models/IOrder";
+import { IOrderDetails } from "../models/IOrderDetails";
 import axiosInstance from "./AxiosInstance";
 
 export default class OrderService {
@@ -24,7 +25,7 @@ export default class OrderService {
     }
 
     static async getById(id: number) {
-        const response = await axiosInstance.get<Array<IOrder>>(`/order/${id}`)
+        const response = await axiosInstance.get<IOrderDetails>(`/order/${id}`)
         return response.data;
     }
 }

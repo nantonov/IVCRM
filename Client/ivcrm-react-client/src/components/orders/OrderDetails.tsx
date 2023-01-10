@@ -1,9 +1,9 @@
 import { CardContent, Typography } from "@mui/material";
-import { IOrder } from "../../models/IOrder";
+import { IOrderDetails } from "../../models/IOrderDetails";
 import { StyledCard } from "../buildingBlocks/StyledComponents";
 
 interface Props {
-    order: IOrder
+    order: IOrderDetails
 }
 
 const OrderDetails: React.FC<Props> = ({ order }) => {

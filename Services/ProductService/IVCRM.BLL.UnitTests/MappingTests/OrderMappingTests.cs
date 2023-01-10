@@ -45,6 +45,23 @@ namespace IVCRM.BLL.UnitTests.MappingTests
         }
 
         [Fact]
+        public void Map_Entity_ReturnsDetailsModel()
+        {
+            //Arrange
+            var model = TestOrderModels.OrderDetailsModel;
+            var entity = TestOrderEntities.OrderDetailsEntity;
+
+            var config = new MapperConfiguration(cfg => cfg.AddProfile<BllMappingProfile>());
+            var mapper = config.CreateMapper();
+
+            //Act
+            var result = mapper.Map<OrderDetails>(entity);
+
+            //Assert
+            result.ShouldBeEquivalentTo(model);
+        }
+
+        [Fact]
         public void Map_Model_ReturnsViewModel()
         {
             //Arrange 
@@ -56,6 +73,23 @@ namespace IVCRM.BLL.UnitTests.MappingTests
 
             //Act 
             var result = mapper.Map<OrderViewModel>(model);
+
+            //Assert 
+            result.ShouldBeEquivalentTo(viewModel);
+        }
+
+        [Fact]
+        public void Map_DetailsModel_ReturnsDetailsViewModel()
+        {
+            //Arrange 
+            var model = TestOrderModels.OrderDetailsModel;
+            var viewModel = TestOrderViewModels.OrderDetailsViewModel;
+
+            var config = new MapperConfiguration(cfg => cfg.AddProfile<ApiMappingProfile>());
+            var mapper = config.CreateMapper();
+
+            //Act 
+            var result = mapper.Map<OrderDetailsViewModel>(model);
 
             //Assert 
             result.ShouldBeEquivalentTo(viewModel);
@@ -77,7 +111,6 @@ namespace IVCRM.BLL.UnitTests.MappingTests
 
             //Assert 
             result.ShouldBeEquivalentTo(model);
-
         }
     }
 }

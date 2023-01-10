@@ -13,6 +13,17 @@ namespace IVCRM.BLL.UnitTests.TestData.Models
             CustomerId = 1,
         };
 
+        internal static OrderDetails OrderDetailsModel => new()
+        {
+            Id = 1,
+            Name = "Name",
+            OrderStatus = OrderStatus.Created,
+            CustomerId = 1,
+            Customer = TestCustomerModels.CustomerModel,
+            ProductOrders = TestProductOrderModels.ProductOrderModelCollection
+
+        };
+
         internal static List<Order> OrderModelCollection => new()
         {
             OrderModel,

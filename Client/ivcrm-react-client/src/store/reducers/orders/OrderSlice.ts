@@ -1,17 +1,20 @@
 import { IOrder } from "../../../models/IOrder";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { createOrder, deleteOrder, fetchOrders, getOrderById, updateOrder } from "./ActionCreators";
+import { IOrderDetails } from "../../../models/IOrderDetails";
+import { IOrderItem } from "../../../models/IOrderItem";
+import { ICustomer } from "../../../models/ICustomer";
 
 interface IOrderState {
     orders: IOrder[];
-    order: IOrder;
+    order: IOrderDetails;
     isLoading: boolean;
     error: string;
 }
 
 const initialState: IOrderState = {
     orders: [],
-    order: {} as IOrder,
+    order: {customer: {} as ICustomer, productOrders: new Array<IOrderItem>} as IOrderDetails,
     isLoading: false,
     error: '',
 }
@@ -33,7 +36,7 @@ export const orderSlice = createSlice({
             state.isLoading = false;
             state.error = action.payload;
         },
-        [getOrderById.fulfilled.type]: (state, action: PayloadAction<IOrder>) => {
+        [getOrderById.fulfilled.type]: (state, action: PayloadAction<IOrderDetails>) => {
             state.isLoading = false;
             state.error = '';
             state.order = action.payload;

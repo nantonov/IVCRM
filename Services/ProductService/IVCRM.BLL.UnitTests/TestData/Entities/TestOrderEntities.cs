@@ -13,6 +13,16 @@ namespace IVCRM.BLL.UnitTests.TestData.Entities
             CustomerId = 1,
         };
 
+        internal static OrderEntity OrderDetailsEntity => new()
+        {
+            Id = 1,
+            Name = "Name",
+            OrderStatus = OrderStatus.Created,
+            CustomerId = 1,
+            Customer = TestCustomerEntities.CustomerEntity,
+            ProductOrders = TestProductOrderEntities.ProductOrderEntityCollection,
+        };
+
         internal static List<OrderEntity> OrderEntityCollection => new ()
         {
             OrderEntity,
