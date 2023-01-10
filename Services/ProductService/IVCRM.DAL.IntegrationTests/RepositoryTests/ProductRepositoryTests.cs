@@ -33,12 +33,12 @@ namespace IVCRM.DAL.IntegrationTests.RepositoryTests
             //Arrange
             var entities = TestProductEntities.ProductEntityCollection;
             await AddRangeToContext(entities);
+            var expectedResult = Context.Products.ToList();
             //Act
             var actualResult = await _repository.GetAll();
 
             //Assert
-            actualResult.ShouldNotBeEmpty();
-            entities.ShouldBeSubsetOf(actualResult);
+            actualResult.ShouldBeEquivalentTo(expectedResult);
         }
 
         [Fact]

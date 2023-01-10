@@ -1,6 +1,8 @@
-﻿namespace IVCRM.BLL.Models
+﻿using IVCRM.BLL.Models.Interfaces;
+
+namespace IVCRM.BLL.Models
 {
-    public class ProductCategory
+    public class ProductCategory : IModel
     {
         public int Id { get; set; }
         public string? Name { get; set; }

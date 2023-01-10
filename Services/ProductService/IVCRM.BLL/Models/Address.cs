@@ -1,8 +1,8 @@
-﻿using IVCRM.DAL.Entities.Interfaces;
+﻿using IVCRM.BLL.Models.Interfaces;
 
 namespace IVCRM.BLL.Models
 {
-    public class Address : IEntity
+    public class Address : IModel
     {
         public int Id { get; set; }
         public string? Street { get; set; }
