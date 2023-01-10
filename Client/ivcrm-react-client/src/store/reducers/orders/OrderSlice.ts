@@ -14,7 +14,7 @@ interface IOrderState {
 
 const initialState: IOrderState = {
     orders: [],
-    order: {customer: {} as ICustomer, productOrders: new Array<IOrderItem>} as IOrderDetails,
+    order: {customer: {} as ICustomer, orderItems: new Array<IOrderItem>} as IOrderDetails,
     isLoading: false,
     error: '',
 }

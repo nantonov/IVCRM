@@ -154,7 +154,7 @@ namespace IVCRM.DAL.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("IVCRM.DAL.Entities.ProductOrderEntity", b =>
+            modelBuilder.Entity("IVCRM.DAL.Entities.OrderItemEntity", b =>
                 {
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -172,7 +172,7 @@ namespace IVCRM.DAL.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("ProductOrders");
+                    b.ToTable("OrderItems");
                 });
 
             modelBuilder.Entity("IVCRM.DAL.Entities.ProductStorageEntity", b =>
@@ -253,16 +253,16 @@ namespace IVCRM.DAL.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("IVCRM.DAL.Entities.ProductOrderEntity", b =>
+            modelBuilder.Entity("IVCRM.DAL.Entities.OrderItemEntity", b =>
                 {
                     b.HasOne("IVCRM.DAL.Entities.OrderEntity", "Order")
-                        .WithMany("ProductOrders")
+                        .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("IVCRM.DAL.Entities.ProductEntity", "Product")
-                        .WithMany("ProductOrders")
+                        .WithMany("OrderItems")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -303,7 +303,7 @@ namespace IVCRM.DAL.Migrations
 
             modelBuilder.Entity("IVCRM.DAL.Entities.OrderEntity", b =>
                 {
-                    b.Navigation("ProductOrders");
+                    b.Navigation("OrderItems");
                 });
 
             modelBuilder.Entity("IVCRM.DAL.Entities.ProductCategoryEntity", b =>
@@ -315,7 +315,7 @@ namespace IVCRM.DAL.Migrations
 
             modelBuilder.Entity("IVCRM.DAL.Entities.ProductEntity", b =>
                 {
-                    b.Navigation("ProductOrders");
+                    b.Navigation("OrderItems");
 
                     b.Navigation("ProductStorages");
                 });

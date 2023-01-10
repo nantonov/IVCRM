@@ -11,6 +11,6 @@ namespace IVCRM.API.ViewModels
         public int CustomerId { get; set; }
 
         public CustomerViewModel? Customer { get; set; }
-        public ICollection<ProductOrderViewModel>? ProductOrders { get; set; }
+        public ICollection<OrderItemViewModel>? OrderItems { get; set; }
     }
 }

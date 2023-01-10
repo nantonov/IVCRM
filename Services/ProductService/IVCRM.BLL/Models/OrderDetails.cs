@@ -11,6 +11,6 @@ namespace IVCRM.BLL.Models
         public int CustomerId { get; set; }
 
         public Customer? Customer { get; set; }
-        public ICollection<ProductOrder>? ProductOrders { get; set; }
+        public ICollection<OrderItem>? OrderItems { get; set; }
     }
 }

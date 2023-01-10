@@ -31,7 +31,7 @@ useEffect(() => {
         <CustomerDetails customer={order.customer}/>
       </Grid>
       <Grid item style={{display: "flex"}} xs={12}>
-        <OrderItemTable orderItems={order.productOrders}/>
+        <OrderItemTable orderItems={order.orderItems}/>
       </Grid>
     </Grid>
   );

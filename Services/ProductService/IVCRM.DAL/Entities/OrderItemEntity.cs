@@ -1,8 +1,6 @@
-﻿using IVCRM.DAL.Entities.Interfaces;
-
-namespace IVCRM.DAL.Entities
+﻿namespace IVCRM.DAL.Entities
 {
-    public class ProductOrderEntity
+    public class OrderItemEntity
     {
         public int ProductId { get; set; }
         public int OrderId { get; set; }

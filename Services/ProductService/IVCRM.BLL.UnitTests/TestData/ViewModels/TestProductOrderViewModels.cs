@@ -4,7 +4,7 @@ namespace IVCRM.BLL.UnitTests.TestData.ViewModels
 {
     internal static class TestProductOrderViewModels
     {
-        internal static ProductOrderViewModel ProductOrderViewModel => new()
+        internal static OrderItemViewModel OrderItemViewModel => new()
         {
             ProductId = 1,
             OrderId = 1,
@@ -13,9 +13,9 @@ namespace IVCRM.BLL.UnitTests.TestData.ViewModels
             Product = TestProductViewModels.ValidProductViewModel,
         };
 
-        internal static List<ProductOrderViewModel> ProductOrderViewModelCollection => new()
+        internal static List<OrderItemViewModel> ProductOrderViewModelCollection => new()
         {
-            ProductOrderViewModel,
+            OrderItemViewModel,
         };
     }
 }

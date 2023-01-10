@@ -4,7 +4,7 @@ namespace IVCRM.DAL.IntegrationTests.TestData.Entities
 {
     internal static class TestProductOrderEntities
     {
-        internal static ProductOrderEntity ProductOrderEntity => new()
+        internal static OrderItemEntity OrderItemEntity => new()
         {
             ProductId = 1,
             OrderId = 1,
@@ -13,9 +13,9 @@ namespace IVCRM.DAL.IntegrationTests.TestData.Entities
             Product = TestProductEntities.ProductEntity,
         };
 
-        internal static List<ProductOrderEntity> ProductOrderEntityCollection => new()
+        internal static List<OrderItemEntity> ProductOrderEntityCollection => new()
         {
-            ProductOrderEntity,
+            OrderItemEntity,
         };
     }
 }
