@@ -1,15 +1,17 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-import { createProduct, deleteProduct, fetchProducts, updateProduct } from "./ActionCreators";
+import { createProduct, deleteProduct, fetchProducts, getProductById, updateProduct, uploadPicture } from "./ActionCreators";
 import { IProduct } from "../../../models/IProduct";
 
 interface IProductState {
     products: IProduct[];
+    product: IProduct;
     isLoading: boolean;
     error: string;
 }
 
 const initialState: IProductState = {
     products: [],
+    product: {} as IProduct,
     isLoading: false,
     error: '',
 }
@@ -28,6 +30,18 @@ export const productSlice = createSlice({
             state.isLoading = true;
         },
         [fetchProducts.rejected.type]: (state, action: PayloadAction<string>) => {
+            state.isLoading = false;
+            state.error = action.payload;
+        },
+        [getProductById.fulfilled.type]: (state, action: PayloadAction<IProduct>) => {
+            state.isLoading = false;
+            state.error = '';
+            state.product = action.payload;
+        },
+        [getProductById.pending.type]: (state) => {
+            state.isLoading = true;
+        },
+        [getProductById.rejected.type]: (state, action: PayloadAction<string>) => {
             state.isLoading = false;
             state.error = action.payload;
         },
@@ -64,6 +78,17 @@ export const productSlice = createSlice({
             state.isLoading = true;
         },
         [deleteProduct.rejected.type]: (state, action: PayloadAction<string>) => {
+            state.isLoading = false;
+            state.error = action.payload;
+        },
+        [uploadPicture.fulfilled.type]: (state, action: any) => {
+            state.isLoading = false;
+            state.error = '';
+        },
+        [uploadPicture.pending.type]: (state) => {
+            state.isLoading = true;
+        },
+        [uploadPicture.rejected.type]: (state, action: PayloadAction<string>) => {
             state.isLoading = false;
             state.error = action.payload;
         },
